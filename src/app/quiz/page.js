@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import * as Tone from 'tone';
+import { useRouter } from 'next/navigation'; // Next.jsのルーティング用
 
 // スケールのリスト
 const scales = [
@@ -23,6 +24,8 @@ export default function QuizPage() {
   const [questionNumber, setQuestionNumber] = useState(0);
   const totalQuestions = 4;
   const [isQuizFinished, setIsQuizFinished] = useState(false);
+
+  const router = useRouter(); // Next.jsのルーターを取得
 
   useEffect(() => {
     if (!isQuizFinished) generateQuestion();
@@ -62,22 +65,35 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="dark:bg-gray-900 dark:text-white min-h-screen">
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat dark:bg-gray-900 dark:text-white"
+      style={{
+        backgroundImage: "url('/andrik-langfield-ITQVgbjG-q4-unsplash.jpg')", // 背景画像URLを指定
+      }}
+    >
       {isQuizFinished ? (
         <main className="flex flex-col items-center justify-center min-h-screen p-4">
           <h1 className="text-2xl font-bold mb-4">クイズ結果</h1>
           <p className="mb-4 text-lg">スコア: {score} / {totalQuestions}</p>
           <p className="mb-8 text-lg">正答率: {((score / totalQuestions) * 100).toFixed(2)}%</p>
-          <button
-            onClick={() => {
-              setIsQuizFinished(false);
-              setScore(0);
-              setQuestionNumber(0);
-            }}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
-          >
-            もう一度プレイ
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => {
+                setIsQuizFinished(false);
+                setScore(0);
+                setQuestionNumber(0);
+              }}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
+            >
+              もう一度プレイ
+            </button>
+            <button
+              onClick={() => router.push('/')} // トップ画面に遷移
+              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg"
+            >
+              トップに戻る
+            </button>
+          </div>
         </main>
       ) : (
         <main className="flex flex-col items-center justify-center min-h-screen p-4">
@@ -114,6 +130,12 @@ export default function QuizPage() {
                   </button>
                 ))}
               </div>
+              <button
+                onClick={() => router.push('/')} // トップ画面に遷移
+                className="mt-8 bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg"
+              >
+                トップに戻る
+              </button>
             </>
           )}
         </main>
