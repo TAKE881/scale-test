@@ -65,9 +65,11 @@ export default function QuizPage() {
       synth.triggerAttackRelease(note, '8n', Tone.now() + index * noteDuration);
     });
   };
-
+  const [isAnswered, setIsAnswered] = useState(false); // 連打防止フラグを追加
 
   const handleAnswer = (answer, index) => {
+    if (isAnswered) return; // すでに回答済みなら処理しない
+    setIsAnswered(true); // 解答済みにする
     setSelectedOption(index);
     setTimeout(() => {
       if (answer === currentScale.name) {
@@ -80,6 +82,7 @@ export default function QuizPage() {
         setIsQuizFinished(true);
       }
       setSelectedOption(null); // アニメーション後に状態をリセット
+          setIsAnswered(false); // 次の問題のためにフラグをリセット
     }, 500); // アニメーションの時間に合わせて調整
   };
 
@@ -91,7 +94,10 @@ export default function QuizPage() {
     setUsedScales([]); // 出題済みリストをリセット
   };
 
+
+
   return (
+
     <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
