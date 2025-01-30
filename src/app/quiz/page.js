@@ -26,6 +26,7 @@ export default function QuizPage() {
   const totalQuestions = 4;
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [usedScales, setUsedScales] = useState([]); // 出題済みのスケールを記録
 
   const router = useRouter(); // Next.jsのルーターを取得
 
@@ -34,9 +35,17 @@ export default function QuizPage() {
   }, [isQuizFinished]);
 
   const generateQuestion = () => {
-    const randomScale = scales[Math.floor(Math.random() * scales.length)];
+    // 未出題のスケールをフィルタリング
+    const availableScales = scales.filter((scale) => !usedScales.includes(scale.name));
+
+    // 未出題のスケールからランダムに選択
+    const randomScale = availableScales[Math.floor(Math.random() * availableScales.length)];
     setCurrentScale(randomScale);
 
+    // 出題済みリストに追加
+    setUsedScales((prev) => [...prev, randomScale.name]);
+
+    // 選択肢をシャッフル
     const shuffled = [...scales].sort(() => 0.5 - Math.random()).slice(0, 4);
     if (!shuffled.includes(randomScale)) {
       shuffled[0] = randomScale;
@@ -49,10 +58,14 @@ export default function QuizPage() {
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
 
+    const speedFactor = 1.5; // 音楽の再生速度は1.5倍のまま
+    const noteDuration = 0.5 / speedFactor; // 音の間隔を短縮
+
     currentScale.notes.forEach((note, index) => {
-      synth.triggerAttackRelease(note, '8n', Tone.now() + index * 0.5);
+      synth.triggerAttackRelease(note, '8n', Tone.now() + index * noteDuration);
     });
   };
+
 
   const handleAnswer = (answer, index) => {
     setSelectedOption(index);
@@ -70,45 +83,50 @@ export default function QuizPage() {
     }, 500); // アニメーションの時間に合わせて調整
   };
 
+  // クイズをリセット
+  const resetQuiz = () => {
+    setIsQuizFinished(false);
+    setScore(0);
+    setQuestionNumber(0);
+    setUsedScales([]); // 出題済みリストをリセット
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }} // 初期状態
-      animate={{ opacity: 1 }} // 表示時のアニメーション
-      exit={{ opacity: 0 }} // 画面遷移時のアニメーション
-      className="min-h-screen bg-cover bg-center bg-no-repeat dark:bg-gray-900 dark:text-white"
-      style={{
-        backgroundImage: "url('/andrik-langfield-ITQVgbjG-q4-unsplash.jpg')", // 背景画像URLを指定
-      }}
-    >
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 1.0 }} // アプリ全体のアニメーション速度を標準に戻す
+    className="min-h-screen bg-cover bg-center bg-no-repeat dark:bg-gray-900 dark:text-white"
+  >
+
       {isQuizFinished ? (
         <motion.main
-          initial={{ y: 300, opacity: 0 }} // 初期状態（下からスライド）
-          animate={{ y: 0, opacity: 1 }} // 表示時のアニメーション
-          transition={{ duration: 0.5 }} // アニメーションの速度
-          className="flex flex-col items-center justify-center min-h-screen p-4"
-        >
-          <h1 className="text-2xl font-bold mb-4">クイズ結果</h1>
-          <p className="mb-4 text-lg">スコア: {score} / {totalQuestions}</p>
-          <p className="mb-8 text-lg">正答率: {((score / totalQuestions) * 100).toFixed(2)}%</p>
-          <div className="flex gap-4">
-            <button
-              onClick={() => {
-                setIsQuizFinished(false);
-                setScore(0);
-                setQuestionNumber(0);
-              }}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
-            >
-              もう一度プレイ
-            </button>
-            <button
-              onClick={() => router.push('/')} // トップ画面に遷移
-              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg"
-            >
-              トップに戻る
-            </button>
-          </div>
-        </motion.main>
+  initial={{ y: 300, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 1.0 }}
+  className="flex flex-col items-center justify-center min-h-screen p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+>
+
+<h1 className="text-2xl font-bold mb-4 text-center">クイズ結果</h1>
+  <p className="mb-4 text-lg text-center">スコア: {score} / {totalQuestions}</p>
+  <p className="mb-8 text-lg text-center">正答率: {((score / totalQuestions) * 100).toFixed(2)}%</p>
+
+  <div className="flex flex-col sm:flex-row gap-4 w-full">
+    <button
+      onClick={resetQuiz}
+      className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
+    >
+      もう一度プレイ
+    </button>
+    <button
+      onClick={() => router.push('/')}
+      className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
+    >
+      トップに戻る
+    </button>
+  </div>
+</motion.main>
       ) : (
         <AnimatePresence mode="wait">
           <motion.main
@@ -149,8 +167,8 @@ export default function QuizPage() {
                       className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${
                         selectedOption === index ? 'selected' : ''
                       }`}
-                      whileHover={{ scale: 1.05 }} // ホバー時のアニメーション
-                      whileTap={{ scale: 0.95 }} // タップ時のアニメーション
+                      whileHover={{ scale: 1.02 }} // 小さな動きにして自然に
+                      whileTap={{ scale: 0.98 }} // タップ時のエフェクトも最適化
                     >
                       {option.name}
                     </motion.button>
