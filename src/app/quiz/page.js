@@ -24,6 +24,7 @@ export default function QuizPage() {
   const [questionNumber, setQuestionNumber] = useState(0);
   const totalQuestions = 4;
   const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const router = useRouter(); // Next.jsのルーターを取得
 
@@ -52,16 +53,20 @@ export default function QuizPage() {
     });
   };
 
-  const handleAnswer = (answer) => {
-    if (answer === currentScale.name) {
-      setScore((prev) => prev + 1);
-    }
-    if (questionNumber + 1 < totalQuestions) {
-      setQuestionNumber((prev) => prev + 1);
-      generateQuestion();
-    } else {
-      setIsQuizFinished(true); // クイズ終了
-    }
+  const handleAnswer = (answer, index) => {
+    setSelectedOption(index);
+    setTimeout(() => {
+      if (answer === currentScale.name) {
+        setScore((prev) => prev + 1);
+      }
+      if (questionNumber + 1 < totalQuestions) {
+        setQuestionNumber((prev) => prev + 1);
+        generateQuestion();
+      } else {
+        setIsQuizFinished(true);
+      }
+      setSelectedOption(null); // アニメーション後に状態をリセット
+    }, 500); // アニメーションの時間に合わせて調整
   };
 
   return (
@@ -123,8 +128,10 @@ export default function QuizPage() {
                 {options.map((option, index) => (
                   <button
                     key={index}
-                    onClick={() => handleAnswer(option.name)}
-                    className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700"
+                    onClick={() => handleAnswer(option.name, index)}
+                    className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${
+                      selectedOption === index ? 'selected' : ''
+                    }`}
                   >
                     {option.name}
                   </button>
@@ -143,4 +150,3 @@ export default function QuizPage() {
     </div>
   );
 }
-// test commit
