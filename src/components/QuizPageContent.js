@@ -40,7 +40,7 @@ export default function QuizPageContent() {
       transition={{ duration: 1.0 }}
       className="min-h-screen bg-cover bg-center bg-no-repeat dark:bg-gray-900 dark:text-white"
     >
-      <h1 className="text-2xl font-bold text-center mb-4">
+      <h1 className="text-white text-2xl font-bold text-center mb-4">
         {mode === "ear" ? "音感クイズ" : "スケールクイズ"}
       </h1>
 
@@ -82,8 +82,8 @@ export default function QuizPageContent() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center justify-center min-h-screen p-4"
           >
-            <p className="mb-4 text-lg text-center">スコア: {score}</p>
-            <p className="mb-4 text-lg text-center">
+            <p className="text-white mb-4 text-lg text-center">スコア: {score}</p>
+            <p className="text-white mb-4 text-lg text-center">
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
 
@@ -122,8 +122,15 @@ export default function QuizPageContent() {
                     whileTap={{ scale: 0.98 }}
                   >
                     {option.name}
+
                   </motion.button>
                 ))}
+                            <button
+              onClick={() => router.push("/")}
+              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-1 rounded-lg w-auto ml-auto"
+            >
+              トップに戻る
+            </button>
               </div>
             )}
           </motion.main>
