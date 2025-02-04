@@ -1,14 +1,19 @@
-import React from "react"
+"use client"; // ✅ クライアントコンポーネントに指定
+
+import React, { useEffect, useRef } from "react";
+import * as Tone from "tone"; // ✅ `Tone.js` をインポート
 import { PianoKey } from "./PianoKey";
 
-// PianoKeyboard: Entire keyboard component
-// Schedules note playback using Tone.js
-// Renders multiple PianoKey components
-
+// 🎹 PianoKeyboard: ピアノのキーボード全体
 export function PianoKeyboard() {
-  const synth = new Tone.Synth().toDestination();
+  const synthRef = useRef(null); // ✅ `synth` を `useRef` で管理
 
-  // One octave worth of notes (C4-B4)
+  useEffect(() => {
+    Tone.start(); // ✅ ユーザーアクション後に `AudioContext` を開始
+    synthRef.current = new Tone.Synth().toDestination(); // ✅ `useEffect` 内で `synth` を作成
+  }, []);
+
+  // 🎵 一オクターブの音 (C4-B4)
   const notes = [
     { note: "C4", type: "white" },
     { note: "C#4", type: "black" },
@@ -24,9 +29,11 @@ export function PianoKeyboard() {
     { note: "B4", type: "white" },
   ];
 
-  const playNote = async (note) => {
-    await Tone.start(); // iOS等では音を出す前にユーザーアクション必要
-    synth.triggerAttackRelease(note, "8n");
+  // 🎶 音を鳴らす関数
+  const playNote = (note) => {
+    if (synthRef.current) {
+      synthRef.current.triggerAttackRelease(note, "8n"); // ✅ `useRef` から `synth` を呼び出す
+    }
   };
 
   return (
@@ -41,12 +48,7 @@ export function PianoKeyboard() {
       }}
     >
       {notes.map(({ note, type }) => (
-        <PianoKey
-          key={note}
-          note={note}
-          type={type}
-          onPlay={playNote}
-        />
+        <PianoKey key={note} note={note} type={type} onPlay={playNote} />
       ))}
     </div>
   );
