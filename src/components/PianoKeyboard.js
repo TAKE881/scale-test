@@ -15,18 +15,13 @@ export function PianoKeyboard() {
 
   // 🎵 一オクターブの音 (C4-B4)
   const notes = [
-    { note: "C4", type: "white" },
-    { note: "C#4", type: "black" },
-    { note: "D4", type: "white" },
-    { note: "D#4", type: "black" },
-    { note: "E4", type: "white" },
-    { note: "F4", type: "white" },
-    { note: "F#4", type: "black" },
-    { note: "G4", type: "white" },
-    { note: "G#4", type: "black" },
-    { note: "A4", type: "white" },
-    { note: "A#4", type: "black" },
-    { note: "B4", type: "white" },
+    { note: "ド", type: "white" },
+    { note: "レ", type: "white" },
+    { note: "ミ", type: "white" },
+    { note: "ファ", type: "white" },
+    { note: "ソ", type: "white" },
+    { note: "ラ", type: "white" },
+    { note: "シ", type: "white" },
   ];
 
   // 🎶 音を鳴らす関数
@@ -37,16 +32,7 @@ export function PianoKeyboard() {
   };
 
   return (
-    <div
-      className="piano"
-      style={{
-        display: "flex",
-        position: "relative",
-        width: "520px",
-        height: "200px",
-        marginBottom: "1rem",
-      }}
-    >
+    <div className="flex relative w-[520px] h-[200px] mb-4">
       {notes.map(({ note, type }) => (
         <PianoKey key={note} note={note} type={type} onPlay={playNote} />
       ))}

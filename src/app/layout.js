@@ -1,14 +1,15 @@
-import './globals.css'
+import { Kaisei_Tokumin } from "next/font/google";
+import "./globals.css"; // Tailwind CSS やグローバルスタイルを適用
 
-export const metadata = {
-  title: 'スケールクイズアプリ',
-  description: '音を聴いてスケールを当てるクイズ',
-};
+const kaiseiTokumin = Kaisei_Tokumin({
+  subsets: ["latin", "japanese"],
+  weight: ["400", "700"],
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
-      <body>
+      <body className={kaiseiTokumin.className}>
         {children}
       </body>
     </html>

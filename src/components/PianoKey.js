@@ -9,24 +9,32 @@ export function PianoKey({ note, type, onPlay }) {
 
   return (
     <div
-      className={`key ${type}`}
+      className={`
+        key
+        ${type === "white"
+          ? "w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black"
+          : "w-8 h-16 bg-black text-white -ml-4 z-20"}
+        border border-black
+        rounded-md
+        shadow-lg
+        transition-transform
+        ease-in-out
+        duration-200
+        transform
+        active:translate-y-1
+        cursor-pointer
+        flex
+        justify-center
+        items-center
+        relative
+        overflow-hidden
+      `}
       onClick={handleClick}
-      style={{
-        width: type === "white" ? "40px" : "30px",
-        height: type === "white" ? "150px" : "100px",
-        backgroundColor: type === "white" ? "#fff" : "#000",
-        color: type === "white" ? "#000" : "#fff",
-        border: "1px solid #333",
-        marginLeft: type === "black" ? "-15px" : "0",
-        zIndex: type === "black" ? 2 : 1, // ✅ 黒鍵を前面に表示
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: "pointer",
-        fontWeight: "bold",
-      }}
     >
-      <span style={{ fontSize: "12px", marginBottom: "5px" }}>{note}</span>
+      {type === "white" && (
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-white bg-opacity-80 pointer-events-none" />
+      )}
+      <span className="text-xs mb-1 z-10">{note}</span>
     </div>
   );
 }
