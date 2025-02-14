@@ -10,7 +10,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ja">
       <body className={kaiseiTokumin.className}>
-        {children}
+        <div className="w-screen h-screen bg-[url('/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat">
+          {children}
+        </div>
       </body>
     </html>
   );

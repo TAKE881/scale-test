@@ -1,41 +1,45 @@
-"use client"; // ✅ クライアントコンポーネントに指定
+"use client";
 
-import React, { useEffect, useRef } from "react";
-import * as Tone from "tone"; // ✅ `Tone.js` をインポート
+import React, { useEffect, useRef, useState } from "react";
+import * as Tone from "tone";
 import { PianoKey } from "./PianoKey";
 
-// 🎹 PianoKeyboard: ピアノのキーボード全体
 export function PianoKeyboard() {
-  const synthRef = useRef(null); // ✅ `synth` を `useRef` で管理
+  const synthRef = useRef(null);
+  const [randomNotes, setRandomNotes] = useState([]);
 
   useEffect(() => {
-    Tone.start(); // ✅ ユーザーアクション後に `AudioContext` を開始
-    synthRef.current = new Tone.Synth().toDestination(); // ✅ `useEffect` 内で `synth` を作成
+    Tone.start();
+    synthRef.current = new Tone.Synth().toDestination();
+
+    //  ランダム4
+    const shuffled = notes.sort(() => 0.5 - Math.random()); // シャッフル
+    setRandomNotes(shuffled.slice(0, 4)); // 最初の4
   }, []);
 
-  // 🎵 一オクターブの音 (C4-B4)
   const notes = [
-    { note: "ド", type: "white" },
-    { note: "レ", type: "white" },
-    { note: "ミ", type: "white" },
-    { note: "ファ", type: "white" },
-    { note: "ソ", type: "white" },
-    { note: "ラ", type: "white" },
-    { note: "シ", type: "white" },
+    { note: "C4", label: "ド", type: "white" },
+    { note: "D4", label: "レ", type: "white" },
+    { note: "E4", label: "ミ", type: "white" },
+    { note: "F4", label: "ファ", type: "white" },
+    { note: "G4", label: "ソ", type: "white" },
+    { note: "A4", label: "ラ", type: "white" },
+    { note: "B4", label: "シ", type: "white" },
   ];
 
-  // 🎶 音を鳴らす関数
   const playNote = (note) => {
     if (synthRef.current) {
-      synthRef.current.triggerAttackRelease(note, "8n"); // ✅ `useRef` から `synth` を呼び出す
+      synthRef.current.triggerAttackRelease(note, "8n");
     }
   };
 
   return (
-    <div className="flex relative w-[520px] h-[200px] mb-4">
-      {notes.map(({ note, type }) => (
-        <PianoKey key={note} note={note} type={type} onPlay={playNote} />
-      ))}
+    <div className="flex justify-center items-center w-screen h-screen">
+      <div className="flex relative bg-gray-900 p-4 rounded-lg mt-[-250px] gap-5">
+        {randomNotes.map(({ note, label, type }) => (
+          <PianoKey key={note} note={label} type={type} onPlay={() => playNote(note)} />
+        ))}
+      </div>
     </div>
   );
 }
