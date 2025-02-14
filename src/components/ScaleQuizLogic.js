@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react"
 import * as Tone from "tone";
 
-// 🎵 スケールデータ（他のファイルに分けてもOK）
+
 const scales = [
   { name: 'メジャースケール', notes: ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'] },
   { name: 'ナチュラルマイナー', notes: ['A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'] },
@@ -27,14 +27,14 @@ export function useScaleQuiz(totalQuestions = 4) {
   const [usedScales, setUsedScales] = useState([]);
   const [isAnswered, setIsAnswered] = useState(false);
 
-  // 🎵 クイズ開始時に問題を生成
+
   useEffect(() => {
     if (!isQuizFinished) {
       generateScaleQuestion();
     }
   }, [isQuizFinished]);
 
-  // 🎼 スケールの問題を生成
+
   const generateScaleQuestion = () => {
     const availableScales = scales.filter((s) => !usedScales.includes(s.name));
     if (availableScales.length === 0) {
@@ -53,7 +53,7 @@ export function useScaleQuiz(totalQuestions = 4) {
     setOptions(shuffled.sort(() => 0.5 - Math.random()));
   };
 
-  // 🎹 スケールの音を再生
+
   const playScaleNotes = async () => {
     if (!currentScale) return;
     await Tone.start();
@@ -67,7 +67,7 @@ export function useScaleQuiz(totalQuestions = 4) {
     });
   };
 
-  // ✅ 回答処理
+
   const handleAnswer = (answer, index) => {
     if (isAnswered) return;
     setIsAnswered(true);
@@ -87,7 +87,7 @@ export function useScaleQuiz(totalQuestions = 4) {
     }, 500);
   };
 
-  // 🔄 クイズのリセット
+
   const resetQuiz = () => {
     setIsQuizFinished(false);
     setScore(0);

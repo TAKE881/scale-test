@@ -6,20 +6,20 @@ import { useScaleQuiz } from "../components/ScaleQuizLogic";
 import { usePitchTrainingQuiz } from "./PitchTrainingLogic";
 import { PianoKeyboard } from "../components/PianoKeyboard";
 
-export default function QuizPageContent({ mode = "" }) { // ✅ デフォルト値を設定
+export default function QuizPageContent({ mode = "" }) {
   const router = useRouter();
 
-  console.log("Quiz mode:", mode); // ✅ デバッグ用
+  console.log("Quiz mode:", mode);
 
-  // ✅ OK: すべての Hooks を実行し、あとで分岐
+
   const scaleQuiz = useScaleQuiz();
   const pitchQuiz = usePitchTrainingQuiz();
 
-  // ✅ mode の値に基づいて quizLogic を設定
+
   const quizLogic = mode.includes("pitch") ? pitchQuiz : scaleQuiz;
 
 
-  // クイズのデータを取得
+
   const {
     currentQuestion,
     options,

@@ -1,6 +1,6 @@
 import React from "react";
-import QuizPage from "@/components/QuizPage"; // ✅ `QuizPage.js` を読み込む
+import QuizPage from "@/components/QuizPage";
 
 export default function ScalesQuizPage() {
-  return <QuizPage />; // ✅ スケールクイズ用のページ
+  return <QuizPage />;
 }

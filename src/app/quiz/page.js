@@ -5,7 +5,7 @@ import QuizPage from "@/components/QuizPage";
 
 export default function QuizPageWrapper() {
   const searchParams = useSearchParams();
-  const mode = searchParams.get("mode") || "scaleQuiz"; // ✅ `mode` を取得
+  const mode = searchParams.get("mode") || "scaleQuiz";
 
-  return <QuizPage mode={mode} />; // ✅ `QuizPage.js` に `mode` を渡す
+  return <QuizPage mode={mode} />;
 }

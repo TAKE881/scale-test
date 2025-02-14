@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-// 🎵 音感クイズのロジック
+
 export function usePitchTrainingQuiz(totalQuestions = 4) {
   const [currentNote, setCurrentNote] = useState(null);
   const [options, setOptions] = useState([]);
@@ -13,7 +13,7 @@ export function usePitchTrainingQuiz(totalQuestions = 4) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
 
-  // 🎼 音感クイズの問題を生成
+
   useEffect(() => {
     if (!isQuizFinished) {
       generatePitchTrainingQuestion();
@@ -32,7 +32,7 @@ export function usePitchTrainingQuiz(totalQuestions = 4) {
     setOptions(shuffled.sort(() => 0.5 - Math.random()));
   };
 
-  // 🎹 音を再生
+
   const playNote = async () => {
     if (!currentNote) return;
     await Tone.start();
@@ -40,7 +40,7 @@ export function usePitchTrainingQuiz(totalQuestions = 4) {
     synth.triggerAttackRelease(currentNote, "8n");
   };
 
-  // ✅ 回答処理
+
   const handleAnswer = (answer, index) => {
     if (isAnswered) return;
     setIsAnswered(true);
@@ -60,7 +60,7 @@ export function usePitchTrainingQuiz(totalQuestions = 4) {
     }, 500);
   };
 
-  // 🔄 クイズのリセット
+
   const resetQuiz = () => {
     setIsQuizFinished(false);
     setScore(0);

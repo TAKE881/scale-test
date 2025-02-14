@@ -6,7 +6,7 @@ import { PianoKey } from "./PianoKey";
 
 export function PianoKeyboard() {
   const synthRef = useRef(null);
-  const [randomNotes, setRandomNotes] = useState([]); // 初期値は空
+  const [randomNotes, setRandomNotes] = useState([]);
 
   const allNotes = [
     { note: "C4", label: "ド", type: "white" },
@@ -22,7 +22,7 @@ export function PianoKeyboard() {
     Tone.start();
     synthRef.current = new Tone.Synth().toDestination();
 
-    // ✅ クライアント側でのみ実行
+
     const shuffled = allNotes.sort(() => 0.5 - Math.random()).slice(0, 4);
     setRandomNotes(shuffled);
   }, []);
