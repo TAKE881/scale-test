@@ -36,7 +36,7 @@ export function PianoKeyboard() {
   return (
     <div className="flex justify-center items-center w-screen h-screen">
       <div className="flex relative bg-gray-900 p-4 rounded-lg mt-[-250px] gap-5">
-        {/*  Hydrationエラーを防ぐために、初回は空の `div` を表示 */}
+        {/* ✅ Hydrationエラーを防ぐために、初回は空の `div` を表示 */}
         {randomNotes.length === 0 ? (
           <div className="text-white">Loading...</div>
         ) : (

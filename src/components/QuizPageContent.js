@@ -11,8 +11,13 @@ export default function QuizPageContent({ mode = "" }) { // ✅ デフォルト�
 
   console.log("Quiz mode:", mode); // ✅ デバッグ用
 
-  // クイズの種類に応じてロジックを選択
-  const quizLogic = mode.includes("pitch") ? usePitchTrainingQuiz() : useScaleQuiz();
+  // ✅ OK: すべての Hooks を実行し、あとで分岐
+  const scaleQuiz = useScaleQuiz();
+  const pitchQuiz = usePitchTrainingQuiz();
+
+  // ✅ mode の値に基づいて quizLogic を設定
+  const quizLogic = mode.includes("pitch") ? pitchQuiz : scaleQuiz;
+
 
   // クイズのデータを取得
   const {
