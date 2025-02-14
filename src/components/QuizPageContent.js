@@ -116,9 +116,8 @@ export default function QuizPageContent({ mode }) { // ✅ props で `mode` を�
                   <motion.button
                     key={index}
                     onClick={() => handleAnswer(option.name, index)}
-                    className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${
-                      selectedOption === index ? "selected" : ""
-                    }`}
+                    className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${selectedOption === index ? "selected" : ""
+                      }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
