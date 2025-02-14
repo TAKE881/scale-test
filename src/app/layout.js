@@ -2,7 +2,8 @@ import { Kaisei_Tokumin } from "next/font/google";
 import "./globals.css"; // Tailwind CSS やグローバルスタイルを適用
 
 const kaiseiTokumin = Kaisei_Tokumin({
-  subsets: ["latin", "japanese"],
+  // subsets: ["latin", "japanese"],
+  subsets: ["latin-ext"],
   weight: ["400", "700"],
 });
 
