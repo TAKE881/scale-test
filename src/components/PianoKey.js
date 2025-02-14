@@ -32,7 +32,7 @@ export function PianoKey({ note, type, onPlay }) {
       onClick={handleClick}
     >
       {type === "white" && (
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-white bg-opacity-80 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-5/6 bg-white bg-opacity-80 pointer-events-none" />
       )}
       <span className="text-xs mb-1 z-10">{note}</span>
     </div>

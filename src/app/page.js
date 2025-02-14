@@ -8,7 +8,7 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-center h-screen text-center">
         <h1 className="text-3xl font-bold  text-white mb-4">音感ゲーム</h1>
-        <p className="mb-6 text-lg">モード選択</p>
+        <p className="mb-6 text-lg text-white">モード選択</p>
 
         <div className="flex flex-col gap-4">
           {/* ✅ 音感クイズ（ピアノ）へのボタン */}

@@ -22,7 +22,7 @@ export function PianoKeyboard() {
     Tone.start();
     synthRef.current = new Tone.Synth().toDestination();
 
-    //  クライアント側でのみ実行
+    // ✅ クライアント側でのみ実行
     const shuffled = allNotes.sort(() => 0.5 - Math.random()).slice(0, 4);
     setRandomNotes(shuffled);
   }, []);
