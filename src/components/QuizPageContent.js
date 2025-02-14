@@ -6,7 +6,7 @@ import { useScaleQuiz } from "../components/ScaleQuizLogic";
 import { usePitchTrainingQuiz } from "./PitchTrainingLogic";
 import { PianoKeyboard } from "../components/PianoKeyboard";
 
-export default function QuizPageContent({ mode }) { // ✅ props で `mode` を受け取る
+export default function QuizPageContent({ mode = "" }) { // ✅ デフォルト値を設定
   const router = useRouter();
 
   console.log("Quiz mode:", mode); // ✅ デバッグ用
