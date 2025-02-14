@@ -11,17 +11,45 @@ export default function Home() {
         <p className="mb-6 text-lg text-white">モード選択</p>
 
         <div className="flex flex-col gap-4">
-          {/* ✅ 音感クイズ（ピアノ）へのボタン */}
           <Link href="/quiz?mode=pitchTrainingQuiz">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg w-64">
+            <button className="
+    relative px-16 py-3 text-lg font-semibold
+    text-white bg-gradient-to-r from-green-500 to-emerald-400
+    rounded-full shadow-lg hover:shadow-xl transition-all duration-300
+    border border-white border-opacity-30 hover:border-opacity-60
+    hover:scale-105
+    before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
+    hover:before:opacity-100
+  ">
               音程ゲーム
             </button>
           </Link>
 
-          {/* ✅ スケールクイズへのボタン */}
           <Link href="quiz?mode=scaleQuiz">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-64">
+            <button className="
+    relative px-7 py-3 text-lg font-semibold
+    text-white bg-gradient-to-r from-blue-500 to-indigo-400
+    rounded-full shadow-lg hover:shadow-xl transition-all duration-300
+    border border-white border-opacity-30 hover:border-opacity-60
+    hover:scale-105
+    before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
+    hover:before:opacity-100
+  ">
               音楽スケールゲーム
+            </button>
+          </Link>
+
+          <Link href="quiz?mode=scaleQuiz">
+            <button className="
+    relative px-8 py-3 text-lg font-semibold
+    text-white bg-gradient-to-r from-gray-500 to-gray-700
+    rounded-full shadow-lg hover:shadow-xl transition-all duration-300
+    border border-white border-opacity-30 hover:border-opacity-60
+    hover:scale-105
+    before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
+    hover:before:opacity-100
+  ">
+              設定
             </button>
           </Link>
 
