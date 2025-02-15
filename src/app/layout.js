@@ -1,15 +1,19 @@
-import './globals.css'
+import { Kaisei_Tokumin } from "next/font/google";
+import "./globals.css";
 
-export const metadata = {
-  title: 'スケールクイズアプリ',
-  description: '音を聴いてスケールを当てるクイズ',
-};
+const kaiseiTokumin = Kaisei_Tokumin({
+
+  subsets: ["latin-ext"],
+  weight: ["400", "700"],
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
-      <body>
-        {children}
+      <body className={kaiseiTokumin.className}>
+        <div className="w-screen h-screen bg-[url('/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat">
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -1,24 +1,25 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useScaleQuiz } from "../components/ScaleQuizLogic";
-import { useEarTrainingQuiz } from "../components/EarTrainingLogic";
+import { usePitchTrainingQuiz } from "./PitchTrainingLogic";
 import { PianoKeyboard } from "../components/PianoKeyboard";
 
-export default function QuizPageContent() {
-  const searchParams = useSearchParams();
+export default function QuizPageContent({ mode = "" }) {
   const router = useRouter();
 
-  // URL から `mode` を取得、なければ "scale" をデフォルトに
-  const mode = searchParams.get("mode") || "scale";
+  console.log("Quiz mode:", mode);
 
-  console.log("Quiz mode:", mode); // ✅ 確認ログ
 
-  // クイズの種類に応じてロジックを選択
-  const quizLogic = mode === "ear" ? useEarTrainingQuiz() : useScaleQuiz();
+  const scaleQuiz = useScaleQuiz();
+  const pitchQuiz = usePitchTrainingQuiz();
 
-  // クイズのデータを取得
+
+  const quizLogic = mode.includes("pitch") ? pitchQuiz : scaleQuiz;
+
+
+
   const {
     currentQuestion,
     options,
@@ -41,7 +42,7 @@ export default function QuizPageContent() {
       className="min-h-screen bg-cover bg-center bg-no-repeat dark:bg-gray-900 dark:text-white"
     >
       <h1 className="text-white text-2xl font-bold text-center mb-4">
-        {mode === "ear" ? "音感クイズ" : "スケールクイズ"}
+        {mode.includes("pitch") ? "音程ゲーム" : "スケールクイズ"}
       </h1>
 
       {isQuizFinished ? (
@@ -106,31 +107,28 @@ export default function QuizPageContent() {
               </svg>
             </button>
 
-            {/* 🏆 音感クイズなら「鍵盤」を表示 */}
-            {mode === "ear" ? (
-              <PianoKeyboard handleAnswer={handleAnswer} />
-            ) : (
+            {/* 🎹 音程ゲームならピアノを表示 */}
+            {mode.includes("pitch") && (
+              <div className="mt-4">
+                <PianoKeyboard handleAnswer={handleAnswer} />
+              </div>
+            )}
+
+            {/* 🎵 スケールクイズなら選択肢を表示 */}
+            {!mode.includes("pitch") && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4">
                 {options.map((option, index) => (
                   <motion.button
                     key={index}
                     onClick={() => handleAnswer(option.name, index)}
-                    className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${
-                      selectedOption === index ? "selected" : ""
-                    }`}
+                    className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${selectedOption === index ? "selected" : ""
+                      }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {option.name}
-
                   </motion.button>
                 ))}
-                            <button
-              onClick={() => router.push("/")}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-1 rounded-lg w-auto ml-auto"
-            >
-              トップに戻る
-            </button>
               </div>
             )}
           </motion.main>

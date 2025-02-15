@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-// 🎵 音感クイズのロジック
-export function useEarTrainingQuiz(totalQuestions = 4) {
+
+export function usePitchTrainingQuiz(totalQuestions = 4) {
   const [currentNote, setCurrentNote] = useState(null);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
@@ -13,14 +13,14 @@ export function useEarTrainingQuiz(totalQuestions = 4) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
 
-  // 🎼 音感クイズの問題を生成
+
   useEffect(() => {
     if (!isQuizFinished) {
-      generateEarTrainingQuestion();
+      generatePitchTrainingQuestion();
     }
   }, [isQuizFinished]);
 
-  const generateEarTrainingQuestion = () => {
+  const generatePitchTrainingQuestion = () => {
     const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
     const randomNote = notes[Math.floor(Math.random() * notes.length)];
     setCurrentNote(randomNote);
@@ -32,7 +32,7 @@ export function useEarTrainingQuiz(totalQuestions = 4) {
     setOptions(shuffled.sort(() => 0.5 - Math.random()));
   };
 
-  // 🎹 音を再生
+
   const playNote = async () => {
     if (!currentNote) return;
     await Tone.start();
@@ -40,7 +40,7 @@ export function useEarTrainingQuiz(totalQuestions = 4) {
     synth.triggerAttackRelease(currentNote, "8n");
   };
 
-  // ✅ 回答処理
+
   const handleAnswer = (answer, index) => {
     if (isAnswered) return;
     setIsAnswered(true);
@@ -51,7 +51,7 @@ export function useEarTrainingQuiz(totalQuestions = 4) {
       }
       if (questionNumber + 1 < totalQuestions) {
         setQuestionNumber((prev) => prev + 1);
-        generateEarTrainingQuestion();
+        generatePitchTrainingQuestion();
       } else {
         setIsQuizFinished(true);
       }
@@ -60,7 +60,7 @@ export function useEarTrainingQuiz(totalQuestions = 4) {
     }, 500);
   };
 
-  // 🔄 クイズのリセット
+
   const resetQuiz = () => {
     setIsQuizFinished(false);
     setScore(0);
@@ -75,7 +75,7 @@ export function useEarTrainingQuiz(totalQuestions = 4) {
     totalQuestions,
     isQuizFinished,
     selectedOption,
-    generateEarTrainingQuestion,
+    generatePitchTrainingQuestion,
     playNote,
     handleAnswer,
     resetQuiz,

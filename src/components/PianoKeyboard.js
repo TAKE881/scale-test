@@ -1,53 +1,50 @@
-import React from "react"
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import * as Tone from "tone";
 import { PianoKey } from "./PianoKey";
 
-// PianoKeyboard: Entire keyboard component
-// Schedules note playback using Tone.js
-// Renders multiple PianoKey components
-
 export function PianoKeyboard() {
-  const synth = new Tone.Synth().toDestination();
+  const synthRef = useRef(null);
+  const [randomNotes, setRandomNotes] = useState([]);
 
-  // One octave worth of notes (C4-B4)
-  const notes = [
-    { note: "C4", type: "white" },
-    { note: "C#4", type: "black" },
-    { note: "D4", type: "white" },
-    { note: "D#4", type: "black" },
-    { note: "E4", type: "white" },
-    { note: "F4", type: "white" },
-    { note: "F#4", type: "black" },
-    { note: "G4", type: "white" },
-    { note: "G#4", type: "black" },
-    { note: "A4", type: "white" },
-    { note: "A#4", type: "black" },
-    { note: "B4", type: "white" },
+  const allNotes = [
+    { note: "C4", label: "ド", type: "white" },
+    { note: "D4", label: "レ", type: "white" },
+    { note: "E4", label: "ミ", type: "white" },
+    { note: "F4", label: "ファ", type: "white" },
+    { note: "G4", label: "ソ", type: "white" },
+    { note: "A4", label: "ラ", type: "white" },
+    { note: "B4", label: "シ", type: "white" },
   ];
 
-  const playNote = async (note) => {
-    await Tone.start(); // iOS等では音を出す前にユーザーアクション必要
-    synth.triggerAttackRelease(note, "8n");
+  useEffect(() => {
+    Tone.start();
+    synthRef.current = new Tone.Synth().toDestination();
+
+
+    const shuffled = allNotes.sort(() => 0.5 - Math.random()).slice(0, 4);
+    setRandomNotes(shuffled);
+  }, []);
+
+  const playNote = (note) => {
+    if (synthRef.current) {
+      synthRef.current.triggerAttackRelease(note, "8n");
+    }
   };
 
   return (
-    <div
-      className="piano"
-      style={{
-        display: "flex",
-        position: "relative",
-        width: "520px",
-        height: "200px",
-        marginBottom: "1rem",
-      }}
-    >
-      {notes.map(({ note, type }) => (
-        <PianoKey
-          key={note}
-          note={note}
-          type={type}
-          onPlay={playNote}
-        />
-      ))}
+    <div className="flex justify-center items-center w-screen h-screen">
+      <div className="flex relative bg-gray-900 p-4 rounded-lg mt-[-250px] gap-5">
+        {/* ✅ Hydrationエラーを防ぐために、初回は空の `div` を表示 */}
+        {randomNotes.length === 0 ? (
+          <div className="text-white">Loading...</div>
+        ) : (
+          randomNotes.map(({ note, label, type }) => (
+            <PianoKey key={note} note={label} type={type} onPlay={() => playNote(note)} />
+          ))
+        )}
+      </div>
     </div>
   );
 }
