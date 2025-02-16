@@ -1,6 +1,6 @@
 import React from "react";
 
-export function PianoKey({ note, type, onPlay }) {
+export function PitchQuizKey({ note, type, onPlay }) {
   const handleClick = () => {
     if (onPlay) {
       onPlay(note);
@@ -11,9 +11,11 @@ export function PianoKey({ note, type, onPlay }) {
     <div
       className={`
         key
-        ${type === "white"
-          ? "w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black"
-          : "w-8 h-16 bg-black text-white -ml-4 z-20"}
+        ${
+          type === "white"
+            ? "w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black"
+            : "w-8 h-16 bg-black text-white -ml-4 z-20"
+        }
         border border-black
         rounded-md
         shadow-lg

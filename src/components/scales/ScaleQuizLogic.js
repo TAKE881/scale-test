@@ -1,20 +1,46 @@
 "use client";
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-
 const scales = [
-  { name: 'メジャースケール', notes: ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'] },
-  { name: 'ナチュラルマイナー', notes: ['A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'] },
-  { name: 'ハーモニックマイナー', notes: ['A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G#4', 'A4'] },
-  { name: 'メロディックマイナー', notes: ['A3', 'B3', 'C4', 'D4', 'E4', 'F#4', 'G#4', 'A4'] },
-  { name: 'メジャーペンタトニック', notes: ['C4', 'D4', 'E4', 'G4', 'A4', 'C5'] },
-  { name: 'マイナーペンタトニック', notes: ['A3', 'C4', 'D4', 'E4', 'G4', 'A4'] },
-  { name: 'ブルーススケール', notes: ['A3', 'C4', 'D4', 'D#4', 'E4', 'G4', 'A4'] },
-  { name: 'ドリアン', notes: ['D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C4', 'D5'] },
-  { name: 'リディアン', notes: ['F4', 'G4', 'A4', 'B4', 'C4', 'D4', 'E4', 'F5'] },
-  { name: 'ミクソリディアン', notes: ['G4', 'A4', 'B4', 'C4', 'D4', 'E4', 'F4', 'G5'] },
+  {
+    name: "メジャースケール",
+    notes: ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
+  },
+  {
+    name: "ナチュラルマイナー",
+    notes: ["A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4"],
+  },
+  {
+    name: "ハーモニックマイナー",
+    notes: ["A3", "B3", "C4", "D4", "E4", "F4", "G#4", "A4"],
+  },
+  {
+    name: "メロディックマイナー",
+    notes: ["A3", "B3", "C4", "D4", "E4", "F#4", "G#4", "A4"],
+  },
+  {
+    name: "メジャーペンタトニック",
+    notes: ["C4", "D4", "E4", "G4", "A4", "C5"],
+  },
+  {
+    name: "マイナーペンタトニック",
+    notes: ["A3", "C4", "D4", "E4", "G4", "A4"],
+  },
+  {
+    name: "ブルーススケール",
+    notes: ["A3", "C4", "D4", "D#4", "E4", "G4", "A4"],
+  },
+  { name: "ドリアン", notes: ["D4", "E4", "F4", "G4", "A4", "B4", "C4", "D5"] },
+  {
+    name: "リディアン",
+    notes: ["F4", "G4", "A4", "B4", "C4", "D4", "E4", "F5"],
+  },
+  {
+    name: "ミクソリディアン",
+    notes: ["G4", "A4", "B4", "C4", "D4", "E4", "F4", "G5"],
+  },
 ];
 
 export function useScaleQuiz(totalQuestions = 4) {
@@ -27,13 +53,11 @@ export function useScaleQuiz(totalQuestions = 4) {
   const [usedScales, setUsedScales] = useState([]);
   const [isAnswered, setIsAnswered] = useState(false);
 
-
   useEffect(() => {
     if (!isQuizFinished) {
       generateScaleQuestion();
     }
   }, [isQuizFinished]);
-
 
   const generateScaleQuestion = () => {
     const availableScales = scales.filter((s) => !usedScales.includes(s.name));
@@ -42,7 +66,8 @@ export function useScaleQuiz(totalQuestions = 4) {
       return;
     }
 
-    const randomScale = availableScales[Math.floor(Math.random() * availableScales.length)];
+    const randomScale =
+      availableScales[Math.floor(Math.random() * availableScales.length)];
     setCurrentScale(randomScale);
     setUsedScales((prev) => [...prev, randomScale.name]);
 
@@ -52,7 +77,6 @@ export function useScaleQuiz(totalQuestions = 4) {
     }
     setOptions(shuffled.sort(() => 0.5 - Math.random()));
   };
-
 
   const playScaleNotes = async () => {
     if (!currentScale) return;
@@ -66,7 +90,6 @@ export function useScaleQuiz(totalQuestions = 4) {
       synth.triggerAttackRelease(note, "8n", Tone.now() + index * noteDuration);
     });
   };
-
 
   const handleAnswer = (answer, index) => {
     if (isAnswered) return;
@@ -87,7 +110,6 @@ export function useScaleQuiz(totalQuestions = 4) {
     }, 500);
   };
 
-
   const resetQuiz = () => {
     setIsQuizFinished(false);
     setScore(0);
@@ -106,6 +128,6 @@ export function useScaleQuiz(totalQuestions = 4) {
     generateScaleQuestion,
     playScaleNotes,
     handleAnswer,
-    resetQuiz
+    resetQuiz,
   };
 }
