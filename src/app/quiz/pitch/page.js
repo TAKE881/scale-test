@@ -1,10 +1,157 @@
-import { Suspense } from "react";
-import QuizPage from "@/components/QuizPage"; // ✅ `QuizPage.js` を読み込む
+"use client";
+
+import { useEffect, useState } from "react";
+import * as Tone from "tone";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePitchQuiz } from "@/components/pitch/PitchQuizLogic";
+import { PitchQuizButton } from "@/components/pitch/PitchQuizButton";
+import { PitchQuizPlayer } from "@/components/pitch/PitchQuizPlayer";
 
 export default function PitchQuizPage() {
+  const router = useRouter();
+
+  // ①「現在の音量」を管理する state
+  const [volume, setVolume] = useState(0);
+
+  // ② ページのマウント時に localStorage を読み込む
+  useEffect(() => {
+    const savedVol = localStorage.getItem("quizVolume");
+    if (savedVol !== null) {
+      setVolume(Number(savedVol));
+    }
+  }, []);
+
+  // ③ 再生ボタン押下時の処理 (音量再取得 & 音再生)
+  async function handlePlayNote() {
+    // 再度 localStorage から読み込み (設定ページから戻ってきた直後など想定)
+    const savedVol = localStorage.getItem("quizVolume");
+    if (savedVol !== null) {
+      setVolume(Number(savedVol));
+    }
+    await Tone.start();
+    Tone.getDestination().volume.value = volume;
+    const synth = new Tone.Synth().toDestination();
+    synth.triggerAttackRelease("C4", "8n");
+  }
+
+  // ピッチクイズ用フック: 問題生成・回答処理・正解時ピンポン音など
+  const {
+    score,
+    questionNumber,
+    totalQuestions,
+    isQuizFinished,
+    selectedOption,
+    options,
+    playNote,
+    handleAnswer,
+    resetQuiz,
+  } = usePitchQuiz();
+
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <QuizPage />
-    </Suspense>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.0 }}
+      className="min-h-screen bg-cover bg-center bg-no-repeat text-white"
+    >
+      {/* タイトル */}
+      <h1 className="text-white text-2xl font-bold text-center mb-4">
+        ピッチクイズ
+      </h1>
+
+      {isQuizFinished ? (
+        /* =================
+         *  結果画面
+         * ================= */
+        <motion.main
+          initial={{ y: 300, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.0 }}
+          className="flex flex-col items-center justify-center min-h-screen p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+        >
+          <h1 className="text-2xl font-bold mb-4 text-center">クイズ結果</h1>
+          <p className="mb-4 text-lg text-center">
+            スコア: {score} / {totalQuestions}
+          </p>
+          <p className="mb-8 text-lg text-center">
+            正答率: {((score / totalQuestions) * 100).toFixed(2)}%
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 w-full">
+            <button
+              onClick={resetQuiz}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
+            >
+              もう一度プレイ
+            </button>
+            <button
+              onClick={() => router.push("/")}
+              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
+            >
+              トップに戻る
+            </button>
+          </div>
+        </motion.main>
+      ) : (
+        /* =================
+         *  問題画面
+         * ================= */
+        <AnimatePresence mode="wait">
+          <motion.main
+            key={questionNumber}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center min-h-screen p-4"
+          >
+            {/* スコアや問題数 */}
+            <p className="text-white mb-4 text-lg text-center">
+              スコア: {score}
+            </p>
+            <p className="text-white mb-4 text-lg text-center">
+              問題: {questionNumber + 1} / {totalQuestions}
+            </p>
+
+            {/* 再生ボタン → playNote() */}
+            <button
+              onClick={playNote}
+              className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
+              aria-label="再生"
+            >
+              再生
+            </button>
+
+            {/* ▼ ここから選択肢表示（2通りの例示）▼ */}
+
+            {/* --- (例1) PitchQuizButton.js を使ってシンプルなボタンUIで4択表示する場合 --- */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4">
+              {options.map((option, index) => (
+                <PitchQuizButton
+                  key={option}
+                  label={option}
+                  value={option}
+                  onClick={(val) => handleAnswer(val, index)}
+                />
+              ))}
+            </div>
+
+            {/* --- (例2) PitchQuizPlayer.js を使って「鍵盤風UI」で4択表示する場合 ---
+
+            <div className="mt-8">
+              <PitchQuizPlayer
+                options={options}
+                handleAnswer={handleAnswer}
+              />
+            </div>
+
+            ※ 上の PitchQuizButton の部分をコメントアウトし、
+               こちらを使えば「鍵盤のUI」で回答できるようになります。 */}
+          </motion.main>
+        </AnimatePresence>
+      )}
+    </motion.div>
   );
 }
