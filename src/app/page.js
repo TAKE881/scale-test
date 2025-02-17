@@ -8,15 +8,15 @@ export default function Home() {
       }
     >
       <main className="flex flex-col items-center justify-center h-screen text-center">
-        <h1 className="text-3xl font-bold text-white mb-4">音感ゲーム</h1>
-        <p className="mb-6 text-lg text-white">モード選択</p>
+        <h1 className="text-3xl font-bold text-white mb-4">音感レベル診断！</h1>
+        <p className="mb-7 text-lg text-white">モード選択</p>
 
         <div className="flex flex-col gap-4">
           {/* 1. ピッチクイズへ遷移 */}
           <Link href="/quiz/pitch">
             <button
               className="
-                relative px-16 py-3 text-lg font-semibold
+                relative px-9 mb-3 py-3 text-lg font-semibold
                 text-white bg-gradient-to-r from-green-500 to-emerald-400
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60
@@ -25,7 +25,7 @@ export default function Home() {
                 hover:before:opacity-100
               "
             >
-              音程ゲーム
+              はじめる
             </button>
           </Link>
 
@@ -33,7 +33,7 @@ export default function Home() {
           <Link href="/quiz/scales">
             <button
               className="
-                relative px-7 py-3 text-lg font-semibold
+                relative px-7 py-1 text-lg font-semibold
                 text-white bg-gradient-to-r from-blue-500 to-indigo-400
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60
@@ -42,7 +42,7 @@ export default function Home() {
                 hover:before:opacity-100
               "
             >
-              音楽スケールゲーム
+              調整中
             </button>
           </Link>
 
@@ -52,7 +52,7 @@ export default function Home() {
           <Link href="/settings">
             <button
               className="
-                relative px-8 py-3 text-lg font-semibold
+                relative px-8 py-1 text-lg font-semibold
                 text-white bg-gradient-to-r from-gray-500 to-gray-700
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60
