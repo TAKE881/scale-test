@@ -1,5 +1,6 @@
 "use client";
 
+import { Water_Brush } from "next/font/google";
 import { useEffect, useState } from "react";
 import * as Tone from "tone";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,9 @@ import { usePitchQuiz } from "@/components/pitch/PitchQuizLogic";
 import { PitchQuizButton } from "@/components/pitch/PitchQuizButton";
 import { PitchQuizPlayer } from "@/components/pitch/PitchQuizPlayer";
 
+const waterBrush = Water_Brush({ subsets: ["latin"], weight: "400" });
 export default function PitchQuizPage() {
+
   const router = useRouter();
 
   // ①「現在の音量」を管理する state
@@ -35,7 +38,7 @@ export default function PitchQuizPage() {
     synth.triggerAttackRelease("C4", "8n");
   }
 
-  // ピッチクイズ用フック: 問題生成・回答処理・正解時ピンポン音など
+  // 音程分析用フック: 問題生成・回答処理・正解時ピンポン音など
   const {
     score,
     questionNumber,
@@ -54,11 +57,12 @@ export default function PitchQuizPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.0 }}
-      className="min-h-screen bg-cover bg-center bg-no-repeat text-white"
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
     >
+
       {/* タイトル */}
       <h1 className="text-white text-2xl font-bold text-center mb-4">
-        ピッチクイズ
+        音感レベル診断！
       </h1>
 
       {isQuizFinished ? (
@@ -69,22 +73,28 @@ export default function PitchQuizPage() {
           initial={{ y: 300, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.0 }}
-          className="flex flex-col items-center justify-center min-h-screen p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+          className="flex flex-col items-center justify-center min-h-[90vh] p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
         >
-          <h1 className="text-2xl font-bold mb-4 text-center">クイズ結果</h1>
-          <p className="mb-4 text-lg text-center">
-            スコア: {score} / {totalQuestions}
-          </p>
-          <p className="mb-8 text-lg text-center">
-            正答率: {((score / totalQuestions) * 100).toFixed(2)}%
-          </p>
-
+          <div>
+            <h1 className={`${waterBrush.className} text-9xl`}>
+              {((score / totalQuestions) * 100).toFixed()}
+            </h1>
+          </div>
+          <h1 className="text-2xl font-bold mb-9 text-center">あなたの音感レベル</h1>
+          <div className="w-300">
+            <p className="mb-1 text-lg text-left">
+              正解数: {score} / {totalQuestions}
+            </p>
+            <p className="mb-8 text-lg text-left">
+              音感レベル: Lv.{((score / totalQuestions) * 100).toFixed()}
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 w-full">
             <button
               onClick={resetQuiz}
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
             >
-              もう一度プレイ
+              再チャレンジ
             </button>
             <button
               onClick={() => router.push("/")}
