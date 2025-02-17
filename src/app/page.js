@@ -49,7 +49,7 @@ export default function Home() {
           {/* 3. 設定ページ（仮）へ遷移
               設定ページが未実装であれば、将来的に /settings などに作成する想定でOK
           */}
-          <Link href="/setting">
+          <Link href="/settings">
             <button
               className="
                 relative px-8 py-3 text-lg font-semibold
