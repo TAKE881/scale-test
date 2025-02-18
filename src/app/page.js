@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -8,8 +9,11 @@ export default function Home() {
       }
     >
       <main className="flex flex-col items-center justify-center h-screen text-center">
-        <h1 className="text-3xl font-bold text-white mb-4">音感レベル診断！</h1>
+        <h1 className="text-3xl font-bold text-white mb-4">とん感レベル診断！</h1>
         <p className="mb-7 text-lg text-white">モード選択</p>
+        <div>
+          <Image src="/AIboo2-removebg.png" alt="ブーブークッションに乗ったブタ" width={150} height={0} />
+        </div>
 
         <div className="flex flex-col gap-4">
           {/* 1. ピッチクイズへ遷移 */}
@@ -25,7 +29,7 @@ export default function Home() {
                 hover:before:opacity-100
               "
             >
-              はじめる
+              とん感診断をはじめる
             </button>
           </Link>
 
@@ -42,7 +46,7 @@ export default function Home() {
                 hover:before:opacity-100
               "
             >
-              調整中
+              真面目モード
             </button>
           </Link>
 
