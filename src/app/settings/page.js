@@ -43,10 +43,10 @@ export default function SettingsPage() {
 
   return (
     <main className="p-4 text-white  min-h-screen">
-      <h1 className="text-2xl mb-10">設定</h1>
+      <h1 className="text-2xl mb-10 text-center">設定</h1>
 
       {/* ===== サウンド ===== */}
-      <div className="mb-8">
+      <div className="mb-8 text-center">
         <label className="block mb-2">サウンド</label>
         <input
           type="range"
@@ -61,10 +61,10 @@ export default function SettingsPage() {
       </div>
 
       {/* ===== スケール ===== */}
-      <div className="mb-8">
+      <div className="mb-8 text-center">
         <h2 className="mb-2">スケール</h2>
-        <div className="mb-1 ml-5">
-          <label className="mr-4">
+        <div className="mb-1">
+          <label className="">
             <input
               type="radio"
               name="noteLabel"
@@ -75,7 +75,7 @@ export default function SettingsPage() {
             (C, D, E)
           </label>
         </div>
-        <div className="ml-5">
+        <div className="">
           <label>
             <input
               type="radio"
@@ -88,8 +88,8 @@ export default function SettingsPage() {
           </label>
         </div>
       </div>
-      <div>
-        <Link href="/">
+      <div className="text-center">
+        <Link href="/mode-select">
           <button className="
                 relative px-8 py-3 text-lg font-semibold
                 text-white bg-gradient-to-r from-gray-500 to-gray-700

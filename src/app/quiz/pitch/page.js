@@ -1,5 +1,6 @@
 "use client";
 
+
 import { Water_Brush } from "next/font/google";
 import { useEffect, useState } from "react";
 import * as Tone from "tone";
@@ -8,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePitchQuiz } from "@/components/pitch/PitchQuizLogic";
 import { PitchQuizButton } from "@/components/pitch/PitchQuizButton";
 import { PitchQuizPlayer } from "@/components/pitch/PitchQuizPlayer";
+import Link from "next/link";
 
 const waterBrush = Water_Brush({ subsets: ["latin"], weight: "400" });
 export default function PitchQuizPage() {
@@ -137,7 +139,7 @@ export default function PitchQuizPage() {
             {/* ▼ ここから選択肢表示（2通りの例示）▼ */}
 
             {/* --- (例1) PitchQuizButton.js を使ってシンプルなボタンUIで4択表示する場合 --- */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4 mb-5">
               {options.map((option, index) => (
                 <PitchQuizButton
                   key={option}
@@ -159,9 +161,23 @@ export default function PitchQuizPage() {
 
             ※ 上の PitchQuizButton の部分をコメントアウトし、
                こちらを使えば「鍵盤のUI」で回答できるようになります。 */}
+            <Link href="/mode-select">
+              <button className="
+                relative px-8 py-3 text-lg font-semibold
+                text-white bg-gradient-to-r from-gray-500 to-gray-700
+                rounded-full shadow-lg hover:shadow-xl transition-all duration-300
+                border border-white border-opacity-30 hover:border-opacity-60
+                hover:scale-105
+                before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
+                hover:before:opacity-100
+              ">
+                戻る
+              </button>
+            </Link>
           </motion.main>
         </AnimatePresence>
       )}
+
     </motion.div>
   );
 }
