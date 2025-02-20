@@ -91,7 +91,7 @@ export default function SettingsPage() {
       <div className="">
         <Link href="/mode-select">
           <button className="
-                relative px-8 py-3 text-lg font-semibold
+                relative px-7 py-2 mb-6 text-lg
                 text-white bg-gradient-to-r from-gray-500 to-gray-700
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60
@@ -100,6 +100,20 @@ export default function SettingsPage() {
                 hover:before:opacity-100
               ">
             戻る
+          </button>
+        </Link>
+      </div>
+      <div className="">
+        <Link href="/">
+          <button className="
+                relative px-3 py-1 text-sm text-white bg-gradient-to-r from-gray-500 to-gray-700
+                rounded-full shadow-lg hover:shadow-xl transition-all duration-300
+                border border-white border-opacity-30 hover:border-opacity-60
+                hover:scale-105
+                before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
+                hover:before:opacity-100
+              ">
+            タイトル
           </button>
         </Link>
       </div>
