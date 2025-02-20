@@ -42,11 +42,11 @@ export default function SettingsPage() {
   }
 
   return (
-    <main className="p-4 text-white  min-h-screen">
-      <h1 className="text-2xl mb-10 text-center">設定</h1>
+    <main className="text-white flex flex-col items-center justify-center h-screen text-center">
+      <h1 className="text-2xl mb-10">設定</h1>
 
       {/* ===== サウンド ===== */}
-      <div className="mb-8 text-center">
+      <div className="mb-8">
         <label className="block mb-2">サウンド</label>
         <input
           type="range"
@@ -61,7 +61,7 @@ export default function SettingsPage() {
       </div>
 
       {/* ===== スケール ===== */}
-      <div className="mb-8 text-center">
+      <div className="mb-8">
         <h2 className="mb-2">スケール</h2>
         <div className="mb-1">
           <label className="">
@@ -88,7 +88,7 @@ export default function SettingsPage() {
           </label>
         </div>
       </div>
-      <div className="text-center">
+      <div className="">
         <Link href="/mode-select">
           <button className="
                 relative px-8 py-3 text-lg font-semibold
