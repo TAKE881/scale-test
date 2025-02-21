@@ -1,4 +1,6 @@
 "use client";
+
+import SettingToneSlider from "@/components/setting/SettingToneSlider";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -46,7 +48,7 @@ export default function SettingsPage() {
       <h1 className="text-2xl mb-10">設定</h1>
 
       {/* ===== サウンド ===== */}
-      <div className="mb-8">
+      {/* <div className="mb-8">
         <label className="block mb-2">サウンド</label>
         <input
           type="range"
@@ -58,7 +60,12 @@ export default function SettingsPage() {
           className="w-64 ml-5"
         />
         <span className="ml-2 text-lg">{volumeLevel}</span>
+      </div> */}
+      <div>
+        <SettingToneSlider />
       </div>
+
+
 
       {/* ===== スケール ===== */}
       <div className="mb-8">
