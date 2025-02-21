@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="ja">
       <body className={ReggaeOne.className}>
         <div className="w-screen min-h-screen bg-[url('/image-bg/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat">
+          {/* <div className="w-screen min-h-screen bg-[url('/image-bg/home-and-tokai2DALLE.webp')] bg-cover bg-center bg-no-repeat"> */}
           {children}
         </div>
       </body>

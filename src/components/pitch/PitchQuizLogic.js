@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-export function usePitchQuiz(totalQuestions = 4) {
+export function usePitchQuiz(totalQuestions = 2) {
   const [currentNote, setCurrentNote] = useState(null);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
@@ -40,13 +40,13 @@ export function usePitchQuiz(totalQuestions = 4) {
     synth.triggerAttackRelease(currentNote, "8n");
   };
 
-  // --- 3) 正解時に“ピンポン”2音を鳴らす関数 ---
+  // --- 3) 正解時に2音を鳴らす関数 ---
   const playPinponEffect = async () => {
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
     const now = Tone.now();
 
-    // C5 をすぐ再生、その0.2秒後に E5 を再生
+    // 正解音
     synth.triggerAttackRelease("A#5", "8n", now);
     synth.triggerAttackRelease("F#5", "8n", now + 0.1);
   };
