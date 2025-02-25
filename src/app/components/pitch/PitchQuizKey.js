@@ -11,10 +11,9 @@ export function PitchQuizKey({ note, type, onPlay }) {
     <div
       className={`
         key
-        ${
-          type === "white"
-            ? "w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black"
-            : "w-8 h-16 bg-black text-white -ml-4 z-20"
+        ${type === "white"
+          ? "w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black"
+          : "w-12 h-20 bg-white text-black -ml-4 z-20"
         }
         border border-black
         rounded-md
@@ -26,8 +25,6 @@ export function PitchQuizKey({ note, type, onPlay }) {
         active:translate-y-1
         cursor-pointer
         flex
-        justify-center
-        items-center
         relative
         overflow-hidden
       `}

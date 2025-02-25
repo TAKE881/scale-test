@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePitchQuiz } from "@/app/hooks/pitch/usePitchQuiz";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
+import { PitchQuizKey } from "@/app/components/pitch/PitchQuizKey";
 import { PitchQuizPlayer } from "@/app/components/pitch/PitchQuizPlayer";
 import Link from "next/link";//画面遷移用//
 
@@ -127,20 +128,23 @@ export default function PitchQuizPage() {
             </p>
 
             {/* 再生ボタン → playNote() */}
-            <button
-              onClick={playNote}
-              className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
-              aria-label="再生"
-            >
-              再生
-            </button>
+            <div className="flex justify-center">
+              <button
+                onClick={playNote}
+                className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
+                aria-label="再生"
+              >
+                再生
+              </button>
+            </div>
 
             {/* ▼ ここから選択肢表示（2通りの例示）▼ */}
 
             {/* --- (例1) PitchQuizButton.js を使ってシンプルなボタンUIで4択表示する場合 --- */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4 mb-5">
+            <div className="flex gap-12 w-full max-w-md mt-4 mb-5 justify-center">
               {options.map((option, index) => (
-                <PitchQuizButton
+                // <PitchQuizButton
+                <PitchQuizKey
                   key={option}
                   label={option}
                   value={option}
@@ -160,8 +164,9 @@ export default function PitchQuizPage() {
 
             ※ 上の PitchQuizButton の部分をコメントアウトし、
                こちらを使えば「鍵盤のUI」で回答できるようになります。 */}
-            <Link href="/mode-select">
-              <button className="
+            <div className="flex justify-center">
+              <Link href="/mode-select">
+                <button className="
                 relative px-7 py-2 text-lg font-semibold
                 text-white bg-gradient-to-r from-gray-500 to-gray-700
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
@@ -170,9 +175,10 @@ export default function PitchQuizPage() {
                 before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
                 hover:before:opacity-100
               ">
-                戻る
-              </button>
-            </Link>
+                  戻る
+                </button>
+              </Link>
+            </div>
           </motion.main>
         </AnimatePresence>
       )}
