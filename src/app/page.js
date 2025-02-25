@@ -15,57 +15,40 @@ export default function Home() {
           <Image src="/AIboo2-removebg.png" alt="ブーブークッションに乗ったブタ" width={150} height={0} />
         </div> */}
 
-        <div className="flex flex-col gap-4">
-          {/* 1. ピッチクイズへ遷移 */}
+        <div className="flex flex-col gap-4">{/*縦並び & 16px の間隔 */}
           <Link href="/mode-select">
             <button
               className="
-                relative px-9 mb-3 py-3 text-lg font-semibold
-                text-white bg-gradient-to-r from-green-500 to-emerald-400
-                rounded-full shadow-lg hover:shadow-xl transition-all duration-300
-                border border-white border-opacity-30 hover:border-opacity-60
-                hover:scale-105
-                before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
-                hover:before:opacity-100
+              /*  位置とサイズ */
+              relative px-9 py-3 mb-3 text-lg font-semibold
+
+              /*  テキストのスタイル */
+              text-white
+
+              /*  背景のグラデーション */
+              bg-gradient-to-r from-green-500 to-emerald-400
+
+              /*  角丸・影 */
+              rounded-full shadow-lg hover:shadow-xl
+
+              /*  トランジション（アニメーションのスムーズさ） */
+              transition-all duration-300
+
+              /*  境界線（白い枠の透明度を変化） */
+              border border-white border-opacity-30 hover:border-opacity-60
+
+              /*  ホバー時の拡大アニメーション */
+              hover:scale-105
+
+              /*  疑似要素（ホバー時に輝きを追加） */
+              before:absolute before:inset-0 before:bg-white/10
+              before:rounded-full before:opacity-0 before:transition-opacity
+              hover:before:opacity-100
               "
             >
               はじめる
             </button>
           </Link>
-
-          {/* 2. スケールクイズへ遷移 */}
-          {/* <Link href="/quiz/scales">
-            <button
-              className="
-                relative px-7 py-1 text-lg font-semibold
-                text-white bg-gradient-to-r from-blue-500 to-indigo-400
-                rounded-full shadow-lg hover:shadow-xl transition-all duration-300
-                border border-white border-opacity-30 hover:border-opacity-60
-                hover:scale-105
-                before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
-                hover:before:opacity-100
-              "
-            >
-              真面目モード
-            </button>
-          </Link> */}
-
-          {/* 3. 設定ページへ遷移*/}
-          {/* <Link href="/settings">
-            <button
-              className="
-                relative px-8 py-1 text-lg font-semibold
-                text-white bg-gradient-to-r from-gray-500 to-gray-700
-                rounded-full shadow-lg hover:shadow-xl transition-all duration-300
-                border border-white border-opacity-30 hover:border-opacity-60
-                hover:scale-105
-                before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
-                hover:before:opacity-100
-              "
-            >
-              設定
-            </button>
-          </Link> */}
         </div>
       </main>
     </div>

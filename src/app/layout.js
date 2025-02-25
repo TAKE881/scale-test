@@ -1,20 +1,27 @@
-// import { Kaisei_Tokumin } from "next/font/google";
 import { Reggae_One } from "next/font/google";
+import { Water_Brush } from "next/font/google";//Water_Brushフォント//
 import "./globals.css";
 
-// const kaiseiTokumin = Kaisei_Tokumin({
+// RaggaeOneフォント使用
 const ReggaeOne = Reggae_One({
   weight: '400',
   subsets: ['latin'],
-  // display: 'swap',
-  // weight: ["400", "700"],
 });
 
+// Water_Brushフォント使用
+const waterBrush = Water_Brush({
+  subsets: ["latin"], weight: "400"
+});
+
+// 全ページの背景設定
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
       <body className={ReggaeOne.className}>
-        <div className="w-screen min-h-screen bg-[url('/image-bg/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat">
+        <div className="w-screen min-h-screen
+          bg-[url('/image-bg/gradation-612x612.jpg')] {/*背景画像アイデア1*/}
+          bg-cover bg-center bg-no-repeat">{/*画像はカバー、中央配置、リピートなし*/}
+          {/* 背景画像アイデア2 */}
           {/* <div className="w-screen min-h-screen bg-[url('/image-bg/home-and-tokai2DALLE.webp')] bg-cover bg-center bg-no-repeat"> */}
           {children}
         </div>
