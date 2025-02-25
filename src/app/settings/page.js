@@ -1,6 +1,6 @@
 "use client";
 
-import SettingToneSlider from "@/components/setting/SettingToneSlider";
+import SettingToneSlider from "@/app/components/setting/SettingToneSlider";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 

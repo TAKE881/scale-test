@@ -1,17 +1,16 @@
 "use client";
 
-
-import { Water_Brush } from "next/font/google";
+// import { useFont } from "@/app/layout";
 import { useEffect, useState } from "react";
 import * as Tone from "tone";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePitchQuiz } from "@/components/pitch/PitchQuizLogic";
-import { PitchQuizButton } from "@/components/pitch/PitchQuizButton";
-import { PitchQuizPlayer } from "@/components/pitch/PitchQuizPlayer";
-import Link from "next/link";
+import { usePitchQuiz } from "@/app/hooks/pitch/usePitchQuiz";
+import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
+import { PitchQuizPlayer } from "@/app/components/pitch/PitchQuizPlayer";
+import Link from "next/link";//画面遷移用//
 
-const waterBrush = Water_Brush({ subsets: ["latin"], weight: "400" });
+//
 export default function PitchQuizPage() {
 
   const router = useRouter();
