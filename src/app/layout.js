@@ -8,10 +8,12 @@ const ReggaeOne = Reggae_One({
   subsets: ['latin'],
 });
 
-// Water_Brushフォント使用
-const waterBrush = Water_Brush({
-  subsets: ["latin"], weight: "400"
+
+export const waterBrush = Water_Brush({
+  subsets: ["latin"],
+  weight: "400"
 });
+
 
 // 全ページの背景設定
 export default function RootLayout({ children }) {

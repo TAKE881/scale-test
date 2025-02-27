@@ -1,6 +1,7 @@
 "use client";
 
 // import { useFont } from "@/app/layout";
+import { useABCDEFGNotation } from "@/app/hooks/pitch/useABCDEFGNotation";
 import { useEffect, useState } from "react";
 import * as Tone from "tone";
 import { useRouter } from "next/navigation";
@@ -10,35 +11,18 @@ import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 import { PitchQuizKey } from "@/app/components/pitch/PitchQuizKey";
 import { PitchQuizPlayer } from "@/app/components/pitch/PitchQuizPlayer";
 import Link from "next/link";//画面遷移用//
+import { useVolumeControl } from "@/app/hooks/pitch/useVolumeControl";
+import { usePitchPlayer } from "@/app/hooks/pitch/usePitchPlayer";
+import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 
 //
 export default function PitchQuizPage() {
 
-  const router = useRouter();
+  const { volume, setVolume } = useVolumeControl();
 
-  // ①「現在の音量」を管理する state
-  const [volume, setVolume] = useState(0);
+  const { handlePlayNote } = usePitchPlayer();
 
-  // ② ページのマウント時に localStorage を読み込む
-  useEffect(() => {
-    const savedVol = localStorage.getItem("quizVolume");
-    if (savedVol !== null) {
-      setVolume(Number(savedVol));
-    }
-  }, []);
-
-  // ③ 再生ボタン押下時の処理 (音量再取得 & 音再生)
-  async function handlePlayNote() {
-    // 再度 localStorage から読み込み (設定ページから戻ってきた直後など想定)
-    const savedVol = localStorage.getItem("quizVolume");
-    if (savedVol !== null) {
-      setVolume(Number(savedVol));
-    }
-    await Tone.start();
-    Tone.getDestination().volume.value = volume;
-    const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease("C4", "8n");
-  }
+  const { convertToABCDEFG } = useABCDEFGNotation();
 
   // 音程分析用フック: 問題生成・回答処理・正解時ピンポン音など
   const {
@@ -53,6 +37,23 @@ export default function PitchQuizPage() {
     resetQuiz,
   } = usePitchQuiz();
 
+
+  const [clientOptions, setClientOptions] = useState([null]);
+
+  useEffect(() => {
+    if (options) {
+      setClientOptions(options);
+    }
+  }, [options]);
+
+
+  useEffect(() => {
+    console.log("useVolumeControl:", volume);
+    console.log("usePitchPlayer:", handlePlayNote);
+    console.log("useABCDEFGNotation:", convertToABCDEFG);
+  }, []);
+
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -66,46 +67,12 @@ export default function PitchQuizPage() {
       <h1 className="text-white text-2xl font-bold text-center mb-4">
         音感レベル診断！
       </h1>
-
       {isQuizFinished ? (
-        /* =================
-         *  結果画面
-         * ================= */
-        <motion.main
-          initial={{ y: 300, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.0 }}
-          className="flex flex-col items-center justify-center min-h-[90vh] p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
-        >
-          <div>
-            <h1 className={`${waterBrush.className} text-9xl`}>
-              {((score / totalQuestions) * 100).toFixed()}
-            </h1>
-          </div>
-          <h1 className="text-2xl font-bold mb-9 text-center">あなたの音感レベル</h1>
-          <div className="w-300">
-            <p className="mb-1 text-lg text-left">
-              正解数: {score} / {totalQuestions}
-            </p>
-            <p className="mb-8 text-lg text-left">
-              音感レベル: Lv.{((score / totalQuestions) * 100).toFixed()}
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
-            <button
-              onClick={resetQuiz}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
-            >
-              再チャレンジ
-            </button>
-            <button
-              onClick={() => router.push("/")}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
-            >
-              トップに戻る
-            </button>
-          </div>
-        </motion.main>
+        <PitchQuizResult
+          score={score}
+          totalQuestions={totalQuestions}
+          resetQuiz={resetQuiz}
+        />
       ) : (
         /* =================
          *  問題画面
@@ -130,20 +97,15 @@ export default function PitchQuizPage() {
             {/* 再生ボタン → playNote() */}
             <div className="flex justify-center">
               <button
-                onClick={playNote}
+                onClick={handlePlayNote}
                 className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
                 aria-label="再生"
               >
                 再生
               </button>
             </div>
-
-            {/* ▼ ここから選択肢表示（2通りの例示）▼ */}
-
-            {/* --- (例1) PitchQuizButton.js を使ってシンプルなボタンUIで4択表示する場合 --- */}
             <div className="flex gap-12 w-full max-w-md mt-4 mb-5 justify-center">
-              {options.map((option, index) => (
-                // <PitchQuizButton
+              {clientOptions.map((option, index) => (
                 <PitchQuizKey
                   key={option}
                   label={option}
@@ -151,19 +113,8 @@ export default function PitchQuizPage() {
                   onClick={(val) => handleAnswer(val, index)}
                 />
               ))}
+
             </div>
-
-            {/* --- (例2) PitchQuizPlayer.js を使って「鍵盤風UI」で4択表示する場合 ---
-
-            <div className="mt-8">
-              <PitchQuizPlayer
-                options={options}
-                handleAnswer={handleAnswer}
-              />
-            </div>
-
-            ※ 上の PitchQuizButton の部分をコメントアウトし、
-               こちらを使えば「鍵盤のUI」で回答できるようになります。 */}
             <div className="flex justify-center">
               <Link href="/mode-select">
                 <button className="
@@ -180,9 +131,10 @@ export default function PitchQuizPage() {
               </Link>
             </div>
           </motion.main>
-        </AnimatePresence>
-      )}
+        </AnimatePresence >
+      )
+      }
 
-    </motion.div>
+    </motion.div >
   );
 }
