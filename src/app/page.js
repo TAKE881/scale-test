@@ -6,12 +6,6 @@ export default function Home() {
     <>
       <Link href="/mode-select">
         <div
-          // className={
-          //   "w-screen h-screen bg-[url('/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat"
-          // }
-          // className={
-          //   "w-screen h-screen  bg-[url('/image-bg/park_scene_pastel.jpg')] bg-cover bg-center bg-no-repeat animate-wave "
-          // }
           className={
             "w-screen h-screen  bg-[url('/image-bg/tokai-and-homeDALLE.webp')] bg-cover bg-center bg-no-repeat animate-wave "
           }
