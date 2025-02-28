@@ -426,7 +426,7 @@ synth.triggerAttackRelease('C4', 1)
 
     }
     return (
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: '20px', color: 'white' }}>
             <h1>屋内／屋外で聞こえる音を Tone.js で簡易再現</h1>
 
             {!audioStarted ? (
