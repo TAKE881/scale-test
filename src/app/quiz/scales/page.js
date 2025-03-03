@@ -51,7 +51,7 @@ export default function ScalesQuizPage() {
           initial={{ y: 300, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.0 }}
-          className="flex flex-col items-center justify-center min-h-screen p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+          className="flex flex-col items-center justify-center min-h-screen p-6 w-full max-w-sm mx-auto bg-white shadow-lg rounded-lg"
         >
           <h1 className="text-2xl font-bold mb-4 text-center">クイズ結果</h1>
           <p className="mb-4 text-lg text-center">
@@ -108,7 +108,7 @@ export default function ScalesQuizPage() {
                 <motion.button
                   key={index}
                   onClick={() => handleAnswer(option.name, index)}
-                  className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 ${selectedOption === index ? "selected" : ""
+                  className={`bg-white border border-gray-300 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 transition-all duration-300 ${selectedOption === index ? "selected" : ""
                     }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
