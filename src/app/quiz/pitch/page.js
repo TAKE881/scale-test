@@ -108,7 +108,7 @@ export default function PitchQuizPage() {
               {clientOptions.map((option, index) => (
                 <PitchQuizKey
                   key={option}
-                  label={option}
+                  note={option}
                   value={option}
                   onClick={(val) => handleAnswer(val, index)}
                 />
@@ -126,7 +126,7 @@ export default function PitchQuizPage() {
                 before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
                 hover:before:opacity-100
               ">
-                  戻る
+                  モードセレクトに戻る
                 </button>
               </Link>
             </div>
