@@ -12,7 +12,7 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
             initial={{ y: 300, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.0 }}
-            className="flex flex-col items-center justify-center min-h-[90vh] p-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+            className="flex flex-col items-center justify-center min-h-[90vh] p-6 w-full max-w-sm mx-auto  bg-white shadow-lg rounded-lg"
         >
             <div>
                 <h1 className={`${waterBrush.className} text-9xl`}>
