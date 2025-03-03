@@ -10,49 +10,52 @@ import { usePitchQuiz } from "@/app/hooks/pitch/usePitchQuiz";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 import { PitchQuizKey } from "@/app/components/pitch/PitchQuizKey";
 import { PitchQuizPlayer } from "@/app/components/pitch/PitchQuizPlayer";
-import Link from "next/link";//画面遷移用//
+import Link from "next/link";//画面遷移用
 import { useVolumeControl } from "@/app/hooks/pitch/useVolumeControl";
 import { usePitchPlayer } from "@/app/hooks/pitch/usePitchPlayer";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 
-//
 export default function PitchQuizPage() {
-
-  const { volume, setVolume } = useVolumeControl();
-
+  const { volume } = useVolumeControl();
   const { handlePlayNote } = usePitchPlayer();
-
   const { convertToABCDEFG } = useABCDEFGNotation();
 
-  // 音程分析用フック: 問題生成・回答処理・正解時ピンポン音など
+  // ===== ここが重要！ usePitchQuiz から正解/選択肢/回答関数 を取得 =====
   const {
     score,
     questionNumber,
     totalQuestions,
     isQuizFinished,
     selectedOption,
+    correctAnswer,
     options,
     playNote,
     handleAnswer,
     resetQuiz,
   } = usePitchQuiz();
 
+  // クライアント側で描画用に持つオプション
+  const [clientOptions, setClientOptions] = useState([]);
 
-  const [clientOptions, setClientOptions] = useState([null]);
-
+  // options が変わったら反映
   useEffect(() => {
     if (options) {
       setClientOptions(options);
     }
   }, [options]);
 
-
+  // デバッグ用ログ
   useEffect(() => {
     console.log("useVolumeControl:", volume);
     console.log("usePitchPlayer:", handlePlayNote);
     console.log("useABCDEFGNotation:", convertToABCDEFG);
   }, []);
 
+  // デバッグ: 正解と選択を監視
+  useEffect(() => {
+    console.log("selectedOption:", selectedOption);
+    console.log("correctAnswer:", correctAnswer);
+  }, [selectedOption, correctAnswer]);
 
   return (
     <motion.div
@@ -62,11 +65,11 @@ export default function PitchQuizPage() {
       transition={{ duration: 1.0 }}
       className="min-h-screen bg-cover bg-center bg-no-repeat"
     >
-
       {/* タイトル */}
       <h1 className="text-white text-2xl font-bold text-center mb-4">
         音感レベル診断！
       </h1>
+
       {isQuizFinished ? (
         <PitchQuizResult
           score={score}
@@ -94,7 +97,7 @@ export default function PitchQuizPage() {
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
 
-            {/* 再生ボタン → playNote() */}
+            {/* 再生ボタン → Tone.js で音を再生する */}
             <div className="flex justify-center">
               <button
                 onClick={handlePlayNote}
@@ -104,37 +107,37 @@ export default function PitchQuizPage() {
                 再生
               </button>
             </div>
+
+            {/* クイズの選択肢 */}
             <div className="flex gap-12 w-full max-w-md mt-4 mb-5 justify-center">
               {clientOptions.map((option, index) => (
                 <PitchQuizKey
                   key={option}
                   note={option}
-                  value={option}
-                  onClick={(val) => handleAnswer(val, index)}
+                  isCorrect={selectedOption === option && correctAnswer === option}
+                  onClick={() => handleAnswer(option)}
                 />
               ))}
-
             </div>
+
             <div className="flex justify-center">
               <Link href="/mode-select">
                 <button className="
-                relative px-7 py-2 text-lg font-semibold
-                text-white bg-gradient-to-r from-gray-500 to-gray-700
-                rounded-full shadow-lg hover:shadow-xl transition-all duration-300
-                border border-white border-opacity-30 hover:border-opacity-60
-                hover:scale-105
-                before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
-                hover:before:opacity-100
-              ">
+                  relative px-7 py-2 text-lg font-semibold
+                  text-white bg-gradient-to-r from-gray-500 to-gray-700
+                  rounded-full shadow-lg hover:shadow-xl transition-all duration-300
+                  border border-white border-opacity-30 hover:border-opacity-60
+                  hover:scale-105
+                  before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
+                  hover:before:opacity-100
+                ">
                   モードセレクトに戻る
                 </button>
               </Link>
             </div>
           </motion.main>
-        </AnimatePresence >
-      )
-      }
-
-    </motion.div >
+        </AnimatePresence>
+      )}
+    </motion.div>
   );
 }

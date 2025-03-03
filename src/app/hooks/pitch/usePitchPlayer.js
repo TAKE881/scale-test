@@ -1,23 +1,36 @@
-import { useState, useEffect } from "react";
-import { Tone } from "tone/build/esm/core/Tone";
+import { useState } from "react";
+import * as Tone from "tone";
 import { useVolumeControl } from "./useVolumeControl";
+
+const NOTES = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"]; // ランダムに選ぶ音
 
 export const usePitchPlayer = () => {
     const { volume, setVolume } = useVolumeControl();
-    // ③ 再生ボタン押下時の処理 (音量再取得 & 音再生)
-    async function handlePlayNote(C4) {
-        // 再度 localStorage から読み込み (設定ページから戻ってきた直後など想定)
+    const [selectedNote, setSelectedNote] = useState(""); // ランダムで選んだ音を保存
+
+    // 音を再生しつつ、ランダムな音を選択
+    async function playRandomNote() {
+        // ランダムな音を選択
+        const randomNote = NOTES[Math.floor(Math.random() * NOTES.length)];
+        setSelectedNote(randomNote);
+
+        // localStorage から音量を取得
         const savedVol = localStorage.getItem("quizVolume");
         if (savedVol !== null) {
             setVolume(Number(savedVol));
+            await new Promise((resolve) => setTimeout(resolve, 10)); // 状態更新待ち
         }
+
+        // Tone.js で音を再生
         await Tone.start();
         Tone.getDestination().volume.value = volume;
+
         const synth = new Tone.Synth().toDestination();
-        // synth.triggerAttackRelease("C4", "8n");
-        synth.triggerAttackRelease(note, "8n");
+        synth.triggerAttackRelease(randomNote, "8n");
     }
+
     return {
-        handlePlayNote
+        playRandomNote,
+        selectedNote, // 他のコンポーネントでも使えるようにする
     };
 };
