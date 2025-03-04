@@ -7,9 +7,9 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
   console.log("isCorrect:", isCorrect);
 
   const [showEffect, setShowEffect] = useState(false);
-  const [showSplit, setShowSplit] = useState(false);
 
   useEffect(() => {
+    console.log(" useEffect が実行された: isCorrect =", isCorrect);
     if (isCorrect) {
       console.log(" エフェクトを表示！");
       setShowEffect(true);
@@ -19,13 +19,15 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
         console.log(" エフェクトを消去！");
       }, 1000); // 1秒後にエフェクトを消す
 
-      return () => clearTimeout(timeout); // ⬅️ タイマーのキャンセル
+      return () => {
+        console.log(" タイマークリア");
+        clearTimeout(timeout);
+      };
     }
   }, [isCorrect]);
 
-  // showEffect の状態が変わったらログを出す（デバッグ用）
   useEffect(() => {
-    console.log("showEffect has changed:", showEffect);
+    console.log(" showEffect の状態:", showEffect);
   }, [showEffect]);
 
   const handleClick = () => {
@@ -35,62 +37,33 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
   };
 
   return (
-    <div
-      className="
-    w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black
-    border border-black
-    rounded-md
-    shadow-lg
-    transition-transform
-    ease-in-out
-    duration-200
-    transform
-    active:translate-y-1
-    cursor-pointer
-    flex
-    relative
-    overflow-hidden
-    items-center
-    justify-center
-  "
-      onClick={handleClick}
-    >
-      <span className=" text-xs text-center text-black mb-1 z-10">{note}</span>
-      {/*  手書き風の円エフェクト */}
+    <>
+      {/* ボタン本体 */}
+      <div
+        className="
+          w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black
+          border border-black rounded-md shadow-lg transition-transform
+          ease-in-out duration-200 transform active:translate-y-1 cursor-pointer
+          flex relative overflow-hidden items-center justify-center
+        "
+        onClick={handleClick}
+      >
+        <span className="text-xs text-center text-black mb-1 z-10">{note}</span>
+      </div>
       {showEffect && (
         <svg
-          className="absolute w-16 h-16"
+          className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-1/2 z-50"
           viewBox="0 0 100 100"
           fill="none"
           stroke="red"
-          strokeWidth="12"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          strokeWidth="8"
         >
-          <path
-            d="
-              M 10,50
-              Q 25,5 50,10
-              Q 75,15 90,50
-              Q 75,85 50,90
-              Q 25,95 10,50
-            "
-            strokeDasharray="400"
-            strokeDashoffset="400"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="400"
-              to="0"
-              dur="0.3s"
-              fill="freeze"
-              keyTimes="0; 1"
-              attributeType="XML"
-              begin="0s"
-            />
-          </path>
+          <circle cx="50" cy="50" r="40" stroke="red" strokeWidth="8" fill="none">
+            <animate attributeName="r" from="0" to="40" dur="0.3s" fill="freeze" />
+          </circle>
         </svg>
       )}
-    </div>
+
+    </>
   );
 }

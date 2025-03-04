@@ -34,7 +34,7 @@ export default function PitchQuizPage() {
   // クライアント側で描画用に持つオプション
   const [clientOptions, setClientOptions] = useState([]);
 
-  // ✅ 正解のみを表示するモード（true にすると正解ボタン1つだけ）
+  //  正解のみを表示するモード（true にすると正解ボタン1つだけ）
   // const isOnlyCorrect = false;
   const isOnlyCorrect = true;
 
@@ -42,10 +42,10 @@ export default function PitchQuizPage() {
   useEffect(() => {
     if (options) {
       if (isOnlyCorrect) {
-        // ✅ 正解のみ表示
+        //  正解のみ表示
         setClientOptions([correctAnswer]);
       } else {
-        // ✅ 通常のランダム選択肢を表示
+        //  通常のランダム選択肢を表示
         setClientOptions(options);
       }
     }
@@ -97,10 +97,10 @@ export default function PitchQuizPage() {
             className="flex flex-col items-center justify-center min-h-screen p-4"
           >
             {/* スコアや問題数 */}
-            <p className="text-white mb-4 text-lg text-center">
+            <p className="text-white mb-4 text-xs text-center">
               スコア: {score}
             </p>
-            <p className="text-white mb-4 text-lg text-center">
+            <p className="text-white mb-4 text-xs text-center">
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
 
@@ -130,7 +130,7 @@ export default function PitchQuizPage() {
             <div className="flex justify-center">
               <Link href="/mode-select">
                 <button className="
-                  relative px-7 py-2 text-lg font-semibold
+                  relative px-7 py-2 text-xxxs font-semibold
                   text-white bg-gradient-to-r from-gray-500 to-gray-700
                   rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                   border border-white border-opacity-30 hover:border-opacity-60
