@@ -1,24 +1,21 @@
 "use client";
 
-// import { useFont } from "@/app/layout";
-import { useABCDEFGNotation } from "@/app/hooks/pitch/useABCDEFGNotation";
+import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 import { useEffect, useState } from "react";
 import * as Tone from "tone";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePitchQuiz } from "@/app/hooks/pitch/usePitchQuiz";
-import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
-import { PitchQuizKey } from "@/app/components/pitch/PitchQuizKey";
-import { PitchQuizPlayer } from "@/app/components/pitch/PitchQuizPlayer";
-import Link from "next/link";//画面遷移用
+import { usePitchQuizLogic } from "@/app/hooks/pitch/usePitchQuizLogic";
+import Link from "next/link";
 import { useVolumeControl } from "@/app/hooks/pitch/useVolumeControl";
-import { usePitchPlayer } from "@/app/hooks/pitch/usePitchPlayer";
+import { usePitchQuizSetter } from "@/app/hooks/pitch/usePitchQuizSetter";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
+import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 
 export default function PitchQuizPage() {
   const { volume } = useVolumeControl();
-  const { handlePlayNote } = usePitchPlayer();
-  const { convertToABCDEFG } = useABCDEFGNotation();
+  const { handlePlayNote } = usePitchQuizSetter();
+  const { convertToABCDEFG } = useSoundName();
 
   // ===== ここが重要！ usePitchQuiz から正解/選択肢/回答関数 を取得 =====
   const {
@@ -32,23 +29,33 @@ export default function PitchQuizPage() {
     playNote,
     handleAnswer,
     resetQuiz,
-  } = usePitchQuiz();
+  } = usePitchQuizLogic();
 
   // クライアント側で描画用に持つオプション
   const [clientOptions, setClientOptions] = useState([]);
 
-  // options が変わったら反映
+  // ✅ 正解のみを表示するモード（true にすると正解ボタン1つだけ）
+  // const isOnlyCorrect = false;
+  const isOnlyCorrect = true;
+
+  // options の更新に応じて clientOptions をセット
   useEffect(() => {
     if (options) {
-      setClientOptions(options);
+      if (isOnlyCorrect) {
+        // ✅ 正解のみ表示
+        setClientOptions([correctAnswer]);
+      } else {
+        // ✅ 通常のランダム選択肢を表示
+        setClientOptions(options);
+      }
     }
-  }, [options]);
+  }, [options, correctAnswer]);
 
   // デバッグ用ログ
   useEffect(() => {
     console.log("useVolumeControl:", volume);
-    console.log("usePitchPlayer:", handlePlayNote);
-    console.log("useABCDEFGNotation:", convertToABCDEFG);
+    console.log("usePitchQuizSetter:", handlePlayNote);
+    console.log("useSoundName:", convertToABCDEFG);
   }, []);
 
   // デバッグ: 正解と選択を監視
@@ -111,7 +118,7 @@ export default function PitchQuizPage() {
             {/* クイズの選択肢 */}
             <div className="flex gap-12 w-full max-w-md mt-4 mb-5 justify-center">
               {clientOptions.map((option, index) => (
-                <PitchQuizKey
+                <PitchQuizButton
                   key={option}
                   note={option}
                   isCorrect={selectedOption === option && correctAnswer === option}

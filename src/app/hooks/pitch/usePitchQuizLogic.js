@@ -1,10 +1,10 @@
-// app/hooks/pitch/usePitchQuiz.js
+// app/hooks/pitch/PitchQuizLogic.js
 "use client";
 
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-export function usePitchQuiz(totalQuestions = 2) {
+export function usePitchQuizLogic(totalQuestions = 2) {
   const [currentNote, setCurrentNote] = useState(null);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
