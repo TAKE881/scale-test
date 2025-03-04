@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'xxs': '10px',
+        'xxxs': '8px',
+      },
       animation: {
         wave: "wave 3s infinite ease-in-out",
       },
