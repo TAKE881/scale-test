@@ -3,7 +3,7 @@
 
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ScaleQuizLogic } from "@/app/hooks/scales/ScaleQuizLogic";
+import { useScaleQuizLogic } from "@/app/hooks/scales/useScaleQuizLogic";
 
 export default function ScalesQuizPage() {
   async function playNote() {
