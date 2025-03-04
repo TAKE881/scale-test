@@ -35,8 +35,8 @@ export default function PitchQuizPage() {
   const [clientOptions, setClientOptions] = useState([]);
 
   //  正解のみを表示するモード（true にすると正解ボタン1つだけ）
-  // const isOnlyCorrect = false;
-  const isOnlyCorrect = true;
+  const isOnlyCorrect = false;
+  // const isOnlyCorrect = true;
 
   // options の更新に応じて clientOptions をセット
   useEffect(() => {
@@ -72,8 +72,10 @@ export default function PitchQuizPage() {
       transition={{ duration: 1.0 }}
       className="min-h-screen bg-cover bg-center bg-no-repeat"
     >
-      {/* タイトル */}
-      <h1 className="text-white text-2xl font-bold text-center mb-4">
+      {/*============================================================
+                                    タイトル
+        =============================================================== */}
+      <h1 className="text-white text-xxl pt-4 font-bold text-center">
         音感レベル診断！
       </h1>
 
@@ -96,16 +98,20 @@ export default function PitchQuizPage() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center justify-center min-h-screen p-4"
           >
-            {/* スコアや問題数 */}
+            {/*============================================================
+                                    スコア、問題数
+            =============================================================== */}
             <p className="text-white mb-4 text-xs text-center">
               スコア: {score}
             </p>
-            <p className="text-white mb-4 text-xs text-center">
+            <p className="text-white mb-38 text-xs text-center">
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
-
-            {/* 再生ボタン → Tone.js で音を再生する */}
-            <div className="flex justify-center">
+            {/*============================================================
+                                    ボタンレイアウト
+            =============================================================== */}
+            {/* 再生ボタン */}
+            <div className="flex justify-center mb-14">
               <button
                 onClick={handlePlayNote}
                 className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
@@ -115,8 +121,8 @@ export default function PitchQuizPage() {
               </button>
             </div>
 
-            {/* クイズの選択肢 */}
-            <div className="flex gap-12 w-full max-w-md mt-4 mb-5 justify-center">
+            {/* 選択肢ボタン */}
+            <div className="flex gap-8 w-full max-w-md mb-24 justify-center">
               {clientOptions.map((option, index) => (
                 <PitchQuizButton
                   key={option}

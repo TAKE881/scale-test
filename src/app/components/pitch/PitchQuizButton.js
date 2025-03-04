@@ -41,14 +41,14 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
       {/* ボタン本体 */}
       <div
         className="
-          w-10 h-20 bg-gradient-to-b from-white to-gray-300 text-black
+          w-18 h-32 bg-gradient-to-b mb-1 from-white to-gray-300 text-black
           border border-black rounded-md shadow-lg transition-transform
           ease-in-out duration-200 transform active:translate-y-1 cursor-pointer
           flex relative overflow-hidden items-center justify-center
         "
         onClick={handleClick}
       >
-        <span className="text-xs text-center text-black mb-1 z-10">{note}</span>
+        <span className="text-lg text-center text-black mb-1 z-10">{note}</span>
       </div>
       {showEffect && (
         <svg
