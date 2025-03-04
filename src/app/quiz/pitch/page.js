@@ -104,25 +104,26 @@ export default function PitchQuizPage() {
             <p className="text-white mb-4 text-xs text-center">
               スコア: {score}
             </p>
-            <p className="text-white mb-38 text-xs text-center">
+            <p className="text-white mb-34 text-xs text-center">
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
             {/*============================================================
                                     ボタンレイアウト
             =============================================================== */}
             {/* 再生ボタン */}
-            <div className="flex justify-center mb-14">
+            <div className="flex justify-center mb-20">
               <button
                 onClick={handlePlayNote}
-                className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
+                className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
                 aria-label="再生"
               >
                 再生
               </button>
+
             </div>
 
             {/* 選択肢ボタン */}
-            <div className="flex gap-8 w-full max-w-md mb-24 justify-center">
+            <div className="flex gap-8 w-full max-w-md mb-18 justify-center">
               {clientOptions.map((option, index) => (
                 <PitchQuizButton
                   key={option}
