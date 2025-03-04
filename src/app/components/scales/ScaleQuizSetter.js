@@ -1,9 +1,9 @@
-// components/scales/ScaleQuizPlayer.js
+// components/scales/ScaleQuizSetter.js
 "use client";
 
 import React from "react";
 
-export function ScaleQuizPlayer({ currentScale, playScaleNotes }) {
+export function ScaleQuizSetter({ currentScale, playScaleNotes }) {
   if (!currentScale) {
     return <div className="text-white">Loading scale...</div>;
   }

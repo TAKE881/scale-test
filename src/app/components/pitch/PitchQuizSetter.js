@@ -1,15 +1,15 @@
-// app/components/pitch/PitchQuizPlayer.js
+// app/components/pitch/PitchQuizSetter.js
 "use client";
 
 import React from "react";
-import { PitchQuizKey } from "./PitchQuizKey";
+import { PitchQuizButton } from "./PitchQuizButton";
 
 /**
  * props:
  *   options: string[]  // 例: ["C4", "E4", "G4", "A4"] など4つ
  *   handleAnswer(note) // ユーザーが選んだ音を親に伝える
  */
-export function PitchQuizPlayer({ options = [], handleAnswer }) {
+export function PitchQuizSetter({ options = [], handleAnswer }) {
   if (options.length === 0) {
     return <div className="text-white">Loading...</div>;
   }
@@ -18,7 +18,7 @@ export function PitchQuizPlayer({ options = [], handleAnswer }) {
   return (
     <div className="flex gap-4">
       {options.map((note, idx) => (
-        <PitchQuizKey
+        <PitchQuizButton
           key={note}
           note={note}
           type="white"

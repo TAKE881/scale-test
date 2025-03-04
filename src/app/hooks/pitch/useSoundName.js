@@ -1,4 +1,4 @@
-export const useABCDEFGNotation = () => {
+export const useSoundName = () => {
     const noteMapping = {
         "C4": "ド",
         "D4": "レ",

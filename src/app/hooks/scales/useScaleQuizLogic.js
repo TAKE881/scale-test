@@ -43,7 +43,7 @@ const scales = [
     },
 ];
 
-export function useScaleQuiz(totalQuestions = 4) {
+export function ScaleQuizLogic(totalQuestions = 4) {
     const [currentScale, setCurrentScale] = useState(null);
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);

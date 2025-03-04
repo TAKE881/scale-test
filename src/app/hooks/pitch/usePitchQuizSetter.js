@@ -4,7 +4,7 @@ import { useVolumeControl } from "./useVolumeControl";
 
 const NOTES = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"]; // ランダムに選ぶ音
 
-export const usePitchPlayer = () => {
+export const usePitchQuizSetter = () => {
     const { volume, setVolume } = useVolumeControl();
     const [selectedNote, setSelectedNote] = useState(""); // ランダムで選んだ音を保存
 
