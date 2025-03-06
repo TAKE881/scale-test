@@ -67,15 +67,16 @@ export default function PitchQuizPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.0 }}
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      className="h-screen flex flex-col bg-cover bg-center bg-no-repeat"
     >
       {/*============================================================
                                     タイトル
         =============================================================== */}
-      <h1 className="text-white text-xxl pt-4 font-bold text-center">
-        音感レベル診断！
-      </h1>
-
+      <div className="h-[10%] flex items-center justify-center">
+        <h1 className="text-white text-xxl pt-4 font-bold text-center">
+          音感レベル診断！
+        </h1>
+      </div>
       {isQuizFinished ? (
         <PitchQuizResult
           score={score}
@@ -93,45 +94,51 @@ export default function PitchQuizPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center justify-center min-h-screen p-4"
+            className="flex flex-col items-center justify-center p-4"
           >
             {/*============================================================
                                     スコア、問題数
             =============================================================== */}
-            <p className="text-white mb-4 text-xs text-center">
-              スコア: {score}
-            </p>
-            <p className="text-white mb-34 text-xs text-center">
-              問題: {questionNumber + 1} / {totalQuestions}
-            </p>
+            <div className="h-[10%] flex items-center justify-center">
+              <div>
+                <p className="text-white mb-1 text-xs text-center">
+                  スコア: {score}
+                </p>
+                <p className="text-white mb-1 text-xs text-center">
+                  問題: {questionNumber + 1} / {totalQuestions}
+                </p>
+              </div>
+            </div>
             {/*============================================================
                                     ボタンレイアウト
             =============================================================== */}
             {/* 再生ボタン */}
-            <div className="flex justify-center mb-20">
-              <button
-                onClick={handlePlayNote}
-                className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
-                aria-label="再生"
-              >
-                再生
-              </button>
-
+            <div className="h-[35%] flex items-center justify-center">
+              <div className="flex justify-center mb-20">
+                <button
+                  onClick={handlePlayNote}
+                  className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
+                  aria-label="再生"
+                >
+                  再生
+                </button>
+              </div>
             </div>
-
             {/* 選択肢ボタン */}
-            <div className="flex gap-8 w-full max-w-md mb-18 justify-center">
-              {clientOptions.map((option, index) => (
-                <PitchQuizButton
-                  key={option}
-                  note={option}
-                  isCorrect={selectedOption === option && correctAnswer === option}
-                  onClick={() => handleAnswer(option)}
-                />
-              ))}
+            <div className="h-[35%] flex items-center justify-center">
+              <div className="flex gap-8 w-full max-w-md mb-18 justify-center">
+                {clientOptions.map((option, index) => (
+                  <PitchQuizButton
+                    key={option}
+                    note={option}
+                    isCorrect={selectedOption === option && correctAnswer === option}
+                    onClick={() => handleAnswer(option)}
+                  />
+                ))}
+              </div>
             </div>
-
-            <div className="flex justify-center">
+            {/* 5️ モードセレクトに戻る */}
+            <div className="h-[10%] flex justify-center items-center">
               <Link href="/mode-select">
                 <button className="
                   relative px-7 py-2 text-xxxs font-semibold
@@ -147,8 +154,9 @@ export default function PitchQuizPage() {
               </Link>
             </div>
           </motion.main>
-        </AnimatePresence>
-      )}
-    </motion.div>
+        </AnimatePresence >
+      )
+      }
+    </motion.div >
   );
 }
