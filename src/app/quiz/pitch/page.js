@@ -93,7 +93,7 @@ export default function PitchQuizPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.9 }}
             className="flex flex-col items-center justify-center p-4"
           >
             {/*============================================================
@@ -104,7 +104,7 @@ export default function PitchQuizPage() {
                 <p className="text-white mb-1 text-xs text-center">
                   スコア: {score}
                 </p>
-                <p className="text-white mb-1 text-xs text-center">
+                <p className="text-white mb-10 text-xs text-center">
                   問題: {questionNumber + 1} / {totalQuestions}
                 </p>
               </div>
@@ -114,7 +114,7 @@ export default function PitchQuizPage() {
             =============================================================== */}
             {/* 再生ボタン */}
             <div className="h-[35%] flex items-center justify-center">
-              <div className="flex justify-center mb-20">
+              <div className="flex justify-center mb-26">
                 <button
                   onClick={handlePlayNote}
                   className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
@@ -126,7 +126,7 @@ export default function PitchQuizPage() {
             </div>
             {/* 選択肢ボタン */}
             <div className="h-[35%] flex items-center justify-center">
-              <div className="flex gap-8 w-full max-w-md mb-18 justify-center">
+              <div className="flex gap-8 w-full max-w-md mb-34 justify-center">
                 {clientOptions.map((option, index) => (
                   <PitchQuizButton
                     key={option}
