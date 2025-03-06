@@ -2,8 +2,6 @@
 
 import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 import { useEffect, useState } from "react";
-import * as Tone from "tone";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePitchQuizLogic } from "@/app/hooks/pitch/usePitchQuizLogic";
 import Link from "next/link";
@@ -16,7 +14,6 @@ export default function PitchQuizPage() {
   const { volume } = useVolumeControl();
   const { handlePlayNote } = usePitchQuizSetter();
   const { convertToABCDEFG } = useSoundName();
-
   // ===== ここが重要！ usePitchQuiz から正解/選択肢/回答関数 を取得 =====
   const {
     score,

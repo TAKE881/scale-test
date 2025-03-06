@@ -3,9 +3,12 @@
 
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
+import { useCorrectSound } from "./useCorrectSound";
 
 export function usePitchQuizLogic(totalQuestions = 2) {
-  const [currentNote, setCurrentNote] = useState(null);
+  const { playCorrectSound, playIncorrectSound } = useCorrectSound();
+
+  const [pitchQuizNote, setPitchQuizNote] = useState(null);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -22,7 +25,7 @@ export function usePitchQuizLogic(totalQuestions = 2) {
   const generatePitchTrainingQuestion = () => {
     const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
     const randomNote = notes[Math.floor(Math.random() * notes.length)];
-    setCurrentNote(randomNote);
+    setPitchQuizNote(randomNote);
 
     let shuffled = [...notes].sort(() => Math.random() - 0.5).slice(0, 4);
     if (!shuffled.includes(randomNote)) {
@@ -35,18 +38,11 @@ export function usePitchQuizLogic(totalQuestions = 2) {
   };
 
   const playNote = async () => {
-    if (!currentNote) return;
+    if (!pitchQuizNote) return;
     await Tone.start();
-    const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease(currentNote, "8n");
-  };
 
-  const playPinponEffect = async () => {
-    await Tone.start();
     const synth = new Tone.Synth().toDestination();
-    const now = Tone.now();
-    synth.triggerAttackRelease("A#5", "8n", now);
-    synth.triggerAttackRelease("F#5", "8n", now + 0.1);
+    synth.triggerAttackRelease(pitchQuizNote, "4n");
   };
 
   const handleAnswer = (answer, index) => {
@@ -55,9 +51,11 @@ export function usePitchQuizLogic(totalQuestions = 2) {
     setSelectedOption(answer);
 
     setTimeout(() => {
-      if (answer === currentNote) {
-        playPinponEffect();
+      if (answer === pitchQuizNote) {
+        playCorrectSound();
         setScore((prev) => prev + 1);
+      } else {
+        playIncorrectSound
       }
       if (questionNumber + 1 < totalQuestions) {
         setQuestionNumber((prev) => prev + 1);
@@ -79,8 +77,8 @@ export function usePitchQuizLogic(totalQuestions = 2) {
   };
 
   return {
-    currentNote,
-    correctAnswer: currentNote,
+    pitchQuizNote,
+    correctAnswer: pitchQuizNote,
     options,
     score,
     questionNumber,
