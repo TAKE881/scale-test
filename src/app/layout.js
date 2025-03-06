@@ -28,12 +28,12 @@ export default function RootLayout({ children }) {
           {/* <div className=
             "absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat sepia"
           ></div> */}
-          {/* <div className=
-            " absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat grayscale"
-          ></div> */}
           <div className=
-            " absolute inset-0 bg-[url('/image-bg/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat"
+            " absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat grayscale"
           ></div>
+          {/* <div className=
+            " absolute inset-0 bg-[url('/image-bg/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat"
+          ></div> */}
           {/* コンテンツ（ぼかさない） */}
           <div className=" relative z-10">
             {children}
