@@ -1,20 +1,20 @@
 "use client";
 
-import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePitchQuizLogic } from "@/app/hooks/pitch/usePitchQuizLogic";
 import Link from "next/link";
-// import { useVolumeControl } from "@/app/hooks/pitch/useVolumeControl";
 import { usePitchQuizSetter } from "@/app/hooks/pitch/usePitchQuizSetter";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 
 export default function PitchQuizPage() {
-  // const { volume } = useVolumeControl();
-  const { handlePlayNote } = usePitchQuizSetter();
-  const { convertToABCDEFG } = useSoundName();
-  // ===== ここが重要！ usePitchQuiz から正解/選択肢/回答関数 を取得 =====
+  const { setRandomNote, playSelectedNote, selectedNote } = usePitchQuizSetter();
+
+  useEffect(() => {
+    setRandomNote();
+  }, []);
+
   const {
     score,
     questionNumber,
@@ -28,38 +28,23 @@ export default function PitchQuizPage() {
     resetQuiz,
   } = usePitchQuizLogic();
 
-  // クライアント側で描画用に持つオプション
+
+
   const [clientOptions, setClientOptions] = useState([]);
 
-  //  正解のみを表示するモード（true にすると正解ボタン1つだけ）
   const isOnlyCorrect = false;
-  // const isOnlyCorrect = true;
 
-  // options の更新に応じて clientOptions をセット
   useEffect(() => {
     if (options) {
       if (isOnlyCorrect) {
-        //  正解のみ表示
+
         setClientOptions([correctAnswer]);
       } else {
-        //  通常のランダム選択肢を表示
+
         setClientOptions(options);
       }
     }
   }, [options, correctAnswer]);
-
-  // デバッグ用ログ
-  useEffect(() => {
-    // console.log("useVolumeControl:", volume);
-    console.log("usePitchQuizSetter:", handlePlayNote);
-    console.log("useSoundName:", convertToABCDEFG);
-  }, []);
-
-  // デバッグ: 正解と選択を監視
-  useEffect(() => {
-    console.log("selectedOption:", selectedOption);
-    console.log("correctAnswer:", correctAnswer);
-  }, [selectedOption, correctAnswer]);
 
   return (
     <motion.div
@@ -116,7 +101,7 @@ export default function PitchQuizPage() {
             <div className="h-[35%] flex items-center justify-center">
               <div className="flex justify-center mb-26">
                 <button
-                  onClick={handlePlayNote}
+                  onClick={playSelectedNote}
                   className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
                   aria-label="再生"
                 >
