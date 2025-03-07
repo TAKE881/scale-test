@@ -102,6 +102,33 @@ export default {
       fontFamily: {
         waterBrush: ["Water Brush", "cursive"],
       },
+      textStrokeWidth: {
+        DEFAULT: "1px", // デフォルトの太さ
+        sssssm: "0.05px", // 最も細い
+        ssssm: "0.1px",  // 極細
+        sssm: "0.2px",   // さらに細い
+        ssm: "0.3px",    // 超細い
+        sm: "0.5px",     // 細い
+        md: "1px",       // 標準
+        lg: "2px",       // 太め
+        xl: "3px",       // さらに太い
+        "2xl": "4px",    // 超太い
+      },
+      textStrokeColor: {
+        black: "#000",
+        white: "#fff",
+        red: "#ff0000",
+        darkGray: "#222",
+        gray100: "#f3f4f6",
+        gray200: "#e5e7eb",
+        gray300: "#d1d5db",
+        gray400: "#9ca3af",
+        gray500: "#6b7280",
+        gray600: "#4b5563",
+        gray700: "#374151",
+        gray800: "#1f2937",
+        gray900: "#111827",
+      },
       /*============================================================
               ///////////////////////////////////////////////////////////
       =============================================================== */
@@ -118,6 +145,91 @@ export default {
         },
         ".text-stroke-3": {
           "-webkit-text-stroke": "3px white",
+        },
+        ".text-stroke": {
+          "-webkit-text-stroke-width": "1px",
+          "-webkit-text-stroke-color": "black",
+        },
+        ".text-stroke-sssssm": {
+          "-webkit-text-stroke-width": "0.05px",
+        },
+        ".text-stroke-ssssm": {
+          "-webkit-text-stroke-width": "0.1px",
+        },
+        ".text-stroke-sssm": {
+          "-webkit-text-stroke-width": "0.2px",
+        },
+        ".text-stroke-ssm": {
+          "-webkit-text-stroke-width": "0.3px",
+        },
+        ".text-stroke-sm": {
+          "-webkit-text-stroke-width": "0.5px",
+        },
+        ".text-stroke-md": {
+          "-webkit-text-stroke-width": "1px",
+        },
+        ".text-stroke-lg": {
+          "-webkit-text-stroke-width": "2px",
+        },
+        ".text-stroke-xl": {
+          "-webkit-text-stroke-width": "3px",
+        },
+        ".text-stroke-2xl": {
+          "-webkit-text-stroke-width": "4px",
+        },
+        ".text-stroke-black": {
+          "-webkit-text-stroke-color": "#000",
+        },
+        ".text-stroke-dark-gray": {
+          "-webkit-text-stroke-color": "#222",
+        },
+        ".text-stroke-gray-700": {
+          "-webkit-text-stroke-color": "#374151",
+        },
+        ".text-stroke-gray-800": {
+          "-webkit-text-stroke-color": "#1f2937",
+        },
+        ".text-stroke-gray-900": {
+          "-webkit-text-stroke-color": "#111827",
+        },
+        ".text-stroke-black": {
+          "-webkit-text-stroke-color": "black",
+        },
+        ".text-stroke-white": {
+          "-webkit-text-stroke-color": "white",
+        },
+        ".text-stroke-red": {
+          "-webkit-text-stroke-color": "red",
+        },
+        ".text-stroke-gray-100": {
+          "-webkit-text-stroke-color": "#f3f4f6",
+        },
+        ".text-stroke-gray-200": {
+          "-webkit-text-stroke-color": "#e5e7eb",
+        },
+        ".text-stroke-gray-300": {
+          "-webkit-text-stroke-color": "#d1d5db",
+        },
+        ".text-stroke-gray-400": {
+          "-webkit-text-stroke-color": "#9ca3af",
+        },
+        ".text-stroke-gray-500": {
+          "-webkit-text-stroke-color": "#6b7280",
+        },
+        ".text-stroke-gray-600": {
+          "-webkit-text-stroke-color": "#4b5563",
+        },
+        ".text-stroke-gray-700": {
+          "-webkit-text-stroke-color": "#374151",
+        },
+        ".text-stroke-gray-800": {
+          "-webkit-text-stroke-color": "#1f2937",
+        },
+        ".text-stroke-gray-900": {
+          "-webkit-text-stroke-color": "#111827",
+        },
+        ".text-stroke-dark-gray": {
+          "-webkit-text-stroke-color": "#222",
         },
       });
     },

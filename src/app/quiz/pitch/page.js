@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePitchQuizLogic } from "@/app/hooks/pitch/usePitchQuizLogic";
 import Link from "next/link";
-import { useVolumeControl } from "@/app/hooks/pitch/useVolumeControl";
+// import { useVolumeControl } from "@/app/hooks/pitch/useVolumeControl";
 import { usePitchQuizSetter } from "@/app/hooks/pitch/usePitchQuizSetter";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 
 export default function PitchQuizPage() {
-  const { volume } = useVolumeControl();
+  // const { volume } = useVolumeControl();
   const { handlePlayNote } = usePitchQuizSetter();
   const { convertToABCDEFG } = useSoundName();
   // ===== ここが重要！ usePitchQuiz から正解/選択肢/回答関数 を取得 =====
@@ -50,7 +50,7 @@ export default function PitchQuizPage() {
 
   // デバッグ用ログ
   useEffect(() => {
-    console.log("useVolumeControl:", volume);
+    // console.log("useVolumeControl:", volume);
     console.log("usePitchQuizSetter:", handlePlayNote);
     console.log("useSoundName:", convertToABCDEFG);
   }, []);
@@ -73,7 +73,7 @@ export default function PitchQuizPage() {
                                     タイトル
         =============================================================== */}
       <div className="h-[10%] flex items-center justify-center">
-        <h1 className="text-white text-xxl pt-4 font-bold text-center">
+        <h1 className="text-white text-xxl pt-4 text-stroke-sm text-stroke-gray-300 font-bold  text-center">
           音感レベル診断！
         </h1>
       </div>
@@ -99,7 +99,7 @@ export default function PitchQuizPage() {
             {/*============================================================
                                     スコア、問題数
             =============================================================== */}
-            <div className="h-[10%] flex items-center justify-center">
+            <div className="h-[10%] flex items-center justify-center  text-stroke-sm text-stroke-gray-300">
               <div>
                 <p className="text-white mb-1 text-xs text-center">
                   スコア: {score}
