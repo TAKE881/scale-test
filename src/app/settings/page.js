@@ -37,11 +37,11 @@ export default function SettingsPage() {
   }
 
   // 表記モードの変更
-  function handleNoteLabelChange(e) {
-    const mode = e.target.value;
-    setNoteLabelMode(mode);
-    localStorage.setItem("noteLabelMode", mode);
-  }
+  // function handleNoteLabelChange(e) {
+  //   const mode = e.target.value;
+  //   setNoteLabelMode(mode);
+  //   localStorage.setItem("noteLabelMode", mode);
+  // }
 
   return (
     <main className="text-white flex flex-col items-center justify-center h-screen text-center">
@@ -76,8 +76,8 @@ export default function SettingsPage() {
               type="radio"
               name="noteLabel"
               value="alphabet"
-              checked={noteLabelMode === "alphabet"}
-              onChange={handleNoteLabelChange}
+            // checked={noteLabelMode === "alphabet"}
+            // onChange={handleNoteLabelChange}
             />
             (C, D, E)
           </label>
@@ -88,8 +88,8 @@ export default function SettingsPage() {
               type="radio"
               name="noteLabel"
               value="japanese"
-              checked={noteLabelMode === "japanese"}
-              onChange={handleNoteLabelChange}
+            // checked={noteLabelMode === "japanese"}
+            // onChange={handleNoteLabelChange}
             />
             (ド,レ,ミ)
           </label>
