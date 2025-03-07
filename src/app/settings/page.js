@@ -9,25 +9,25 @@ import Link from "next/link";
  * - 「C4 → ド」などの日本語表記モードをオン/オフ
  */
 export default function SettingsPage() {
-  // 音量を -1 ~ +3 の範囲にする例
-  const [volumeLevel, setVolumeLevel] = useState(0);
+  // // 音量を -1 ~ +3 の範囲にする例
+  // const [volumeLevel, setVolumeLevel] = useState(0);
 
-  // 英語表記 / 日本語表記 のモード切替
-  const [noteLabelMode, setNoteLabelMode] = useState("alphabet");
-  // 例: "alphabet" or "japanese" で管理
+  // // 英語表記 / 日本語表記 のモード切替
+  // const [noteLabelMode, setNoteLabelMode] = useState("alphabet");
+  // // 例: "alphabet" or "japanese" で管理
 
-  useEffect(() => {
-    // マウント時に保存された音量・表記モードを読み出す
-    const savedVolume = localStorage.getItem("quizVolumeLevel");
-    if (savedVolume !== null) {
-      setVolumeLevel(Number(savedVolume));
-    }
+  // useEffect(() => {
+  //   // マウント時に保存された音量・表記モードを読み出す
+  //   const savedVolume = localStorage.getItem("quizVolumeLevel");
+  //   if (savedVolume !== null) {
+  //     setVolumeLevel(Number(savedVolume));
+  //   }
 
-    const savedLabelMode = localStorage.getItem("noteLabelMode");
-    if (savedLabelMode !== null) {
-      setNoteLabelMode(savedLabelMode);
-    }
-  }, []);
+  //   const savedLabelMode = localStorage.getItem("noteLabelMode");
+  //   if (savedLabelMode !== null) {
+  //     setNoteLabelMode(savedLabelMode);
+  //   }
+  // }, []);
 
   // 音量スライダーの変更 (例: -1 ~ +3)
   function handleVolumeChange(e) {
@@ -37,11 +37,11 @@ export default function SettingsPage() {
   }
 
   // 表記モードの変更
-  function handleNoteLabelChange(e) {
-    const mode = e.target.value;
-    setNoteLabelMode(mode);
-    localStorage.setItem("noteLabelMode", mode);
-  }
+  // function handleNoteLabelChange(e) {
+  //   const mode = e.target.value;
+  //   setNoteLabelMode(mode);
+  //   localStorage.setItem("noteLabelMode", mode);
+  // }
 
   return (
     <main className="text-white flex flex-col items-center justify-center h-screen text-center">
@@ -76,8 +76,8 @@ export default function SettingsPage() {
               type="radio"
               name="noteLabel"
               value="alphabet"
-              checked={noteLabelMode === "alphabet"}
-              onChange={handleNoteLabelChange}
+            // checked={noteLabelMode === "alphabet"}
+            // onChange={handleNoteLabelChange}
             />
             (C, D, E)
           </label>
@@ -88,8 +88,8 @@ export default function SettingsPage() {
               type="radio"
               name="noteLabel"
               value="japanese"
-              checked={noteLabelMode === "japanese"}
-              onChange={handleNoteLabelChange}
+            // checked={noteLabelMode === "japanese"}
+            // onChange={handleNoteLabelChange}
             />
             (ド,レ,ミ)
           </label>
