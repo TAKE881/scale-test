@@ -1,8 +1,13 @@
 "use client";
 
+import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 import { useState, useEffect } from "react";
 
 export function PitchQuizButton({ note, isCorrect = false, onClick }) {
+
+
+  const { convertSoundName } = useSoundName();
+
   console.log("PitchQuizButton に渡された note:", note);
   console.log("isCorrect:", isCorrect);
 
@@ -48,7 +53,7 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
         "
         onClick={handleClick}
       >
-        <span className="text-lg text-center text-black mb-1 z-10">{note}</span>
+        <span className="text-lg text-center text-black mb-1 z-10">{convertSoundName(note)}</span>
       </div>
       {showEffect && (
         <svg
