@@ -48,7 +48,7 @@ export default function PitchQuizPage() {
       {/*============================================================
                                     タイトル
         =============================================================== */}
-      <div className="h-[10%] flex items-center justify-center">
+      <div className="h-[5%] mb-7 flex items-center justify-center">
         <h1 className="text-white text-xxl pt-4 text-stroke-sm text-stroke-gray-300 font-bold  text-center">
           音感レベル診断！
         </h1>
@@ -75,7 +75,7 @@ export default function PitchQuizPage() {
             {/*============================================================
                                     スコア、問題数
             =============================================================== */}
-            <div className="h-[10%] flex items-center justify-center  text-stroke-sm text-stroke-gray-300">
+            <div className="h-[5%] mb-12 flex items-center justify-center  text-stroke-sm text-stroke-gray-300">
               <div>
                 <p className="text-white mb-1 text-xs text-center">
                   スコア: {score}
@@ -89,7 +89,7 @@ export default function PitchQuizPage() {
                                     ボタンレイアウト
             =============================================================== */}
             {/* 再生ボタン */}
-            <div className="h-[35%] flex items-center justify-center">
+            <div className="h-[42.5%] flex items-center justify-center">
               <div className="flex justify-center mb-26">
                 <button
                   onClick={playNote}
@@ -101,8 +101,8 @@ export default function PitchQuizPage() {
               </div>
             </div>
             {/* 選択肢ボタン */}
-            <div className="h-[35%] flex items-center justify-center">
-              <div className="flex gap-8 w-full max-w-md mb-34 justify-center">
+            <div className="h-[42.5%] mb-30 flex items-center justify-center">
+              <div className="flex gap-8 w-full max-w-md justify-center">
                 {clientOptions.map((option, index) => (
                   <PitchQuizButton
                     key={option}
@@ -114,7 +114,7 @@ export default function PitchQuizPage() {
               </div>
             </div>
             {/* 5️ モードセレクトに戻る */}
-            <div className="h-[10%] flex justify-center items-center">
+            <div className="h-[5%] flex justify-center items-center">
               <Link href="/mode-select">
                 <button className="
                   relative px-7 py-2 text-xxxs font-semibold

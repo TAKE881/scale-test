@@ -46,7 +46,7 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
       {/* ボタン本体 */}
       <div
         className="
-          w-16 h-30 bg-gradient-to-b mb-1 from-white to-gray-300 text-black
+          w-14 h-28 bg-gradient-to-b mb-1 from-white to-gray-300 text-black
           border border-black rounded-md shadow-lg transition-transform
           ease-in-out duration-200 transform active:translate-y-1 cursor-pointer
           flex relative overflow-hidden items-center justify-center
