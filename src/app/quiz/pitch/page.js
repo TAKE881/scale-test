@@ -4,17 +4,10 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePitchQuizLogic } from "@/app/hooks/pitch/usePitchQuizLogic";
 import Link from "next/link";
-import { usePitchQuizSetter } from "@/app/hooks/pitch/usePitchQuizSetter";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 
 export default function PitchQuizPage() {
-  const { setRandomNote, playSelectedNote, selectedNote } = usePitchQuizSetter();
-
-  useEffect(() => {
-    setRandomNote();
-  }, []);
-
   const {
     score,
     questionNumber,
@@ -101,7 +94,7 @@ export default function PitchQuizPage() {
             <div className="h-[35%] flex items-center justify-center">
               <div className="flex justify-center mb-26">
                 <button
-                  onClick={playSelectedNote}
+                  onClick={playNote}
                   className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
                   aria-label="再生"
                 >
