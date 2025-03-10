@@ -10,7 +10,7 @@ export const useSoundName = () => {
     };
 
     // ✅ 変換関数を提供
-    const convertToABCDEFG = (note) => noteMapping[note] || note;
+    const convertSoundName = (note) => noteMapping[note] || note;
 
-    return { convertToABCDEFG };
+    return { convertSoundName };
 };

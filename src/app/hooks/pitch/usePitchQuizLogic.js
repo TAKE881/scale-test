@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 import { useCorrectSound } from "./useCorrectSound";
 
-export function usePitchQuizLogic(totalQuestions = 2) {
+export function usePitchQuizLogic(totalQuestions = 4) {
   const { playCorrectSound, playIncorrectSound } = useCorrectSound();
 
   const [pitchQuizNote, setPitchQuizNote] = useState(null);
@@ -96,13 +96,18 @@ export function usePitchQuizLogic(totalQuestions = 2) {
             =============================================================== */}
 
     // コレクトサウンドとインコレクトサウンドの設定
+    if (answer === pitchQuizNote) {
+      playCorrectSound();
+      setScore((prev) => prev + 1);
+    } else {
+      playIncorrectSound();
+    }
+    {/*============================================================
+                                    次の問題
+            =============================================================== */}
+    // 実行を遅らせる関数
     setTimeout(() => {
-      if (answer === pitchQuizNote) {
-        playCorrectSound();
-        setScore((prev) => prev + 1);
-      } else {
-        playIncorrectSound();
-      }
+
       // 次の問題に進むか、クイズ終了か？
       if (questionNumber + 1 < totalQuestions) {
         setQuestionNumber((prev) => prev + 1);

@@ -21,8 +21,6 @@ export default function PitchQuizPage() {
     resetQuiz,
   } = usePitchQuizLogic();
 
-
-
   const [clientOptions, setClientOptions] = useState([]);
 
   const isOnlyCorrect = false;
