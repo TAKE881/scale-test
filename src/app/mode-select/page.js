@@ -10,7 +10,7 @@ export default function ModeSelect() {
     >
       <main className="flex flex-col items-center justify-center h-screen text-center">
         {/* <h1 className="text-3xl font-bold text-white mb-4">SE音程王</h1> */}
-        <p className="mb-7 text-lg text-white">モードセレクト</p>
+        <p className="mb-7 text-xl text-white font-bold text-stroke-sm text-stroke-gray-300">モードセレクト</p>
         {/* <div>
           <Image src="/AIboo2-removebg.png" alt="ブーブークッションに乗ったブタ" width={150} height={0} />
         </div> */}
@@ -20,7 +20,7 @@ export default function ModeSelect() {
           <Link href="/quiz/pitch">
             <button
               className="
-                relative px-7 mb-3 py-3 text-lg font-semibold
+                relative px-7 mb-3 py-3 text-lg font-semibold text-stroke-ssssm text-stroke-gray-300
                 text-white bg-gradient-to-r from-green-500 to-emerald-400
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60
@@ -39,7 +39,7 @@ export default function ModeSelect() {
           <Link href="/test">
             <button
               className="
-                relative px-7 mb-3 py-3 text-lg font-semibold
+                relative px-7 mb-3 py-3 text-lg font-semibold text-stroke-ssssm text-stroke-gray-300
                 text-white bg-gradient-to-r from-red-500 to-rose-400
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60
@@ -56,7 +56,7 @@ export default function ModeSelect() {
           <Link href="/settings">
             <button
               className="
-                relative px-6 py-0 text-base font-semibold
+                relative px-6 py-0 text-base font-semibold text-stroke-ssssm text-stroke-gray-300
                 text-white bg-gradient-to-r from-gray-500 to-gray-700
                 rounded-full shadow-lg hover:shadow-xl transition-all duration-300
                 border border-white border-opacity-30 hover:border-opacity-60

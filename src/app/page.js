@@ -6,8 +6,11 @@ export default function Home() {
     <>
       <Link href="/mode-select">
         <div
+          // className={
+          //   "w-screen h-screen  bg-[url('/image-bg/tokai-and-homeDALLE.webp')] bg-cover bg-center bg-no-repeat animate-wave "
+          // }
           className={
-            "w-screen h-screen  bg-[url('/image-bg/tokai-and-homeDALLE.webp')] bg-cover bg-center bg-no-repeat animate-wave "
+            "w-screen h-screen  bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat animate-wave"
           }
         >
           <main className="flex flex-col items-center justify-center h-screen text-center">

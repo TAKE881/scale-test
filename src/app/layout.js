@@ -22,18 +22,23 @@ export default function RootLayout({ children }) {
       <body className={ReggaeOne.className}>
         <div className="relative w-screen min-h-screen">
           {/* ぼかした背景画像 */}
-          {/* <div className=
-          "absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat blur-sm"
-          ></div> */}
+
+          <div className=
+            "absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat blur-sssm"
+          ></div>
+
           {/* <div className=
             "absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat sepia"
           ></div> */}
-          <div className=
+
+          {/* <div className=
             " absolute inset-0 bg-[url('/image-bg-mu/music_bar.webp')] bg-cover bg-center bg-no-repeat grayscale"
-          ></div>
+          ></div> */}
+
           {/* <div className=
             " absolute inset-0 bg-[url('/image-bg/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat"
           ></div> */}
+
           {/* コンテンツ（ぼかさない） */}
           <div className=" relative z-10">
             {children}

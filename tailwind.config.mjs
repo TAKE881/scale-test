@@ -84,6 +84,14 @@ export default {
         '36': '144px',
         '38': '152px',
       },
+      blur: {
+        ssm: '2px',       // ← ベース
+        sssm: '1.8px',    // ← 少し弱く
+        ssssm: '1.6px',
+        sssssm: '1.4px',
+        ssssssm: '1.2px',
+        sssssssm: '1px',  // ← 最も微細
+      },
       //////////////////////////////// 重なり
       zIndex: {
         '100': '100',
