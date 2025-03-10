@@ -44,7 +44,7 @@ export default function SettingsPage() {
   // }
 
   return (
-    <main className="text-white flex flex-col items-center justify-center h-screen text-center">
+    <main className="text-white flex flex-col items-center justify-center h-screen text-center text-stroke-sm text-stroke-gray-300">
       <h1 className="text-2xl mb-10">設定</h1>
 
       {/* ===== サウンド ===== */}
@@ -69,9 +69,9 @@ export default function SettingsPage() {
 
       {/* ===== スケール ===== */}
       <div className="mb-8">
-        <h2 className="mb-2">スケール</h2>
+        <h2 className="mb-2 text-stroke-sm text-stroke-gray-300">スケール</h2>
         <div className="mb-1">
-          <label className="">
+          <label className=" text-stroke-sm text-stroke-gray-300">
             <input
               type="radio"
               name="noteLabel"
