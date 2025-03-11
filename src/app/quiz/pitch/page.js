@@ -139,13 +139,104 @@ export default function PitchQuizPage() {
                 <button onClick={() => handleInstrumentToggle("Guitar")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎸</button>
               </div>
               {/* 再生 */}
-              <button
+              {/* <button
                 onClick={playNote}
                 className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
                 aria-label="再生"
               >
                 再生
+              </button> */}
+              <button
+                onClick={playNote}
+                aria-label="再生"
+                className="
+    relative
+    w-30 h-30
+    flex items-center justify-center
+    rounded-full shadow-md
+    overflow-hidden
+    transition-all duration-150
+    active:scale-95
+  "
+              >
+                {/* ▼ SVGを全面に表示 */}
+                {/* <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                > */}
+                {/* ▼ メタリックグラデ定義 */}
+                {/* <defs>
+                    <radialGradient id="metalGradient" cx="50%" cy="50%" r="70%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="40%" stopColor="#cccccc" />
+                      <stop offset="80%" stopColor="#999999" />
+                      <stop offset="100%" stopColor="#666666" />
+                    </radialGradient>
+                  </defs> */}
+
+                {/* ▼ 外周リング */}
+                {/* <circle cx="100" cy="100" r="95" fill="#222" />
+                  <circle cx="100" cy="100" r="80" fill="#333" /> */}
+
+                {/* ▼ 上半分の水色円弧 */}
+                {/* <path
+                    d="M 100,100 L 100,20 A 80,80 0 0 1 180,100 Z"
+                    fill="#4EB1BA"
+                  /> */}
+                {/* ▼ 下半分のピンク円弧 */}
+                {/* <path
+                    d="M 100,100 L 180,100 A 80,80 0 0 1 100,180 A 80,80 0 0 1 20,100 Z"
+                    fill="#EF5777"
+                  /> */}
+
+                {/* ▼ 中央ノブ */}
+                {/* <circle cx="100" cy="100" r="40" fill="url(#metalGradient)" /> */}
+
+                {/* ▼ ノブの溝装飾 */}
+                {/* <circle cx="100" cy="100" r="35" fill="none" stroke="#444" strokeWidth="2" />
+                  <circle cx="100" cy="100" r="30" fill="none" stroke="#555" strokeWidth="2" /> */}
+
+                {/* ▼ 中央マーカー */}
+                {/* <circle cx="100" cy="100" r="5" fill="#aaa" />
+                </svg> */}
+
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* ▼ メタリックグラデ定義 */}
+                  <defs>
+                    <radialGradient id="metalGradient" cx="50%" cy="50%" r="70%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="40%" stopColor="#cccccc" />
+                      <stop offset="80%" stopColor="#999999" />
+                      <stop offset="100%" stopColor="#666666" />
+                    </radialGradient>
+                  </defs>
+
+                  {/* ▼ 外周リング */}
+                  <circle cx="100" cy="100" r="88" fill="#222" />
+
+                  {/* ▼ 内リング（グレーで統一） */}
+                  <circle cx="100" cy="100" r="80" fill="#888888" />
+
+                  {/* ▼ 中央ノブ */}
+                  <circle cx="100" cy="100" r="40" fill="url(#metalGradient)" />
+
+                  {/* ▼ ノブの溝装飾 */}
+                  <circle cx="100" cy="100" r="35" fill="none" stroke="#444" strokeWidth="2" />
+                  <circle cx="100" cy="100" r="30" fill="none" stroke="#555" strokeWidth="2" />
+
+                  {/* ▼ 中央マーカー */}
+                  <circle cx="100" cy="100" r="5" fill="#aaa" />
+                </svg>
+
               </button>
+
             </div>
 
 
