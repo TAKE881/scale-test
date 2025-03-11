@@ -14,7 +14,7 @@ export default function Home() {
           }
         >
           <main className="flex flex-col items-center justify-center h-screen text-center">
-            <h1 className="text-4xl font-bold text-green-500 mb-9 text-stroke-1 text-stroke-white">環境音マスター検定</h1>
+            <h1 className="text-4xl font-bold text-metallic-gold mb-9 text-stroke-1 text-stroke-white">Perfect pitch！</h1>
             {/* <p className="mb-7 text-lg text-white">モード選択</p> */}
             {/* <div>
           <Image src="/AIboo2-removebg.png" alt="ブーブークッションに乗ったブタ" width={150} height={0} />
@@ -34,7 +34,7 @@ export default function Home() {
               text-gray-600 text-stroke-1 text-stroke-white
               "
               >
-                START
+                はじめる
               </button>
               {/* </Link> */}
             </div>

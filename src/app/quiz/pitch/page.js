@@ -51,8 +51,8 @@ export default function PitchQuizPage() {
                                     タイトル
         =============================================================== */}
       <div className="h-[5%] mb-7 flex items-center justify-center">
-        <h1 className="text-white text-xxl pt-4 text-stroke-sm text-stroke-gray-300 font-bold  text-center">
-          音感レベル診断！
+        <h1 className="text-metallic-gold text-white text-xxl pt-4 text-stroke-sm text-stroke-gray-300 font-bold  text-center">
+          Perfect pitch！
         </h1>
       </div>
       {isQuizFinished ? (
@@ -79,10 +79,10 @@ export default function PitchQuizPage() {
             =============================================================== */}
             <div className="h-[5%] mb-12 flex items-center justify-center  text-stroke-sm text-stroke-gray-300">
               <div>
-                <p className="text-white mb-1 text-xs text-center">
+                <p className="text-metallic-silver mb-1 text-xs text-center">
                   スコア: {score}
                 </p>
-                <p className="text-white mb-10 text-xs text-center">
+                <p className="text-metallic-silver mb-10 text-xs text-center">
                   問題: {questionNumber + 1} / {totalQuestions}
                 </p>
               </div>
