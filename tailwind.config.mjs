@@ -126,6 +126,7 @@ export default {
         'metallic-bronze': '#CD7F32',
         'metallic-green': '#3e5c46',   // ややくすみのある緑
         'metallic-yellow': '#ddd12b',// ややくすみのある黄色(淡い金っぽい)
+        sepia: '#704214', // セピア色
       },
       fontFamily: {
         waterBrush: ["Water Brush", "cursive"],

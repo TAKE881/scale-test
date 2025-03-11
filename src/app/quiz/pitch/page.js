@@ -88,7 +88,7 @@ export default function PitchQuizPage() {
               </div>
             </div>
             {/*============================================================
-                                    再生ボタン
+                                    再生ボタン（仮）
             =============================================================== */}
             {/* 再生ボタン */}
             {/* バージョン１ */}
@@ -127,16 +127,60 @@ export default function PitchQuizPage() {
                 <button onClick={() => handleInstrumentToggle("Guitar")} className="px-4 py-2 bg-gray-300 rounded">🎸</button>
               </div>
             </div> */}
+
+
+            {/*============================================================
+                                    楽器変更ボタン
+            =============================================================== */}
             <div className="h-[42.5%] flex flex-col items-center gap-4">
               <div className="flex gap-4">
-                {/* 🎤  */}
-                <button onClick={() => handleInstrumentToggle("Voice")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎤</button>
-                {/* 🎮 */}
-                <button onClick={() => handleInstrumentToggle("Retro")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎮</button>
-                {/* 🎻  */}
-                <button onClick={() => handleInstrumentToggle("Violin")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎻</button>
-                {/* 🎸  */}
-                <button onClick={() => handleInstrumentToggle("Guitar")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎸</button>
+
+
+                {/* *****************🎤*****************  */}
+                <button onClick={() => handleInstrumentToggle("Voice")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Voice"
+                      ? "bg-metallic-gold"
+                      : instrument !== "Voice" && instrument !== "Synth"
+                        ? "bg-gray-400"
+                        : "bg-metallic-silver"
+                    }`}
+                >🎤</button>
+
+
+                {/* *****************🎮***************** */}
+                <button onClick={() => handleInstrumentToggle("Retro")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Retro"
+                      ? "bg-metallic-gold"
+                      : instrument !== "Retro" && instrument !== "Synth"
+                        ? "bg-gray-400"
+                        : "bg-metallic-silver"
+                    }`}
+                >🎮</button>
+
+
+                {/* *****************🎻*****************  */}
+                <button onClick={() => handleInstrumentToggle("Violin")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Violin"
+                      ? "bg-metallic-gold"
+                      : instrument !== "Violin" && instrument !== "Synth"
+                        ? "bg-gray-400"
+                        : "bg-metallic-silver"
+                    }`}
+                >🎻</button>
+
+
+                {/* *****************🎸*****************  */}
+                <button onClick={() => handleInstrumentToggle("Guitar")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Guitar"
+                    ? "bg-metallic-gold"
+                    : instrument !== "Guitar" && instrument !== "Synth"
+                      ? "bg-gray-400"
+                      : "bg-metallic-silver"
+                    }`}
+                >🎸</button>
+                {/*============================================================
+                                    再生ボタン
+            =============================================================== */}
               </div>
               {/* 再生 */}
               {/* <button
@@ -150,15 +194,18 @@ export default function PitchQuizPage() {
                 onClick={playNote}
                 aria-label="再生"
                 className="
-    relative
-    w-30 h-30
-    flex items-center justify-center
-    rounded-full shadow-md
-    overflow-hidden
-    transition-all duration-150
-    active:scale-95
-  "
+                            relative
+                            w-30 h-30
+                            flex items-center justify-center
+                            rounded-full shadow-md
+                            overflow-hidden
+                            transition-all duration-150
+                            active:scale-95
+                          "
               >
+                {/*============================================================
+                                    SVG（仮）
+            =============================================================== */}
                 {/* ▼ SVGを全面に表示 */}
                 {/* <svg
                   width="100%"
@@ -202,6 +249,10 @@ export default function PitchQuizPage() {
                 {/* <circle cx="100" cy="100" r="5" fill="#aaa" />
                 </svg> */}
 
+
+                {/*============================================================
+                                    SVG
+            =============================================================== */}
                 <svg
                   width="100%"
                   height="100%"
