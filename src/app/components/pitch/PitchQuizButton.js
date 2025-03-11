@@ -8,8 +8,11 @@ export function PitchQuizButton({ note, isCorrect = false, onClick }) {
 
   const { convertSoundName } = useSoundName();
 
-  console.log("PitchQuizButton に渡された note:", note);
-  console.log("isCorrect:", isCorrect);
+  // console.log("PitchQuizButton に渡された note:", note);
+
+  // console.log("isCorrect:", isCorrect);
+  console.log(`🎹 クイズボタン 表示: note=${note}, isCorrect=${isCorrect}`);
+
 
   const [showEffect, setShowEffect] = useState(false);
 

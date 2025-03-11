@@ -127,13 +127,17 @@ export default function PitchQuizPage() {
                 <button onClick={() => handleInstrumentToggle("Guitar")} className="px-4 py-2 bg-gray-300 rounded">🎸</button>
               </div>
             </div> */}
-
-            <div className="flex flex-col items-center gap-4">
-              {/* 🎻  */}
-              <button onClick={() => handleInstrumentToggle("Violin")} className="px-4 py-2 bg-gray-300 rounded">
-                🎻
-              </button>
-
+            <div className="h-[42.5%] flex flex-col items-center gap-4">
+              <div className="flex gap-4">
+                {/* 🎤  */}
+                <button onClick={() => handleInstrumentToggle("Voice")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎤</button>
+                {/* 🎮 */}
+                <button onClick={() => handleInstrumentToggle("Retro")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎮</button>
+                {/* 🎻  */}
+                <button onClick={() => handleInstrumentToggle("Violin")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎻</button>
+                {/* 🎸  */}
+                <button onClick={() => handleInstrumentToggle("Guitar")} className="px-1 py-1 bg-metallic-silver rounded-full w-8 h-8">🎸</button>
+              </div>
               {/* 再生 */}
               <button
                 onClick={playNote}
@@ -142,18 +146,9 @@ export default function PitchQuizPage() {
               >
                 再生
               </button>
-
-              {/* 🎤 🎮  */}
-              <div className="flex gap-4">
-                <button onClick={() => handleInstrumentToggle("Voice")} className="px-4 py-2 bg-gray-300 rounded">🎤</button>
-                <button onClick={() => handleInstrumentToggle("Retro")} className="px-4 py-2 bg-gray-300 rounded">🎮</button>
-              </div>
-
-              {/* 🎸  */}
-              <button onClick={() => handleInstrumentToggle("Guitar")} className="px-4 py-2 bg-gray-300 rounded">
-                🎸
-              </button>
             </div>
+
+
 
             {/*============================================================
                                     選択肢ボタン
