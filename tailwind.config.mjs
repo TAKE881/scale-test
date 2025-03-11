@@ -120,6 +120,12 @@ export default {
         secondary: '#9333EA', // 紫系のアクセント
         danger: '#DC2626', // 赤色の警告
         success: '#16A34A', // 緑色の成功通知
+        'metallic-blue': '#2f4550',
+        'metallic-silver': '#C0C0C0',
+        'metallic-gold': '#D4AF37',
+        'metallic-bronze': '#CD7F32',
+        'metallic-green': '#3e5c46',   // ややくすみのある緑
+        'metallic-yellow': '#ddd12b',// ややくすみのある黄色(淡い金っぽい)
       },
       fontFamily: {
         waterBrush: ["Water Brush", "cursive"],

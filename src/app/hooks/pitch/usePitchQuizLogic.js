@@ -4,6 +4,9 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 import { useCorrectSound } from "./useCorrectSound";
+// import "@/tone/setupCustomSynths";
+import { customSynthMap } from "@/tone/customSynthMap";
+
 
 export function usePitchQuizLogic(totalQuestions = 4) {
   const { playCorrectSound, playIncorrectSound } = useCorrectSound();
@@ -15,6 +18,7 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [instrument, setInstrument] = useState("Synth");
 
 
   {/*============================================================
@@ -47,14 +51,43 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   }, [pitchQuizNote]);
 
   // 再生ボタン機能
+  // const playNote = async () => {
+  //   if (!pitchQuizNote) return;
+  //   console.log("🎵 再生ボタンが押されました！鳴らす音:", pitchQuizNote);
+  //   await Tone.start();
+  //   const synth = new Tone.Synth().toDestination();
+  //   synth.triggerAttackRelease(pitchQuizNote, "4n");
+  // };
+  // const pitchQuizNote = "C4";
+
+  const handleInstrumentToggle = (name) => {
+    const newInstrument = instrument === name ? "Synth" : name;
+    setInstrument(newInstrument);
+    console.log(" 選択された楽器！！！！！！:", newInstrument);
+    // alert(` 現在の楽器！！！！！！: ${newInstrument}`);
+  };
+
+  // const playNote = async () => {
+  //   if (!pitchQuizNote) return;
+  //   await Tone.start();
+  //   const synth = new Tone[instrument]().toDestination();
+  //   synth.triggerAttackRelease(pitchQuizNote, "4n");
+  // };
+
   const playNote = async () => {
     if (!pitchQuizNote) return;
-    console.log("🎵 再生ボタンが押されました！鳴らす音:", pitchQuizNote);
-
     await Tone.start();
-    const synth = new Tone.Synth().toDestination();
+
+    const SynthClass = customSynthMap[instrument] || Tone.Synth;
+    const instance = new SynthClass();
+    const synth = instance.synth || instance;
+
+    console.log(` 再生された音程！！！！！！: ${pitchQuizNote}`);
+    console.log(` 再生された楽器！！！！！！: ${instrument}`);
+
     synth.triggerAttackRelease(pitchQuizNote, "4n");
   };
+
 
   const generatePitchTrainingQuestion = () => {
     const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
@@ -132,6 +165,9 @@ export function usePitchQuizLogic(totalQuestions = 4) {
     totalQuestions,
     isQuizFinished,
     selectedOption,
+    instrument,
+    setInstrument,
+    handleInstrumentToggle,
     playNote,
     handleAnswer,
     resetQuiz,
