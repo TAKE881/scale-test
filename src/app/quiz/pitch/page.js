@@ -19,6 +19,9 @@ export default function PitchQuizPage() {
     playNote,
     handleAnswer,
     resetQuiz,
+    instrument,
+    setInstrument,
+    handleInstrumentToggle
   } = usePitchQuizLogic();
 
   const [clientOptions, setClientOptions] = useState([]);
@@ -31,7 +34,6 @@ export default function PitchQuizPage() {
 
         setClientOptions([correctAnswer]);
       } else {
-
         setClientOptions(options);
       }
     }
@@ -86,10 +88,11 @@ export default function PitchQuizPage() {
               </div>
             </div>
             {/*============================================================
-                                    ボタンレイアウト
+                                    再生ボタン
             =============================================================== */}
             {/* 再生ボタン */}
-            <div className="h-[42.5%] flex items-center justify-center">
+            {/* バージョン１ */}
+            {/* <div className="h-[42.5%] flex items-center justify-center">
               <div className="flex justify-center mb-26">
                 <button
                   onClick={playNote}
@@ -99,7 +102,62 @@ export default function PitchQuizPage() {
                   再生
                 </button>
               </div>
+            </div> */}
+            {/* バージョン２ */}
+            {/* <div>
+              <div className="flex justify-center mt-4">
+                <button onClick={() => setInstrument("Violin")} className="px-4 py-2 bg-gray-300 rounded">🎻</button>
+              </div>
+              <div className="h-[42.5%] flex items-center justify-center">
+                <div className="flex justify-center mb-26">
+                  <button
+                    onClick={playNote}
+                    className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
+                    aria-label="再生"
+                  >
+                    再生
+                  </button>
+                </div>
+              </div>
+              <div className="flex justify-between px-4">
+                <button onClick={() => handleInstrumentToggle("Voice")} className="px-4 py-2 bg-gray-300 rounded">🎤</button>
+                <button onClick={() => handleInstrumentToggle("Retro")} className="px-4 py-2 bg-gray-300 rounded">🎮</button>
+              </div>
+              <div className="flex justify-center mt-4">
+                <button onClick={() => handleInstrumentToggle("Guitar")} className="px-4 py-2 bg-gray-300 rounded">🎸</button>
+              </div>
+            </div> */}
+
+            <div className="flex flex-col items-center gap-4">
+              {/* 🎻  */}
+              <button onClick={() => handleInstrumentToggle("Violin")} className="px-4 py-2 bg-gray-300 rounded">
+                🎻
+              </button>
+
+              {/* 再生 */}
+              <button
+                onClick={playNote}
+                className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
+                aria-label="再生"
+              >
+                再生
+              </button>
+
+              {/* 🎤 🎮  */}
+              <div className="flex gap-4">
+                <button onClick={() => handleInstrumentToggle("Voice")} className="px-4 py-2 bg-gray-300 rounded">🎤</button>
+                <button onClick={() => handleInstrumentToggle("Retro")} className="px-4 py-2 bg-gray-300 rounded">🎮</button>
+              </div>
+
+              {/* 🎸  */}
+              <button onClick={() => handleInstrumentToggle("Guitar")} className="px-4 py-2 bg-gray-300 rounded">
+                🎸
+              </button>
             </div>
+
+            {/*============================================================
+                                    選択肢ボタン
+            =============================================================== */}
             {/* 選択肢ボタン */}
             <div className="h-[42.5%] mb-30 flex items-center justify-center">
               <div className="flex gap-8 w-full max-w-md justify-center">
@@ -113,7 +171,9 @@ export default function PitchQuizPage() {
                 ))}
               </div>
             </div>
-            {/* 5️ モードセレクトに戻る */}
+            {/*============================================================
+                                    モードセレクトに戻る
+            =============================================================== */}
             <div className="h-[5%] flex justify-center items-center">
               <Link href="/mode-select">
                 <button className="
