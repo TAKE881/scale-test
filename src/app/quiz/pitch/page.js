@@ -21,7 +21,7 @@ export default function PitchQuizPage() {
     resetQuiz,
     instrument,
     setInstrument,
-    handleInstrumentToggle
+    handleInstrumentToggle,
   } = usePitchQuizLogic();
 
   const [clientOptions, setClientOptions] = useState([]);
@@ -31,7 +31,6 @@ export default function PitchQuizPage() {
   useEffect(() => {
     if (options) {
       if (isOnlyCorrect) {
-
         setClientOptions([correctAnswer]);
       } else {
         setClientOptions(options);
@@ -128,56 +127,66 @@ export default function PitchQuizPage() {
               </div>
             </div> */}
 
-
             {/*============================================================
                                     楽器変更ボタン
             =============================================================== */}
             <div className="h-[42.5%] flex flex-col items-center gap-4">
               <div className="flex gap-4">
-
-
                 {/* *****************🎤*****************  */}
-                <button onClick={() => handleInstrumentToggle("Voice")}
-                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Voice"
+                <button
+                  onClick={() => handleInstrumentToggle("Voice")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${
+                    instrument === "Voice"
                       ? "bg-metallic-gold"
                       : instrument !== "Voice" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
-                    }`}
-                >🎤</button>
-
-
-                {/* *****************🎮***************** */}
-                <button onClick={() => handleInstrumentToggle("Retro")}
-                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Retro"
-                      ? "bg-metallic-gold"
-                      : instrument !== "Retro" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
-                    }`}
-                >🎮</button>
-
-
-                {/* *****************🎻*****************  */}
-                <button onClick={() => handleInstrumentToggle("Violin")}
-                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Violin"
-                      ? "bg-metallic-gold"
-                      : instrument !== "Violin" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
-                    }`}
-                >🎻</button>
-
-
-                {/* *****************🎸*****************  */}
-                <button onClick={() => handleInstrumentToggle("Guitar")}
-                  className={`px-1 py-1 rounded-full w-8 h-8 ${instrument === "Guitar"
-                    ? "bg-metallic-gold"
-                    : instrument !== "Guitar" && instrument !== "Synth"
                       ? "bg-gray-400"
                       : "bg-metallic-silver"
-                    }`}
-                >🎸</button>
+                  }`}
+                >
+                  🎤
+                </button>
+
+                {/* *****************🎮***************** */}
+                <button
+                  onClick={() => handleInstrumentToggle("Retro")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${
+                    instrument === "Retro"
+                      ? "bg-metallic-gold"
+                      : instrument !== "Retro" && instrument !== "Synth"
+                      ? "bg-gray-400"
+                      : "bg-metallic-silver"
+                  }`}
+                >
+                  🎮
+                </button>
+
+                {/* *****************🎻*****************  */}
+                <button
+                  onClick={() => handleInstrumentToggle("Violin")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${
+                    instrument === "Violin"
+                      ? "bg-metallic-gold"
+                      : instrument !== "Violin" && instrument !== "Synth"
+                      ? "bg-gray-400"
+                      : "bg-metallic-silver"
+                  }`}
+                >
+                  🎻
+                </button>
+
+                {/* *****************🎸*****************  */}
+                <button
+                  onClick={() => handleInstrumentToggle("Guitar")}
+                  className={`px-1 py-1 rounded-full w-8 h-8 ${
+                    instrument === "Guitar"
+                      ? "bg-metallic-gold"
+                      : instrument !== "Guitar" && instrument !== "Synth"
+                      ? "bg-gray-400"
+                      : "bg-metallic-silver"
+                  }`}
+                >
+                  🎸
+                </button>
                 {/*============================================================
                                     再生ボタン
             =============================================================== */}
@@ -249,7 +258,6 @@ export default function PitchQuizPage() {
                 {/* <circle cx="100" cy="100" r="5" fill="#aaa" />
                 </svg> */}
 
-
                 {/*============================================================
                                     SVG
             =============================================================== */}
@@ -261,7 +269,12 @@ export default function PitchQuizPage() {
                 >
                   {/* ▼ メタリックグラデ定義 */}
                   <defs>
-                    <radialGradient id="metalGradient" cx="50%" cy="50%" r="70%">
+                    <radialGradient
+                      id="metalGradient"
+                      cx="50%"
+                      cy="50%"
+                      r="70%"
+                    >
                       <stop offset="0%" stopColor="#ffffff" />
                       <stop offset="40%" stopColor="#cccccc" />
                       <stop offset="80%" stopColor="#999999" />
@@ -279,18 +292,28 @@ export default function PitchQuizPage() {
                   <circle cx="100" cy="100" r="40" fill="url(#metalGradient)" />
 
                   {/* ▼ ノブの溝装飾 */}
-                  <circle cx="100" cy="100" r="35" fill="none" stroke="#444" strokeWidth="2" />
-                  <circle cx="100" cy="100" r="30" fill="none" stroke="#555" strokeWidth="2" />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="35"
+                    fill="none"
+                    stroke="#444"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="30"
+                    fill="none"
+                    stroke="#555"
+                    strokeWidth="2"
+                  />
 
                   {/* ▼ 中央マーカー */}
                   <circle cx="100" cy="100" r="5" fill="#aaa" />
                 </svg>
-
               </button>
-
             </div>
-
-
 
             {/*============================================================
                                     選択肢ボタン
@@ -302,8 +325,10 @@ export default function PitchQuizPage() {
                   <PitchQuizButton
                     key={option}
                     note={option}
-                    isCorrect={selectedOption === option && correctAnswer === option}
-                    onClick={() => handleAnswer(option)}
+                    // isCorrect={selectedOption === option && correctAnswer === option}
+                    // onClick={() => handleAnswer(option)}
+                    correctNote={correctAnswer} // ✅ これが重要！noteと比較する基準
+                    onClick={() => handleAnswer(option)} // ✅ 正誤判定不要、PitchQuizButtonが自分で判断する
                   />
                 ))}
               </div>
@@ -313,7 +338,8 @@ export default function PitchQuizPage() {
             =============================================================== */}
             <div className="h-[5%] flex justify-center items-center">
               <Link href="/mode-select">
-                <button className="
+                <button
+                  className="
                   relative px-7 py-2 text-xxxs font-semibold
                   text-white bg-gradient-to-r from-gray-500 to-gray-700
                   rounded-full shadow-lg hover:shadow-xl transition-all duration-300
@@ -321,15 +347,15 @@ export default function PitchQuizPage() {
                   hover:scale-105
                   before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity
                   hover:before:opacity-100
-                ">
+                "
+                >
                   モードセレクトに戻る
                 </button>
               </Link>
             </div>
           </motion.main>
-        </AnimatePresence >
-      )
-      }
-    </motion.div >
+        </AnimatePresence>
+      )}
+    </motion.div>
   );
 }
