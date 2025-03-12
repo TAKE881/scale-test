@@ -1,66 +1,68 @@
-// src/tone/synths/VoiceSynth.js
 import * as Tone from "tone";
 
 export class VoiceSynth {
-    constructor() {
-        // メインSynth（Triangle波）
-        this.synth = new Tone.MonoSynth({
-            oscillator: { type: "triangle" },
-            envelope: {
-                attack: 0.5,
-                decay: 0.4,
-                sustain: 0.4,
-                release: 2.5,
-            },
-        });
+  constructor() {
+    this.synth = new Tone.MonoSynth({
+      oscillator: { type: "triangle" },
+      envelope: {
+        attack: 0.3,
+        decay: 0.2,
+        sustain: 0.8,
+        release: 3,
+      },
+      filter: {
+        type: "lowpass",
+        frequency: 1500,
+      },
+    });
 
-        // ✅ サブオシレーター風に重ねる（FatOscillatorで厚み追加）
-        const subSynth = new Tone.FatOscillator({
-            type: "sine",
-            frequency: 0, // main note に追従させる
-            spread: 10,
-            count: 3,
-        }).start();
+    this.formant = new Tone.Filter({
+      type: "bandpass",
+      frequency: 800,
+      Q: 6,
+    });
 
-        // ✅ FormantFilter（母音共鳴）
-        this.formant = new Tone.Filter({
-            type: "bandpass",
-            frequency: 800, // 中域の声のフォルマント（母音“a”〜“e”あたり）
-            Q: 7,
-        });
+    this.vibrato = new Tone.Vibrato({
+      frequency: 5,
+      depth: 0.05,
+    });
 
-        // ✅ Vibrato（揺れ感）
-        this.vibrato = new Tone.Vibrato({
-            frequency: 5,
-            depth: 0.1,
-        }).start();
+    this.eq = new Tone.EQ3({
+      low: -3,
+      mid: 5,
+      high: -1,
+    });
 
-        // ✅ EQ（中音域さらに強調）
-        this.eq = new Tone.EQ3({
-            low: -6,
-            mid: 5,
-            high: -3,
-        });
+    this.reverb = new Tone.Reverb({
+      decay: 3,
+      wet: 0.4,
+    });
 
-        // ✅ Reverb（空間感）
-        this.reverb = new Tone.Reverb({
-            decay: 4,
-            wet: 0.7,
-        });
+    this.outputGain = new Tone.Gain(3); // ✅ 音量ブースト！
 
-        // 🔗 接続（MainSynth → Formant → Vibrato → EQ → Reverb → 出力）
-        this.synth.connect(this.formant);
-        this.formant.connect(this.vibrato);
-        this.vibrato.connect(this.eq);
-        this.eq.connect(this.reverb);
-        this.reverb.toDestination();
+    this.synth.chain(
+      this.formant,
+      this.vibrato,
+      this.eq,
+      this.reverb,
+      this.outputGain,
+      Tone.Destination
+    );
+  }
 
-        // （※サブオシレータは音として重ねる場合、mainSynthにMIXして接続も可）
-        // ⇒ Tone.Mixer使えば調整もできる。今はシンプルにmainのみ出力。
-    }
-
-    async triggerAttackRelease(note, duration) {
-        await Tone.loaded();
-        this.synth.triggerAttackRelease(note, duration);
-    }
+  async triggerAttackRelease(note, duration) {
+    await Tone.loaded();
+    this.synth.triggerAttackRelease(note, duration);
+  }
+  stopNote() {
+    this.synth.triggerRelease();
+  }
+  dispose() {
+    this.synth.dispose();
+    this.formant.dispose();
+    this.vibrato.dispose();
+    this.eq.dispose();
+    this.reverb.dispose();
+    this.outputGain.dispose();
+  }
 }
