@@ -1,12 +1,11 @@
 // app/hooks/pitch/PitchQuizLogic.js
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as Tone from "tone";
 import { useCorrectSound } from "./useCorrectSound";
 // import "@/tone/setupCustomSynths";
 import { customSynthMap } from "@/tone/customSynthMap";
-
 
 export function usePitchQuizLogic(totalQuestions = 4) {
   const { playCorrectSound, playIncorrectSound } = useCorrectSound();
@@ -20,18 +19,73 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [instrument, setInstrument] = useState("Synth");
 
+  // ✅ シンセを保持するuseRef（Synthインスタンスを再利用）
+  const synthRef = useRef(null);
 
-  {/*============================================================
+  // // ✅ 初期化用：楽器のインスタンス作成
+  // useEffect(() => {
+  //   createSynthInstance(); // 初期化
+
+  //   return () => {
+  //     if (typeof synthRef.current?.dispose === "function") {
+  //       synthRef.current.dispose();
+  //     }
+  //   };
+  // }, [instrument]); // 楽器が切り替わったときだけ再作成
+
+  useEffect(() => {
+    createSynthInstance();
+
+    return () => {
+      // ✅ 楽器切り替え時にVoiceSynthを適切に解放
+      if (typeof synthRef.current?.dispose === "function") {
+        synthRef.current.dispose();
+      }
+    };
+  }, [instrument]);
+
+  const createSynthInstance = () => {
+    // ✅ dispose()がある場合のみ破棄（RetroSynthにはない場合もある）
+    // if (synthRef.current?.dispose) {
+    //   synthRef.current.dispose();
+    // }
+    // if (typeof synthRef.current?.dispose === "function") {
+    //   synthRef.current.dispose();
+    // }
+
+    if (synthRef.current?.triggerRelease) {
+      synthRef.current.triggerRelease();
+    }
+    if (typeof synthRef.current?.dispose === "function") {
+      synthRef.current.dispose();
+    }
+
+    const SynthClass = customSynthMap[instrument] || Tone.Synth;
+    const instance = new SynthClass();
+
+    // ✅ synth を明確にここで定義する
+    const synth = instance.synth || instance;
+
+    // ✅ Tone.Synth系のみ toDestination() を実行
+    if (typeof synth.toDestination === "function") {
+      synth.toDestination();
+    }
+
+    // ✅ synthRefに格納
+    synthRef.current = synth;
+  };
+
+  {
+    /*============================================================
                                     出題
-            =============================================================== */}
+            =============================================================== */
+  }
 
   useEffect(() => {
     if (!isQuizFinished) {
       generatePitchTrainingQuestion();
     }
   }, [isQuizFinished]);
-
-
 
   const resetQuiz = () => {
     setIsQuizFinished(false);
@@ -41,9 +95,11 @@ export function usePitchQuizLogic(totalQuestions = 4) {
     setIsAnswered(false);
   };
 
-  {/*============================================================
+  {
+    /*============================================================
                                     再生ボタン
-            =============================================================== */}
+            =============================================================== */
+  }
 
   // 再生ボタンロジック
   useEffect(() => {
@@ -74,32 +130,46 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   //   synth.triggerAttackRelease(pitchQuizNote, "4n");
   // };
 
+  // const playNote = async () => {
+  //   if (!pitchQuizNote) return;
+  //   await Tone.start();
+
+  //   const SynthClass = customSynthMap[instrument] || Tone.Synth;
+  //   const instance = new SynthClass();
+  //   const synth = instance.synth || instance;
+
+  //   console.log(` 再生された音程！！！！！！: ${pitchQuizNote}`);
+  //   console.log(` 再生された楽器！！！！！！: ${instrument}`);
+
+  //   synth.triggerAttackRelease(pitchQuizNote, "4n");
+  // };
+
+  // const playNote = async () => {
+  //   if (!pitchQuizNote || !synthRef.current) return;
+  //   await Tone.start();
+  //   synthRef.current.triggerAttackRelease(pitchQuizNote, "4n");
+  // };
+
   const playNote = async () => {
-    if (!pitchQuizNote) return;
+    if (!pitchQuizNote || !synthRef.current) return;
     await Tone.start();
 
-    const SynthClass = customSynthMap[instrument] || Tone.Synth;
-    const instance = new SynthClass();
-    const synth = instance.synth || instance;
+    // ✅ 以前の音が残らないようにする
+    synthRef.current.triggerRelease?.();
 
-    console.log(` 再生された音程！！！！！！: ${pitchQuizNote}`);
-    console.log(` 再生された楽器！！！！！！: ${instrument}`);
-
-    synth.triggerAttackRelease(pitchQuizNote, "4n");
+    synthRef.current.triggerAttackRelease(pitchQuizNote, "4n");
   };
-
 
   const generatePitchTrainingQuestion = () => {
     const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
     const randomNote = notes[Math.floor(Math.random() * notes.length)];
     setPitchQuizNote(randomNote);
 
-
-
-
-    {/*============================================================
+    {
+      /*============================================================
                                     選択ボタン
-            =============================================================== */}
+            =============================================================== */
+    }
 
     let shuffled = [...notes].sort(() => Math.random() - 0.5).slice(0, 4);
     // ランダムノートの有無により、ランダムノートを選択肢に追加
@@ -124,9 +194,11 @@ export function usePitchQuizLogic(totalQuestions = 4) {
     // どのボタンを選択したか
     setSelectedOption(answer);
 
-    {/*============================================================
+    {
+      /*============================================================
                                     画面効果と制御
-            =============================================================== */}
+            =============================================================== */
+    }
 
     // コレクトサウンドとインコレクトサウンドの設定
     if (answer === pitchQuizNote) {
@@ -135,12 +207,13 @@ export function usePitchQuizLogic(totalQuestions = 4) {
     } else {
       playIncorrectSound();
     }
-    {/*============================================================
+    {
+      /*============================================================
                                     次の問題
-            =============================================================== */}
+            =============================================================== */
+    }
     // 実行を遅らせる関数
     setTimeout(() => {
-
       // 次の問題に進むか、クイズ終了か？
       if (questionNumber + 1 < totalQuestions) {
         setQuestionNumber((prev) => prev + 1);
@@ -154,7 +227,6 @@ export function usePitchQuizLogic(totalQuestions = 4) {
       setIsAnswered(false);
     }, 500);
   };
-
 
   return {
     pitchQuizNote,

@@ -50,7 +50,7 @@ export default function PitchQuizPage() {
                                     タイトル
         =============================================================== */}
       <div className="h-[5%] mb-7 flex items-center justify-center">
-        <h1 className="text-metallic-gold text-white text-xxl pt-4 text-stroke-sm text-stroke-gray-300 font-bold  text-center">
+        <h1 className="text-metallic-gold text-xxl pt-4 text-stroke-sm text-stroke-gray-300 font-bold  text-center">
           Perfect pitch！
         </h1>
       </div>
