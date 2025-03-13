@@ -83,6 +83,27 @@ export default {
         '34': '136px',
         '36': '144px',
         '38': '152px',
+        "50": '200px',
+        "51": '202px',
+        "52": '204px',
+        "53": '206px',
+        "54": '208px',
+        "55": '210px',
+        "56": '212px',
+        "57": '214px',
+        "58": '216px',
+        "59": '218px',
+        "60": '220px',
+        "61": '222px',
+        "62": '224px',
+        "63": '226px',
+        "64": '228px',
+        "65": '230px',
+        "66": '232px',
+        "67": '234px',
+        "68": '236px',
+        "69": '238px',
+        "70": '240px',
       },
       blur: {
         ssm: '2px',       // ← ベース
@@ -101,13 +122,20 @@ export default {
       //////////////////////////////// アニメーション
       animation: {
         wave: "wave 3s infinite ease-in-out",
+        floating: "floating 2.5s ease-in-out infinite",
       },
       keyframes: {
         wave: {
           "0%, 100%": { transform: "scale(1.01)", opacity: "1", transformOrigin: "center" },
           "40%": { transform: "scale(1.02)", opacity: "0.8", transformOrigin: "center" },
         },
+        floating: {
+          "0%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-6px)" },
+          "100%": { transform: "translateY(0px)" },
+        },
       },
+
       // ブレイクポイント
       screens: {
         'xs': '400px', // 小さめスマホ
