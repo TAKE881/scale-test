@@ -123,6 +123,10 @@ export default {
         'metallic-blue': '#2f4550',
         'metallic-silver': '#C0C0C0',
         'metallic-gold': '#D4AF37',
+        'rich-gold': '#FFD700',            // ✨ 明るいリッチゴールド：視認性◎
+        'light-gold': '#FFE066',           // ✨ ライトゴールド：柔らかい黄色
+        'shine-gold': '#FFF3B0',           // ✨ シャインゴールド：白系、透過系UI向き
+        'highlight-gold': '#F5C542',       // ✨ ハイライトメタル：少し落ち着いた明るさ
         'metallic-bronze': '#CD7F32',
         'metallic-green': '#3e5c46',   // ややくすみのある緑
         'metallic-yellow': '#ddd12b',// ややくすみのある黄色(淡い金っぽい)

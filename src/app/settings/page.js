@@ -44,7 +44,7 @@ export default function SettingsPage() {
   // }
 
   return (
-    <main className="text-white flex flex-col items-center justify-center h-screen text-center text-stroke-sm text-stroke-gray-300">
+    <main className="text-gray-600 flex flex-col items-center justify-center h-screen text-center text-stroke-sm text-stroke-white">
       <h1 className="text-2xl mb-10">設定</h1>
 
       {/* ===== サウンド ===== */}
