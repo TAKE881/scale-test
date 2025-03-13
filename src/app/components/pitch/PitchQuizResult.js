@@ -19,13 +19,13 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
                     {((score / totalQuestions) * 100).toFixed()}
                 </h1>
             </div>
-            <h1 className="text-2xl font-bold mb-9 text-center">あなたの音感レベル</h1>
+            <h1 className="text-2xl font-bold mb-9 text-center">あなたのpitchレベル</h1>
             <div className="w-300">
                 <p className="mb-1 text-lg text-left">
-                    正解数: {score} / {totalQuestions}
+                    pitch 正解数: {score} / {totalQuestions}
                 </p>
                 <p className="mb-8 text-lg text-left">
-                    音感レベル: Lv.{((score / totalQuestions) * 100).toFixed()}
+                    pitch レベル: Lv.{((score / totalQuestions) * 100).toFixed()}
                 </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 w-full">
@@ -36,10 +36,10 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
                     再チャレンジ
                 </button>
                 <button
-                    onClick={() => router.push("/")}
+                    onClick={() => router.push("/mode-select")}
                     className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
                 >
-                    トップに戻る
+                    モードセレクトに戻る
                 </button>
             </div>
         </motion.main>
