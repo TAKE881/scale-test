@@ -25,6 +25,7 @@ export default function PitchQuizPage() {
   } = usePitchQuizLogic();
 
   const [clientOptions, setClientOptions] = useState([]);
+  const [isShaking, setIsShaking] = useState(false);
 
   const isOnlyCorrect = false;
 
@@ -37,6 +38,12 @@ export default function PitchQuizPage() {
       }
     }
   }, [options, correctAnswer]);
+
+  const handlePlayClick = () => {
+    setIsShaking(true);
+    setTimeout(() => setIsShaking(false), 400);
+    playNote();
+  };
 
   return (
     <motion.div
@@ -333,17 +340,27 @@ export default function PitchQuizPage() {
                 </svg>
               </button>
               <button
-                className="
+                onClick={handlePlayClick} // ❗ 変更：クリックで震えも実行
+                aria-label="再生"
+                className={`
     absolute
-    top-57
-    px-9 py-9
+    top-65
+    px-8 py-8
+    text-metallic-gold
+            text-xxl
+            pt-4
+            text-stroke-sm
+            text-stroke-white
+            font-bold
     bg-metallic-silver/1
-    rounded-full
-    shadow-lg
-    backdrop-blur-sm
-    animate-floating
+    rounded-ful
     pointer-events-none
-  "
+    animate-floating
+    rounded-full shadow-md overflow-hidden
+    transition-all duration-150 active:scale-95
+     ${isShaking ? "animate-shake" :
+                    ""}
+  `}
               >
                 tap
               </button>
