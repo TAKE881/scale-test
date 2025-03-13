@@ -22,17 +22,6 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   // ✅ シンセを保持するuseRef（Synthインスタンスを再利用）
   const synthRef = useRef(null);
 
-  // // ✅ 初期化用：楽器のインスタンス作成
-  // useEffect(() => {
-  //   createSynthInstance(); // 初期化
-
-  //   return () => {
-  //     if (typeof synthRef.current?.dispose === "function") {
-  //       synthRef.current.dispose();
-  //     }
-  //   };
-  // }, [instrument]); // 楽器が切り替わったときだけ再作成
-
   useEffect(() => {
     createSynthInstance();
 
@@ -45,13 +34,7 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   }, [instrument]);
 
   const createSynthInstance = () => {
-    // ✅ dispose()がある場合のみ破棄（RetroSynthにはない場合もある）
-    // if (synthRef.current?.dispose) {
-    //   synthRef.current.dispose();
-    // }
-    // if (typeof synthRef.current?.dispose === "function") {
-    //   synthRef.current.dispose();
-    // }
+
 
     if (synthRef.current?.triggerRelease) {
       synthRef.current.triggerRelease();
@@ -106,49 +89,12 @@ export function usePitchQuizLogic(totalQuestions = 4) {
     console.log("🎵 pitchQuizNote が更新！！！！！！！:", pitchQuizNote);
   }, [pitchQuizNote]);
 
-  // 再生ボタン機能
-  // const playNote = async () => {
-  //   if (!pitchQuizNote) return;
-  //   console.log("🎵 再生ボタンが押されました！鳴らす音:", pitchQuizNote);
-  //   await Tone.start();
-  //   const synth = new Tone.Synth().toDestination();
-  //   synth.triggerAttackRelease(pitchQuizNote, "4n");
-  // };
-  // const pitchQuizNote = "C4";
-
   const handleInstrumentToggle = (name) => {
     const newInstrument = instrument === name ? "Synth" : name;
     setInstrument(newInstrument);
     console.log(" 選択された楽器！！！！！！:", newInstrument);
     // alert(` 現在の楽器！！！！！！: ${newInstrument}`);
   };
-
-  // const playNote = async () => {
-  //   if (!pitchQuizNote) return;
-  //   await Tone.start();
-  //   const synth = new Tone[instrument]().toDestination();
-  //   synth.triggerAttackRelease(pitchQuizNote, "4n");
-  // };
-
-  // const playNote = async () => {
-  //   if (!pitchQuizNote) return;
-  //   await Tone.start();
-
-  //   const SynthClass = customSynthMap[instrument] || Tone.Synth;
-  //   const instance = new SynthClass();
-  //   const synth = instance.synth || instance;
-
-  //   console.log(` 再生された音程！！！！！！: ${pitchQuizNote}`);
-  //   console.log(` 再生された楽器！！！！！！: ${instrument}`);
-
-  //   synth.triggerAttackRelease(pitchQuizNote, "4n");
-  // };
-
-  // const playNote = async () => {
-  //   if (!pitchQuizNote || !synthRef.current) return;
-  //   await Tone.start();
-  //   synthRef.current.triggerAttackRelease(pitchQuizNote, "4n");
-  // };
 
   const playNote = async () => {
     if (!pitchQuizNote || !synthRef.current) return;

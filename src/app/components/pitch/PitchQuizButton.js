@@ -3,44 +3,12 @@
 import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 import { useState, useEffect } from "react";
 
-// export function PitchQuizButton({ note, isCorrect = null, onClick }) {
+
 export function PitchQuizButton({ note, correctNote, onClick }) {
   const { convertSoundName } = useSoundName();
 
-  // console.log("PitchQuizButton に渡された note:", note);
-
-  // console.log("isCorrect:", isCorrect);
-  // console.log(`🎹 クイズボタン 表示: note=${note}, isCorrect=${isCorrect}`);
-
-  // const [showEffect, setShowEffect] = useState(false);
   const [effectType, setEffectType] = useState(null); // "correct" or "wrong" or null
 
-  // useEffect(() => {
-  //   console.log(" useEffect が実行された: isCorrect =", isCorrect);
-
-  // if (isCorrect) {
-  //   console.log(" エフェクトを表示！");
-  //   setShowEffect(true);
-
-  // if (isCorrect === true) {
-  //   console.log("✅ 正解 → 赤丸エフェクト");
-  //   setEffectType("correct");
-  // } else if (isCorrect === false) {
-  //   console.log("❌ 不正解 → バッテンエフェクト");
-  //   setEffectType("wrong");
-  // } else {
-  //   return; // nullならスルー
-  // }
-
-  // const timeout = setTimeout(() => {
-  //   setShowEffect(false);
-  //   console.log(" エフェクトを消去！");
-  // }, 1000); // 1秒後にエフェクトを消す
-
-  // const timeout = setTimeout(() => {
-  //   setEffectType(null);
-  //   console.log("🎬 エフェクトを消去！");
-  // }, 1000);
 
   const handleClick = () => {
     const isCorrect = note === correctNote;
@@ -59,25 +27,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
     }, 1000);
   };
 
-  //   return () => {
-  //     console.log(" タイマークリア");
-  //     clearTimeout(timeout);
-  //   };
-  // }, [isCorrect]);
-
-  // useEffect(() => {
-  //   console.log(" showEffect の状態:", showEffect);
-  // }, [showEffect]);
-  // useEffect(() => {
-  //   console.log("🎞 showEffectType の状態:", effectType);
-  // }, [effectType]);
-
-  // const handleClick = () => {
-  //   if (onClick) {
-  //     onClick(note);
-  //   }
-  // };
-
   return (
     <>
       {/* ボタン本体 */}
@@ -94,32 +43,7 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
           {convertSoundName(note)}
         </span>
       </div>
-      {/* {showEffect && (
-        <svg
-          className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-1/2 z-50"
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke="red"
-          strokeWidth="8"
-        >
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            stroke="red"
-            strokeWidth="8"
-            fill="none"
-          >
-            <animate
-              attributeName="r"
-              from="0"
-              to="40"
-              dur="0.3s"
-              fill="freeze"
-            />
-          </circle>
-        </svg>
-      )} */}
+
       {/* ✅ 正解エフェクト（赤丸） */}
       {effectType === "correct" && (
         <svg

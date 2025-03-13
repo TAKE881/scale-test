@@ -10,13 +10,6 @@ export const useCorrectSound = () => {
     synth.triggerAttackRelease("F#5", "8n", now + 0.1);
   }, []);
 
-  //   const playIncorrectSound = useCallback(async () => {
-  //     await Tone.start();
-  //     const synth = new Tone.Synth().toDestination();
-  //     const now = Tone.now();
-  //     synth.triggerAttackRelease("C#4", "8n", now);
-  //     synth.triggerAttackRelease("C#4", "8n", now + 0.1);
-  //   }, []);
   const playIncorrectSound = useCallback(async () => {
     await Tone.start();
     const synth = new Tone.Synth({
