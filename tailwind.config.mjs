@@ -123,6 +123,7 @@ export default {
       animation: {
         wave: "wave 3s infinite ease-in-out",
         floating: "floating 2.5s ease-in-out infinite",
+        shake: 'shake 0.4s ease-in-out',
       },
       keyframes: {
         wave: {
@@ -133,6 +134,13 @@ export default {
           "0%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-6px)" },
           "100%": { transform: "translateY(0px)" },
+        },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '20%': { transform: 'translateX(-3px)' },
+          '40%': { transform: 'translateX(3px)' },
+          '60%': { transform: 'translateX(-3px)' },
+          '80%': { transform: 'translateX(3px)' },
         },
       },
 
