@@ -101,13 +101,16 @@ export default function PitchQuizPage() {
                 items-center
                 justify-center
                 text-metallic-gold
-                text-stroke-sm
+                text-stroke-sssssm
                 text-stroke-white
+                text-xs
+                font-bold
+                text-center
               "
             >
               <div>
-                <p className="mb-1 text-xs text-center">スコア: {score}</p>
-                <p className="mb-10 text-xs text-center">
+                <p className=" mb-1">スコア: {score}</p>
+                <p className="mb-10">
                   問題: {questionNumber + 1} / {totalQuestions}
                 </p>
               </div>
