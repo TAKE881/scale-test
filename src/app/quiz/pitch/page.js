@@ -332,6 +332,23 @@ export default function PitchQuizPage() {
                   <circle cx="100" cy="100" r="5" fill="#aaa" />
                 </svg>
               </button>
+              <button
+                className="
+    absolute
+    top-57
+    px-9 py-9
+    bg-metallic-silver/1
+    rounded-full
+    shadow-lg
+    backdrop-blur-sm
+    animate-floating
+    pointer-events-none
+  "
+              >
+                tap
+              </button>
+
+
             </div>
             {/*============================================================
                                     選択肢ボタン
