@@ -115,48 +115,6 @@ export default function PitchQuizPage() {
                 </p>
               </div>
             </div>
-
-            {/*============================================================
-                                    再生ボタン（仮）
-            =============================================================== */}
-            {/* 再生ボタン */}
-            {/* バージョン１ */}
-            {/* <div className="h-[42.5%] flex items-center justify-center">
-              <div className="flex justify-center mb-26">
-                <button
-                  onClick={playNote}
-                  className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
-                  aria-label="再生"
-                >
-                  再生
-                </button>
-              </div>
-            </div> */}
-            {/* バージョン２ */}
-            {/* <div>
-              <div className="flex justify-center mt-4">
-                <button onClick={() => setInstrument("Violin")} className="px-4 py-2 bg-gray-300 rounded">🎻</button>
-              </div>
-              <div className="h-[42.5%] flex items-center justify-center">
-                <div className="flex justify-center mb-26">
-                  <button
-                    onClick={playNote}
-                    className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
-                    aria-label="再生"
-                  >
-                    再生
-                  </button>
-                </div>
-              </div>
-              <div className="flex justify-between px-4">
-                <button onClick={() => handleInstrumentToggle("Voice")} className="px-4 py-2 bg-gray-300 rounded">🎤</button>
-                <button onClick={() => handleInstrumentToggle("Retro")} className="px-4 py-2 bg-gray-300 rounded">🎮</button>
-              </div>
-              <div className="flex justify-center mt-4">
-                <button onClick={() => handleInstrumentToggle("Guitar")} className="px-4 py-2 bg-gray-300 rounded">🎸</button>
-              </div>
-            </div> */}
-
             {/*============================================================
                                     楽器変更ボタン
             =============================================================== */}
@@ -265,7 +223,6 @@ export default function PitchQuizPage() {
                     🎻
                   </span>
                 </button>
-
                 {/* *****************🎸 Guitar ***************** */}
                 <button
                   onClick={() => handleInstrumentToggle("Guitar")}
@@ -297,20 +254,11 @@ export default function PitchQuizPage() {
                     🎸
                   </span>
                 </button>
-
-                {/*============================================================
+              </div>
+              {/*============================================================
                                     再生ボタン
                 =============================================================== */}
-              </div>
 
-              {/* 再生 */}
-              {/* <button
-                onClick={playNote}
-                className="items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-24 h-24 shadow-md transition-colors duration-200"
-                aria-label="再生"
-              >
-                再生
-              </button> */}
               <button
                 onClick={playNote}
                 aria-label="再生"
@@ -329,52 +277,6 @@ export default function PitchQuizPage() {
                   active:scale-95
                 "
               >
-                {/*============================================================
-                                    SVG（仮）
-                =============================================================== */}
-                {/* ▼ SVGを全面に表示 */}
-                {/* <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 200 200"
-                  xmlns="http://www.w3.org/2000/svg"
-                > */}
-                {/* ▼ メタリックグラデ定義 */}
-                {/* <defs>
-                    <radialGradient id="metalGradient" cx="50%" cy="50%" r="70%">
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="40%" stopColor="#cccccc" />
-                      <stop offset="80%" stopColor="#999999" />
-                      <stop offset="100%" stopColor="#666666" />
-                    </radialGradient>
-                  </defs> */}
-
-                {/* ▼ 外周リング */}
-                {/* <circle cx="100" cy="100" r="95" fill="#222" />
-                  <circle cx="100" cy="100" r="80" fill="#333" /> */}
-
-                {/* ▼ 上半分の水色円弧 */}
-                {/* <path
-                    d="M 100,100 L 100,20 A 80,80 0 0 1 180,100 Z"
-                    fill="#4EB1BA"
-                  /> */}
-                {/* ▼ 下半分のピンク円弧 */}
-                {/* <path
-                    d="M 100,100 L 180,100 A 80,80 0 0 1 100,180 A 80,80 0 0 1 20,100 Z"
-                    fill="#EF5777"
-                  /> */}
-
-                {/* ▼ 中央ノブ */}
-                {/* <circle cx="100" cy="100" r="40" fill="url(#metalGradient)" /> */}
-
-                {/* ▼ ノブの溝装飾 */}
-                {/* <circle cx="100" cy="100" r="35" fill="none" stroke="#444" strokeWidth="2" />
-                  <circle cx="100" cy="100" r="30" fill="none" stroke="#555" strokeWidth="2" /> */}
-
-                {/* ▼ 中央マーカー */}
-                {/* <circle cx="100" cy="100" r="5" fill="#aaa" />
-                </svg> */}
-
                 {/*============================================================
                                     SVG
                 =============================================================== */}
@@ -398,13 +300,10 @@ export default function PitchQuizPage() {
                       <stop offset="100%" stopColor="#666666" />
                     </radialGradient>
                   </defs>
-
                   {/* ▼ 外周リング */}
                   <circle cx="100" cy="100" r="88" fill="#222" />
-
                   {/* ▼ 内リング（グレーで統一） */}
                   <circle cx="100" cy="100" r="80" fill="#888888" />
-
                   {/* ▼ 中央ノブ */}
                   <circle
                     cx="100"
@@ -412,7 +311,6 @@ export default function PitchQuizPage() {
                     r="40"
                     fill="url(#metalGradient)"
                   />
-
                   {/* ▼ ノブの溝装飾 */}
                   <circle
                     cx="100"
@@ -430,13 +328,11 @@ export default function PitchQuizPage() {
                     stroke="#555"
                     strokeWidth="2"
                   />
-
                   {/* ▼ 中央マーカー */}
                   <circle cx="100" cy="100" r="5" fill="#aaa" />
                 </svg>
               </button>
             </div>
-
             {/*============================================================
                                     選択肢ボタン
             =============================================================== */}
@@ -463,8 +359,6 @@ export default function PitchQuizPage() {
                   <PitchQuizButton
                     key={option}
                     note={option}
-                    // isCorrect={selectedOption === option && correctAnswer === option}
-                    // onClick={() => handleAnswer(option)}
                     correctNote={correctAnswer} // ✅ これが重要！noteと比較する基準
                     onClick={() => handleAnswer(option)} // ✅ 正誤判定不要、PitchQuizButtonが自分で判断する
                   />
