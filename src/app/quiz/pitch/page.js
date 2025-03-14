@@ -68,7 +68,7 @@ export default function PitchQuizPage() {
             text-center
           "
         >
-          Perfect Pitch！
+          {/* Perfect Pitch！ */}
         </h1>
       </div>
 

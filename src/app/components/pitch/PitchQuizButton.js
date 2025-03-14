@@ -83,7 +83,7 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
       {/*  不正解エフェクト（青） */}
       {effectType === "wrong" && (
         <svg
-          className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-1/2 z-50"
+          className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-[65%] z-50"
           viewBox="0 0 100 100"
           fill="none"
           stroke="blue"
