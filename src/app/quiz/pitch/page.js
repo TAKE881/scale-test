@@ -128,8 +128,7 @@ export default function PitchQuizPage() {
             <div
               className="
                 h-[42.5%]
-                flex
-                flex-col
+                flex flex-col
                 items-center
                 gap-4
               "
@@ -139,11 +138,8 @@ export default function PitchQuizPage() {
                 <button
                   onClick={() => handleInstrumentToggle("Voice")}
                   className={`
-                    px-1
-                    py-1
+                    px-1 py-1 w-8 h-8
                     rounded-full
-                    w-8
-                    h-8
                     ${instrument === "Voice"
                       ? "bg-metallic-gold"
                       : instrument !== "Voice" && instrument !== "Synth"
@@ -171,11 +167,8 @@ export default function PitchQuizPage() {
                 <button
                   onClick={() => handleInstrumentToggle("Retro")}
                   className={`
-                    px-1
-                    py-1
+                    px-1 py-1 w-8 h-8
                     rounded-full
-                    w-8
-                    h-8
                     ${instrument === "Retro"
                       ? "bg-metallic-gold"
                       : instrument !== "Retro" && instrument !== "Synth"
@@ -203,11 +196,8 @@ export default function PitchQuizPage() {
                 <button
                   onClick={() => handleInstrumentToggle("Violin")}
                   className={`
-                    px-1
-                    py-1
+                    px-1 py-1 w-8 h-8
                     rounded-full
-                    w-8
-                    h-8
                     ${instrument === "Violin"
                       ? "bg-metallic-gold"
                       : instrument !== "Violin" && instrument !== "Synth"
@@ -336,31 +326,23 @@ export default function PitchQuizPage() {
                     strokeWidth="2"
                   />
                   {/* ▼ 中央マーカー */}
-                  <circle cx="100" cy="100" r="5" fill="#aaa" />
+                  {/* <circle cx="100" cy="100" r="5" fill="#aaa" /> */}
                 </svg>
               </button>
               <button
-                onClick={handlePlayClick} // ❗ 変更：クリックで震えも実行
+                onClick={handlePlayClick}
                 aria-label="再生"
                 className={`
-    absolute
-    top-65
-    px-8 py-8
-    text-metallic-gold
-            text-xxl
-            pt-4
-            text-stroke-sm
-            text-stroke-white
-            font-bold
-    bg-metallic-silver/1
-    rounded-ful
-    pointer-events-none
-    animate-floating
-    rounded-full shadow-md overflow-hidden
-    transition-all duration-150 active:scale-95
-     ${isShaking ? "animate-shake" :
-                    ""}
-  `}
+                  absolute
+                  top-72
+                  text-metallic-gold
+                  text-xxl
+                  text-stroke-sm
+                  text-stroke-white
+                  font-bold
+                  pointer-events-none
+                  animate-floating
+                  `}
               >
                 tap
               </button>
@@ -393,8 +375,8 @@ export default function PitchQuizPage() {
                   <PitchQuizButton
                     key={option}
                     note={option}
-                    correctNote={correctAnswer} // ✅ これが重要！noteと比較する基準
-                    onClick={() => handleAnswer(option)} // ✅ 正誤判定不要、PitchQuizButtonが自分で判断する
+                    correctNote={correctAnswer} //  これが重要！noteと比較する基準
+                    onClick={() => handleAnswer(option)} //  正誤判定不要、PitchQuizButtonが自分で判断する
                   />
                 ))}
               </div>

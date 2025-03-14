@@ -19,14 +19,14 @@ export function usePitchQuizLogic(totalQuestions = 4) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [instrument, setInstrument] = useState("Synth");
 
-  // ✅ シンセを保持するuseRef（Synthインスタンスを再利用）
+  //  シンセを保持するuseRef（Synthインスタンスを再利用）
   const synthRef = useRef(null);
 
   useEffect(() => {
     createSynthInstance();
 
     return () => {
-      // ✅ 楽器切り替え時にVoiceSynthを適切に解放
+      //  楽器切り替え時にVoiceSynthを適切に解放
       if (typeof synthRef.current?.dispose === "function") {
         synthRef.current.dispose();
       }
@@ -46,15 +46,15 @@ export function usePitchQuizLogic(totalQuestions = 4) {
     const SynthClass = customSynthMap[instrument] || Tone.Synth;
     const instance = new SynthClass();
 
-    // ✅ synth を明確にここで定義する
+    //  synth を明確にここで定義する
     const synth = instance.synth || instance;
 
-    // ✅ Tone.Synth系のみ toDestination() を実行
+    //  Tone.Synth系のみ toDestination() を実行
     if (typeof synth.toDestination === "function") {
       synth.toDestination();
     }
 
-    // ✅ synthRefに格納
+    //  synthRefに格納
     synthRef.current = synth;
   };
 
@@ -84,23 +84,31 @@ export function usePitchQuizLogic(totalQuestions = 4) {
             =============================================================== */
   }
 
-  // 再生ボタンロジック
+  // デバッグ用
   useEffect(() => {
     console.log("🎵 pitchQuizNote が更新！！！！！！！:", pitchQuizNote);
   }, [pitchQuizNote]);
 
+  // 楽器の切り替えロジック
   const handleInstrumentToggle = (name) => {
+
+    // 同じ楽器選択でsynthに戻る
     const newInstrument = instrument === name ? "Synth" : name;
+
+    // 状態を更新(楽器が切り替わる)
     setInstrument(newInstrument);
+
+    // デバッグ用
     console.log(" 選択された楽器！！！！！！:", newInstrument);
-    // alert(` 現在の楽器！！！！！！: ${newInstrument}`);
   };
+
 
   const playNote = async () => {
     if (!pitchQuizNote || !synthRef.current) return;
+    // 音を出す許可
     await Tone.start();
 
-    // ✅ 以前の音が残らないようにする
+    //  以前の音が残らないようにする
     synthRef.current.triggerRelease?.();
 
     synthRef.current.triggerAttackRelease(pitchQuizNote, "4n");

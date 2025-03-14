@@ -9,7 +9,7 @@ export const useSoundName = () => {
         "B4": "シ",
     };
 
-    // ✅ 変換関数を提供
+    //  変換関数を提供
     const convertSoundName = (note) => noteMapping[note] || note;
 
     return { convertSoundName };

@@ -38,7 +38,7 @@ export class VoiceSynth {
       wet: 0.4,
     });
 
-    this.outputGain = new Tone.Gain(3); // ✅ 音量ブースト！
+    this.outputGain = new Tone.Gain(3); //  音量ブースト！
 
     this.synth.chain(
       this.formant,

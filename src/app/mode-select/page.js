@@ -9,11 +9,9 @@ export default function ModeSelect() {
       }
     >
       <main className="flex flex-col items-center justify-center h-screen text-center">
-        {/* <h1 className="text-3xl font-bold text-white mb-4">SE音程王</h1> */}
+
         <p className="mb-7 text-xl text-gray-600 font-bold text-stroke-sm text-stroke-white">モードセレクト</p>
-        {/* <div>
-          <Image src="/AIboo2-removebg.png" alt="ブーブークッションに乗ったブタ" width={150} height={0} />
-        </div> */}
+
 
         <div className="flex flex-col gap-4">
           {/* 1. ピッチクイズへ遷移 */}
@@ -35,7 +33,6 @@ export default function ModeSelect() {
           </Link>
 
           {/* 2. スケールクイズへ遷移 */}
-          {/* <Link href="/qui/scales"> */}
           <Link href="/test">
             <button
               className="

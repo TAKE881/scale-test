@@ -9,19 +9,18 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
 
   const [effectType, setEffectType] = useState(null); // "correct" or "wrong" or null
 
-
   const handleClick = () => {
     const isCorrect = note === correctNote;
 
-    // ✅ 即時エフェクト表示
+    //  即時エフェクト表示
     setEffectType(isCorrect ? "correct" : "wrong");
 
-    // ✅ 親に通知（必要なら）
+    //  親に通知（必要なら）
     if (onClick) {
       onClick(note, isCorrect);
     }
 
-    // ✅ 一定時間後にエフェクト消去
+    //  一定時間後にエフェクト消去
     setTimeout(() => {
       setEffectType(null);
     }, 1000);
@@ -29,7 +28,10 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
 
   return (
     <>
-      {/* ボタン本体 */}
+      {/*============================================================
+                                    クイズボタン
+            =============================================================== */}
+
       <div
         className="
           w-14 h-28 bg-gradient-to-b mb-1 from-white to-gray-300 text-black
@@ -43,8 +45,10 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
           {convertSoundName(note)}
         </span>
       </div>
-
-      {/* ✅ 正解エフェクト（赤丸） */}
+      {/*============================================================
+                                    正解・不正解エフェクト
+            =============================================================== */}
+      {/*  正解エフェクト（赤丸） */}
       {effectType === "correct" && (
         <svg
           className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-1/2 z-50"
@@ -72,7 +76,7 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
         </svg>
       )}
 
-      {/* ❌ 不正解エフェクト（青） */}
+      {/*  不正解エフェクト（青） */}
       {effectType === "wrong" && (
         <svg
           className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-1/2 z-50"
@@ -114,6 +118,9 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
             />
           </line>
         </svg>
+        // ============================================================
+
+        // ===============================================================
       )}
     </>
   );

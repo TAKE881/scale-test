@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
                                     アイコン
         =============================================================== */}
       <head>
-        {/* ✅ ① favicon明示 */}
+        {/*  ① favicon明示 */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link
@@ -44,11 +44,11 @@ export default function RootLayout({ children }) {
           sizes="180x180"
         />
 
-        {/* ✅ ③ PWA対応 */}
+        {/*  ③ PWA対応 */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
 
-        {/* ✅ ② SNS / OGP対応 */}
+        {/*  ② SNS / OGP対応 */}
         <meta property="og:title" content="Perfect Pitch App" />
         <meta property="og:description" content="音感を鍛えるクイズアプリ！" />
         <meta property="og:image" content="/og-image.png" />
