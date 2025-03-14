@@ -10,7 +10,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-[url('/image-bg-piano/imagepiano.webp')] bg-cover bg-center bg-no-repeat animate-wave z-0"></div>
 
           {/* ぼかし・透過レイヤー（背景だけをぼかす） */}
-          <div className="absolute inset-0 backdrop-blur-ssm bg-white/10 z-10"></div>
+          <div className="absolute inset-0 backdrop-blur-ssm bg-black/10 z-10"></div>
 
           {/* メインコンテンツ（前面・文字はぼけない） */}
           <main className="relative z-20 flex flex-col items-center justify-center h-screen text-center">

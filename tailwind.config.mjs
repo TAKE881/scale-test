@@ -28,7 +28,12 @@ export default {
                               カスタム設定
       =============================================================== */
 
-
+      backgroundImage: {
+        'music-paper': "linear-gradient(to bottom, #fefcf3, #f5f1e8), url('/images/noise.png')",
+      },
+      backgroundBlendMode: {
+        overlay: 'overlay',
+      },
       /////////////////////////////////// 高さ
       textShadow: {
         sm: '1px 1px 2px rgba(0, 0, 0, 0.5)',
@@ -36,6 +41,7 @@ export default {
         lg: '3px 3px 6px rgba(0, 0, 0, 0.6)',
         white: '1px 1px 2px rgba(255, 255, 255, 0.8)',
       },
+
       height: {
         '12': '48px',
         '14': '56px',
@@ -197,6 +203,8 @@ export default {
         'metallic-gray-medium': '#838383',
         'metallic-gray-light': '#a0a0a0',
         'metallic-gray-soft': '#c9c9c9',
+
+        ivory: '#fefcf3', // ← ✅ 追加済み（アイボリー）
 
 
         sepia: '#704214', // セピア色

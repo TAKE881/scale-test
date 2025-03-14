@@ -16,11 +16,12 @@ export default function SettingsPage() {
   }
 
   return (
-    <main className="text-gray-600 flex flex-col items-center justify-center h-screen text-center text-stroke-sm text-stroke-white">
+    <main className="text-gray-600 flex flex-col items-center
+    justify-center h-screen text-center text-stroke-sm text-stroke-white">
       <h1 className="text-2xl mb-10">設定</h1>
 
       <div>
-        <SettingToneSlider />
+        {/* <SettingToneSlider /> */}
       </div>
       {/* ===== スケール ===== */}
       <div className="mb-8">

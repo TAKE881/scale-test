@@ -7,7 +7,7 @@ import { useCorrectSound } from "./useCorrectSound";
 // import "@/tone/setupCustomSynths";
 import { customSynthMap } from "@/tone/customSynthMap";
 
-export function usePitchQuizLogic(totalQuestions = 4) {
+export function usePitchQuizLogic(totalQuestions = 1) {
   const { playCorrectSound, playIncorrectSound } = useCorrectSound();
 
   const [pitchQuizNote, setPitchQuizNote] = useState(null);

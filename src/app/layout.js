@@ -73,10 +73,10 @@ export default function RootLayout({ children }) {
         <div className="
           relative w-screen min-h-screen">
           <div className="
-          absolute inset-0 bg-[url('/image-bg-piano/imagepiano.webp')] bg-cover bg-center bg-no-repeat z-0">
+          absolute inset-0 bg-[url('/image-bg-piano/imagepiano.webp')] bg-cover bg-center bg-no-repeat backdrop-blur z-0">
           </div>
           <div className="
-          absolute inset-0 backdrop-blur-sm bg-white/20 border border-white/40 rounded-xl shadow-lg z-10">
+          absolute inset-0 backdrop-blur-sm bg-black/50 border border-white/40 rounded-xl shadow-lg z-10">
           </div>
           <div className="
           relative z-10">

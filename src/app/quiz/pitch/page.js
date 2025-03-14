@@ -7,6 +7,7 @@ import Link from "next/link";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 
+
 export default function PitchQuizPage() {
   const {
     score,
@@ -71,7 +72,9 @@ export default function PitchQuizPage() {
           {/* Perfect Pitch！ */}
         </h1>
       </div>
-
+      {/*============================================================
+                                    リザルト
+        =============================================================== */}
       {isQuizFinished ? (
         <PitchQuizResult
           score={score}
@@ -79,9 +82,9 @@ export default function PitchQuizPage() {
           resetQuiz={resetQuiz}
         />
       ) : (
-        /* =================
-         *  問題画面
-         * ================= */
+        /* ============================================================
+         *                          問題画面
+         * ============================================================ */
         <AnimatePresence mode="wait">
           <motion.main
             key={questionNumber}
