@@ -60,7 +60,7 @@ export default function PitchQuizPage() {
         <h1
           className="
             text-metallic-gold
-            text-xxl
+            text-xxxl
             pt-4
             text-stroke-sm
             text-stroke-white
@@ -68,7 +68,7 @@ export default function PitchQuizPage() {
             text-center
           "
         >
-          Perfect pitch！
+          Perfect Pitch！
         </h1>
       </div>
 
@@ -90,8 +90,7 @@ export default function PitchQuizPage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9 }}
             className="
-              flex
-              flex-col
+              flex flex-col
               items-center
               justify-center
               p-4
@@ -110,7 +109,7 @@ export default function PitchQuizPage() {
                 text-metallic-gold
                 text-stroke-sssssm
                 text-stroke-white
-                text-xs
+                text-md
                 font-bold
                 text-center
               "
@@ -298,7 +297,7 @@ export default function PitchQuizPage() {
                     </radialGradient>
                   </defs>
                   {/* ▼ 外周リング */}
-                  <circle cx="100" cy="100" r="88" fill="#222" />
+                  <circle cx="100" cy="100" r="88" fill="#3a3a3a" />
                   {/* ▼ 内リング（グレーで統一） */}
                   <circle cx="100" cy="100" r="80" fill="#888888" />
                   {/* ▼ 中央ノブ */}
@@ -336,7 +335,7 @@ export default function PitchQuizPage() {
                   absolute
                   top-72
                   text-metallic-gold
-                  text-xxl
+                  text-xxxl
                   text-stroke-sm
                   text-stroke-white
                   font-bold
@@ -375,7 +374,7 @@ export default function PitchQuizPage() {
                   <PitchQuizButton
                     key={option}
                     note={option}
-                    correctNote={correctAnswer} //  これが重要！noteと比較する基準
+                    correctNote={correctAnswer} //  noteと比較する基準
                     onClick={() => handleAnswer(option)} //  正誤判定不要、PitchQuizButtonが自分で判断する
                   />
                 ))}
@@ -397,24 +396,19 @@ export default function PitchQuizPage() {
                 <button
                   className="
                     relative
-                    px-7
-                    py-2
-                    text-xxxs
-                    font-semibold
-                    text-white
+                    px-7 py-2
+                    text-xxxs font-semibold text-white
                     bg-gradient-to-r
-                    from-gray-500
-                    to-gray-700
+                    from-gray-500 to-gray-700
                     rounded-full
                     shadow-lg
                     hover:shadow-xl
                     transition-all
                     duration-300
-                    border
-                    border-white
-                    border-opacity-30
+                    border border-white border-opacity-30
                     hover:border-opacity-60
                     hover:scale-105
+
                     before:absolute
                     before:inset-0
                     before:bg-white/10

@@ -30,6 +30,12 @@ export default {
 
 
       /////////////////////////////////// 高さ
+      textShadow: {
+        sm: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        DEFAULT: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        lg: '3px 3px 6px rgba(0, 0, 0, 0.6)',
+        white: '1px 1px 2px rgba(255, 255, 255, 0.8)',
+      },
       height: {
         '12': '48px',
         '14': '56px',
@@ -169,8 +175,30 @@ export default {
         'shine-gold': '#FFF3B0',           // ✨ シャインゴールド：白系、透過系UI向き
         'highlight-gold': '#F5C542',       // ✨ ハイライトメタル：少し落ち着いた明るさ
         'metallic-bronze': '#CD7F32',
-        'metallic-green': '#3e5c46',   // ややくすみのある緑
         'metallic-yellow': '#ddd12b',// ややくすみのある黄色(淡い金っぽい)
+
+        // Metallic Green系（ナチュラルで程よくツヤのあるグリーン）
+        'metallic-green-dark': '#3f7e5d',         // 深みと彩度UP
+        'metallic-green': '#569b75',              // バランスの取れた緑
+        'metallic-green-medium': '#6fb88e',       // 明るさ＋ツヤ感UP
+        'metallic-green-light': '#87cfa5',        // 爽やかさプラス
+        'metallic-green-soft': '#a7e1c0',         // 柔らかくナチュラル
+
+        // Metallic Red系（深みの中に艶を感じるレッド）
+        'metallic-red-dark': '#993d3d',
+        'metallic-red': '#b45757',
+        'metallic-red-medium': '#cd6e6e',
+        'metallic-red-light': '#e38585',
+        'metallic-red-soft': '#f0adad',
+
+        // Metallic Gray系（少しブルーを含んだ洗練グレー）
+        'metallic-gray-dark': '#4a4a4a',
+        'metallic-gray': '#666666',
+        'metallic-gray-medium': '#838383',
+        'metallic-gray-light': '#a0a0a0',
+        'metallic-gray-soft': '#c9c9c9',
+
+
         sepia: '#704214', // セピア色
       },
       fontFamily: {
@@ -209,6 +237,7 @@ export default {
     },
   },
   plugins: [
+    require('tailwindcss-textshadow'), // このpluginが必要です！
     function ({ addUtilities }) {
       addUtilities({
         ".text-stroke-1": {

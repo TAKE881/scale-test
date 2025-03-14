@@ -29,19 +29,23 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
   return (
     <>
       {/*============================================================
-                                    クイズボタン
+                                    クイズ選択肢
             =============================================================== */}
 
       <div
         className="
           w-14 h-28 bg-gradient-to-b mb-1 from-white to-gray-300 text-black
-          border border-black rounded-md shadow-lg transition-transform
+          border border-metallic-gray-light rounded-md shadow-lg transition-transform
           ease-in-out duration-200 transform active:translate-y-1 cursor-pointer
           flex relative overflow-hidden items-center justify-center
         "
         onClick={handleClick}
       >
-        <span className="text-lg text-center text-black mb-1 z-10">
+        {/*============================================================
+                                    テキストシャドウとテキストストロークが入らない
+            =============================================================== */}
+
+        <span className="text-xl text-shadow text-center text-metallic-gray-dark text-stroke-sm text-stroke-gray mb-1 z-10">
           {convertSoundName(note)}
         </span>
       </div>
