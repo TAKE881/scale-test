@@ -39,14 +39,29 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
     }),
   };
 
+  // 色を決める関数を追加
+  const getScoreColor = (scorePercentage) => {
+    if (scorePercentage < 20) return "text-red-500";
+    if (scorePercentage < 40) return "text-red-500";
+    if (scorePercentage < 60) return "text-metallic-bronze";
+    if (scorePercentage < 80) return "text-metallic-silver";
+    return "text-metallic-gold"; // 80〜100
+  };
+
+  const scorePercentage = ((score / totalQuestions) * 100).toFixed();
+
   const pages = [
     {
-      title: "PitchQuizResult",
+      title: "結果",
       content: (
         <>
           <div>
-            <h1 className={`${waterBrush.className} text-9xl`}>
-              {((score / totalQuestions) * 100).toFixed()}
+            <h1
+              className={`${waterBrush.className} text-9xl ${getScoreColor(
+                scorePercentage
+              )}`}
+            >
+              {scorePercentage}
             </h1>
           </div>
           <div>
@@ -54,22 +69,27 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
               あなたのpitchレベル
             </h1>
           </div>
-          <div className="w-300">
-            <p className="mb-1 text-lg text-left">
-              pitch 正解数: {score} / {totalQuestions}
-            </p>
-            <p className="mb-8 text-lg text-left">
-              pitch レベル: Lv.{((score / totalQuestions) * 100).toFixed()}
-            </p>
+          <div
+            className=" text-xl text-left w-[60vw] mx-auto
+"
+          >
+            <div className="">
+              <p className="mb-1">
+                正解数: {score} / {totalQuestions}
+              </p>
+              <p className="mb-8">
+                pitch レベル: {((score / totalQuestions) * 100).toFixed()}
+              </p>
+            </div>
           </div>
         </>
       ),
     },
     {
-      title: "PitchQuizDetail",
+      title: "結果一覧",
       content: (
         <>
-          <h2 className="text-xl font-bold mb-2">詳細な結果</h2>
+          <h2 className="text-2xl font-bold mb-2">問題の答えとあなたの回答</h2>
           <ul className="list-disc list-inside text-left text-md">
             <li>問題別の結果を表示したり</li>
             <li>間違った音の確認</li>
@@ -81,27 +101,31 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
     {
       title: "操作メニュー",
       content: (
-        <div className="flex flex-col sm:flex-row gap-4 w-full mt-8">
-          <button
-            onClick={resetQuiz}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
-          >
-            再チャレンジ
-          </button>
-          <button
-            onClick={() => router.push("/mode-select")}
-            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto"
-          >
-            モードセレクトに戻る
-          </button>
+        <div className="min-h-screen flex justify-center items-center">
+          <div className="transform -translate-y-50 flex flex-col sm:flex-row gap-6">
+            <button
+              onClick={resetQuiz}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto text-center"
+            >
+              再チャレンジ
+            </button>
+            <button
+              onClick={() => router.push("/mode-select")}
+              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto text-center"
+            >
+              モードセレクトに戻る
+            </button>
+          </div>
         </div>
       ),
     },
   ];
 
   return (
+    // <div className="bg[url('/image-bg-Result/bggakki.webp')] bg-cover-center bg-no-repeat">
+    //   <div className="relative inset-0  bg-cover bg-center bg-no-repeat  opacity-30 z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
     <div className="bg[url('/image-bg-Result/bggakki.webp')] bg-cover-center bg-no-repeat">
-      <div className="relative inset-0  bg-cover bg-center bg-no-repeat  opacity-30 z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
+      <div className="relative inset-0  bg-cover bg-center bg-no-repeat z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
             key={pageIndex}
@@ -110,10 +134,10 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             className="absolute top-0 left-0 w-full"
           >
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-4xl font-bold mb-4 text-deep-sapphire">
               {pages[pageIndex].title}
             </h2>
             {pages[pageIndex].content}
@@ -125,14 +149,14 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
           <button
             onClick={handlePrev}
             disabled={pageIndex === 0}
-            className="text-2xl text-gray-600 hover:text-black disabled:opacity-30"
+            className="text-7xl text-gray-600 hover:text-black disabled:opacity-30"
           >
             ←
           </button>
           <button
             onClick={handleNext}
             disabled={pageIndex === pages.length - 1}
-            className="text-2xl text-gray-600 hover:text-black disabled:opacity-30"
+            className="text-7xl text-gray-600 hover:text-black disabled:opacity-30"
           >
             →
           </button>

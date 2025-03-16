@@ -75,11 +75,17 @@ export default function PitchQuizPage() {
                                     リザルト
         =============================================================== */}
       {isQuizFinished ? (
-        <PitchQuizResult
-          score={score}
-          totalQuestions={totalQuestions}
-          resetQuiz={resetQuiz}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 2.0, ease: "easeOut", delay: 0.9 }}
+        >
+          <PitchQuizResult
+            score={score}
+            totalQuestions={totalQuestions}
+            resetQuiz={resetQuiz}
+          />
+        </motion.div>
       ) : (
         /* ============================================================
          *                          問題画面

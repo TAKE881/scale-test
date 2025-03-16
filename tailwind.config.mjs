@@ -72,6 +72,11 @@ export default {
         xxxs: "8px",
         xxl: "22px",
         xxxl: "26px",
+        "3xl": "30px",
+        "4xl": "36px",
+        "5xl": "48px",
+        "6xl": "60px",
+        "7xl": "72px",
       },
       //////////////////////////////// 角丸
       borderRadius: {
