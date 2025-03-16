@@ -7,7 +7,6 @@ import Link from "next/link";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 
-
 export default function PitchQuizPage() {
   const {
     score,
@@ -60,7 +59,7 @@ export default function PitchQuizPage() {
       <div className="h-[5%] mb-7 flex items-center justify-center">
         <h1
           className="
-            text-metallic-gold
+            text-royal-blue
             text-xxxl
             pt-4
             text-stroke-sm
@@ -109,10 +108,10 @@ export default function PitchQuizPage() {
                 flex
                 items-center
                 justify-center
-                text-metallic-gold
-                text-stroke-sssssm
-                text-stroke-white
-                text-md
+                text-royal-blue
+                text-stroke-ssssm
+                text-stroke-gray-500
+                text-xl
                 font-bold
                 text-center
               "
@@ -142,9 +141,12 @@ export default function PitchQuizPage() {
                   className={`
                     px-1 py-1 w-8 h-8
                     rounded-full
-                    ${instrument === "Voice"
-                      ? "bg-metallic-gold"
-                      : instrument !== "Voice" && instrument !== "Synth"
+                    border
+                    border-metallic-silver
+                    ${
+                      instrument === "Voice"
+                        ? "bg-royal-blue"
+                        : instrument !== "Voice" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -152,9 +154,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Voice" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Voice" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -171,9 +174,12 @@ export default function PitchQuizPage() {
                   className={`
                     px-1 py-1 w-8 h-8
                     rounded-full
-                    ${instrument === "Retro"
-                      ? "bg-metallic-gold"
-                      : instrument !== "Retro" && instrument !== "Synth"
+                    border
+                    border-metallic-silver
+                    ${
+                      instrument === "Retro"
+                        ? "bg-royal-blue"
+                        : instrument !== "Retro" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -181,9 +187,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Retro" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Retro" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -200,9 +207,12 @@ export default function PitchQuizPage() {
                   className={`
                     px-1 py-1 w-8 h-8
                     rounded-full
-                    ${instrument === "Violin"
-                      ? "bg-metallic-gold"
-                      : instrument !== "Violin" && instrument !== "Synth"
+                    border
+                    border-metallic-silver
+                    ${
+                      instrument === "Violin"
+                        ? "bg-royal-blue"
+                        : instrument !== "Violin" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -210,9 +220,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Violin" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Violin" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -231,9 +242,12 @@ export default function PitchQuizPage() {
                     rounded-full
                     w-8
                     h-8
-                    ${instrument === "Guitar"
-                      ? "bg-metallic-gold"
-                      : instrument !== "Guitar" && instrument !== "Synth"
+                    border
+                    border-metallic-silver
+                    ${
+                      instrument === "Guitar"
+                        ? "bg-royal-blue"
+                        : instrument !== "Guitar" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -241,9 +255,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Guitar" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Guitar" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -280,56 +295,199 @@ export default function PitchQuizPage() {
                                     SVG
                 =============================================================== */}
                 <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 200 200"
+                  width="400"
+                  height="400"
+                  viewBox="0 0 400 400"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  {/* ▼ メタリックグラデ定義 */}
+                  {/* グラデーション定義 */}
                   <defs>
+                    {/* 外円のグラデーション */}
                     <radialGradient
-                      id="metalGradient"
+                      id="outerGradient"
                       cx="50%"
                       cy="50%"
-                      r="70%"
+                      r="60%"
                     >
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="40%" stopColor="#cccccc" />
-                      <stop offset="80%" stopColor="#999999" />
-                      <stop offset="100%" stopColor="#666666" />
+                      <stop offset="0%" stopColor="#1e3a8a" />
+                      <stop offset="50%" stopColor="#2563eb" />
+                      <stop offset="100%" stopColor="#0f172a" />
                     </radialGradient>
+
+                    <radialGradient
+                      id="outerHighlight"
+                      cx="50%"
+                      cy="20%"
+                      r="30%"
+                    >
+                      <stop offset="0%" stopColor="white" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="transparent" />
+                    </radialGradient>
+
+                    {/* 中央シルバーグラデーション */}
+                    <radialGradient id="silverGloss" cx="50%" cy="40%" r="50%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="30%" stopColor="#e5e7eb" />
+                      <stop offset="60%" stopColor="#9ca3af" />
+                      <stop offset="80%" stopColor="#6b7280" />
+                      <stop offset="100%" stopColor="#4b5563" />
+                    </radialGradient>
+
+                    {/* シルバー縁のグラデーション */}
+                    <linearGradient
+                      id="silverEdge"
+                      x1="0%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />{" "}
+                      {/* 上部ハイライト */}
+                      <stop
+                        offset="30%"
+                        stopColor="#aaaaaa"
+                        stopOpacity="0.8"
+                      />
+                      <stop offset="100%" stopColor="#555555" stopOpacity="1" />{" "}
+                      {/* 下部シャドウ感 */}
+                    </linearGradient>
+
+                    <radialGradient id="glowLight" cx="50%" cy="50%" r="100%">
+                      <stop offset="0%" stopColor="#cceeff" />
+                      <stop offset="100%" stopColor="transparent" />
+                    </radialGradient>
+                    {/* シャドウ・立体感 */}
+                    <filter
+                      id="buttonShadow"
+                      x="-20%"
+                      y="-20%"
+                      width="140%"
+                      height="140%"
+                    >
+                      <feDropShadow
+                        dx="0"
+                        dy="2"
+                        stdDeviation="3"
+                        floodColor="rgba(0,0,0,0.4)"
+                      />
+                      <feDropShadow
+                        dx="0"
+                        dy="-2"
+                        stdDeviation="4"
+                        floodColor="rgba(255,255,255,0.3)"
+                      />
+                    </filter>
+
+                    <radialGradient
+                      id="silverHighlight"
+                      cx="50%"
+                      cy="30%"
+                      r="30%"
+                    >
+                      <stop offset="0%" stopColor="white" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="white" stopOpacity="0" />
+                    </radialGradient>
+                    <filter
+                      id="metalShadow"
+                      x="-20%"
+                      y="-20%"
+                      width="140%"
+                      height="140%"
+                    >
+                      <feDropShadow
+                        dx="0"
+                        dy="4"
+                        stdDeviation="4"
+                        floodColor="#000000"
+                        floodOpacity="0.3"
+                      />
+                    </filter>
                   </defs>
-                  {/* ▼ 外周リング */}
-                  <circle cx="100" cy="100" r="88" fill="#3a3a3a" />
-                  {/* ▼ 内リング（グレーで統一） */}
-                  <circle cx="100" cy="100" r="80" fill="#888888" />
-                  {/* ▼ 中央ノブ */}
+
+                  {/* 外円（背景） */}
                   <circle
-                    cx="100"
-                    cy="100"
-                    r="40"
-                    fill="url(#metalGradient)"
+                    cx="200"
+                    cy="200"
+                    r="180"
+                    fill="url(#outerGradient)"
+                    stroke="url(#borderGradient)"
+                    strokeWidth="8"
                   />
-                  {/* ▼ ノブの溝装飾 */}
+                  {/* 下部の光の演出（オプション） */}
+                  <ellipse
+                    cx="200"
+                    cy="310"
+                    rx="100"
+                    ry="30"
+                    fill="url(#glowLight)"
+                    opacity="0.3"
+                  />
+
+                  {/* クロスヘア線 */}
+                  <line
+                    x1="200"
+                    y1="20"
+                    x2="200"
+                    y2="380"
+                    stroke="white"
+                    strokeWidth="1"
+                  />
+                  <line
+                    x1="20"
+                    y1="200"
+                    x2="380"
+                    y2="200"
+                    stroke="white"
+                    strokeWidth="1"
+                  />
                   <circle
-                    cx="100"
-                    cy="100"
-                    r="35"
+                    cx="200"
+                    cy="200"
+                    r="150"
                     fill="none"
-                    stroke="#444"
-                    strokeWidth="2"
+                    stroke="white"
+                    strokeWidth="1"
                   />
+
+                  {/* 中央の縁（光沢リング） */}
                   <circle
-                    cx="100"
-                    cy="100"
-                    r="30"
-                    fill="none"
-                    stroke="#555"
-                    strokeWidth="2"
+                    cx="200"
+                    cy="200"
+                    r="96"
+                    fill="url(#outerHighlight)"
+                    stroke="url(#borderGradient)"
+                    strokeWidth="9"
                   />
-                  {/* ▼ 中央マーカー */}
-                  {/* <circle cx="100" cy="100" r="5" fill="#aaa" /> */}
+
+                  {/* 中央 */}
+                  <circle
+                    cx="200"
+                    cy="200"
+                    r="90"
+                    fill="url(#silverGloss)"
+                    stroke="none"
+                  />
+
+                  {/* 音符アイコン（少し小さめ・中央） */}
+                  <g transform="translate(200, 200) scale(0.008, -0.008) translate(-4800, -6400)">
+                    <path
+                      d="M6060 11646 l-3125 -632 -3 -4047 c-1 -2226 -4 -4047 -7 -4047 -3 0
+                        -29 20 -59 44 -141 114 -382 176 -689 176 -394 0 -806 -184 -1200 -534 -307
+                        -273 -516 -606 -594 -947 -26 -113 -23 -368 5 -472 91 -334 353 -574 707 -648
+                        104 -22 308 -26 425 -9 531 80 1068 424 1375 885 114 170 193 351 242 555 17
+                        71 18 266 20 4085 l3 4011 2913 587 c1601 324 2915 588 2920 587 4 0 7 -1598
+                        7 -3551 l0 -3550 -42 34 c-162 131 -372 189 -698 190 -144 0 -192 -3 -273 -21
+                        -485 -107 -998 -471 -1302 -923 -71 -105 -155 -277 -194 -394 -86 -261 -79
+                        -546 18 -760 119 -262 391 -459 704 -510 401 -65 955 117 1343 440 342 285
+                        547 596 642 975 l27 105 2 4503 3 4502 -22 -1 c-13 0 -1429 -285 -3148 -633z"
+                      fill="black"
+                    />
+                  </g>
                 </svg>
+
+                {/*============================================================
+                                    SVG(END)
+                =============================================================== */}
               </button>
               <button
                 onClick={handlePlayClick}
@@ -344,12 +502,11 @@ export default function PitchQuizPage() {
                   font-bold
                   pointer-events-none
                   animate-floating
+                  opacity-70
                   `}
               >
                 tap
               </button>
-
-
             </div>
             {/*============================================================
                                     選択肢ボタン
@@ -367,7 +524,7 @@ export default function PitchQuizPage() {
               <div
                 className="
                   flex
-                  gap-8
+                  gap-2
                   w-full
                   max-w-md
                   justify-center

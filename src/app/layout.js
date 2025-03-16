@@ -2,31 +2,32 @@ import { Reggae_One } from "next/font/google";
 import { Water_Brush } from "next/font/google"; //Water_Brushフォント//
 import "./globals.css";
 
-
-{/*============================================================
+{
+  /*============================================================
                               RaggaeOneフォント使用
-        =============================================================== */}
+        =============================================================== */
+}
 
 const ReggaeOne = Reggae_One({
   weight: "400",
   subsets: ["latin"],
 });
-{/*============================================================
+{
+  /*============================================================
                               waterBrushフォント使用
-        =============================================================== */}
+        =============================================================== */
+}
 
 export const waterBrush = Water_Brush({
   subsets: ["latin"],
   weight: "400",
 });
 
-
-
-
-{/*============================================================
+{
+  /*============================================================
                               全ページの背景設定
-        =============================================================== */}
-
+        =============================================================== */
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -66,21 +67,27 @@ export default function RootLayout({ children }) {
                                     フォント
         =============================================================== */}
       <body className={ReggaeOne.className}>
-
         {/*============================================================
                                     背景
         =============================================================== */}
-        <div className="
-          relative w-screen min-h-screen">
-          <div className="
-          absolute inset-0 bg-[url('/image-bg-piano/imagepiano.webp')] bg-cover bg-center bg-no-repeat backdrop-blur z-0">
+        <div
+          className="
+          relative w-screen min-h-screen"
+        >
+          <div
+            className="
+          absolute inset-0 bg-[url('/image-button/bgsilver.webp')] bg-cover bg-center bg-no-repeat backdrop-blur z-0"
+          ></div>
+          <div
+            className="
+          absolute inset-0 backdrop-blur-sm bg-black/10 border border-white/40 rounded-xl shadow-lg z-10"
+          ></div>
+          <div
+            className="
+          relative z-10"
+          >
+            {children}
           </div>
-          <div className="
-          absolute inset-0 backdrop-blur-sm bg-black/50 border border-white/40 rounded-xl shadow-lg z-10">
-          </div>
-          <div className="
-          relative z-10">
-            {children}</div>
         </div>
       </body>
     </html>

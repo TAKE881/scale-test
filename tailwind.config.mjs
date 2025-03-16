@@ -11,7 +11,6 @@
 //   plugins,
 // };
 
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -20,132 +19,139 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
-
   theme: {
     extend: {
-
       /*============================================================
                               カスタム設定
       =============================================================== */
 
       backgroundImage: {
-        'music-paper': "linear-gradient(to bottom, #fefcf3, #f5f1e8), url('/images/noise.png')",
+        "music-paper":
+          "linear-gradient(to bottom, #fefcf3, #f5f1e8), url('/images/noise.png')",
       },
       backgroundBlendMode: {
-        overlay: 'overlay',
+        overlay: "overlay",
       },
       /////////////////////////////////// 高さ
       textShadow: {
-        sm: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-        DEFAULT: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-        lg: '3px 3px 6px rgba(0, 0, 0, 0.6)',
-        white: '1px 1px 2px rgba(255, 255, 255, 0.8)',
+        sm: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+        DEFAULT: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        lg: "3px 3px 6px rgba(0, 0, 0, 0.6)",
+        white: "1px 1px 2px rgba(255, 255, 255, 0.8)",
       },
 
       height: {
-        '12': '48px',
-        '14': '56px',
-        '16': '64px',
-        '18': '72px',
-        '22': '88px',
-        '26': '104px',
-        '28': '112px',
-        '30': '120px',
-        '34': '136px',
-        '36': '144px',
-        '38': '152px',
+        12: "48px",
+        14: "56px",
+        16: "64px",
+        18: "72px",
+        22: "88px",
+        26: "104px",
+        28: "112px",
+        30: "120px",
+        34: "136px",
+        36: "144px",
+        38: "152px",
       },
       width: {
-        '12': '48px',
-        '14': '56px',
-        '16': '64px',
-        '18': '72px',
-        '22': '88px',
-        '26': '104px',
-        '28': '112px',
-        '30': '120px',
-        '34': '136px',
-        '36': '144px',
-        '38': '152px',
+        12: "48px",
+        14: "56px",
+        16: "64px",
+        18: "72px",
+        22: "88px",
+        26: "104px",
+        28: "112px",
+        30: "120px",
+        34: "136px",
+        36: "144px",
+        38: "152px",
       },
       //////////////////////////////// フォントサイズ
       fontSize: {
-        'xxs': '10px',
-        'xxxs': '8px',
-        'xxl': '22px',
-        'xxxl': '26px',
+        xxs: "10px",
+        xxxs: "8px",
+        xxl: "22px",
+        xxxl: "26px",
       },
       //////////////////////////////// 角丸
       borderRadius: {
-        'xl': '16px',
-        '2xl': '24px',
-        '3xl': '32px',
-        '4xl': '40px',
+        xl: "16px",
+        "2xl": "24px",
+        "3xl": "32px",
+        "4xl": "40px",
       },
       //////////////////////////////// スペース
       spacing: {
-        '12': '48px',
-        '14': '56px',
-        '16': '64px',
-        '18': '72px',
-        '22': '88px',
-        '26': '104px',
-        '28': '112px',
-        '30': '120px',
-        '34': '136px',
-        '36': '144px',
-        '38': '152px',
-        "50": '200px',
-        "51": '202px',
-        "52": '204px',
-        "53": '206px',
-        "54": '208px',
-        "55": '210px',
-        "56": '212px',
-        "57": '214px',
-        "58": '216px',
-        "59": '218px',
-        "60": '220px',
-        "61": '222px',
-        "62": '224px',
-        "63": '226px',
-        "64": '228px',
-        "65": '230px',
-        "66": '232px',
-        "67": '234px',
-        "68": '236px',
-        "69": '238px',
-        "70": '240px',
-        "71": '242px',
-        "72": '244px',
-        "73": '246px',
-        "74": '248px',
-        "75": '250px',
+        12: "48px",
+        14: "56px",
+        16: "64px",
+        18: "72px",
+        22: "88px",
+        26: "104px",
+        28: "112px",
+        30: "120px",
+        34: "136px",
+        36: "144px",
+        38: "152px",
+        50: "200px",
+        51: "202px",
+        52: "204px",
+        53: "206px",
+        54: "208px",
+        55: "210px",
+        56: "212px",
+        57: "214px",
+        58: "216px",
+        59: "218px",
+        60: "220px",
+        61: "222px",
+        62: "224px",
+        63: "226px",
+        64: "228px",
+        65: "230px",
+        66: "232px",
+        67: "234px",
+        68: "236px",
+        69: "238px",
+        70: "240px",
+        71: "242px",
+        72: "244px",
+        73: "246px",
+        74: "248px",
+        75: "250px",
       },
       blur: {
-        ssm: '2px',       // ← ベース
-        sssm: '1.8px',    // ← 少し弱く
-        ssssm: '1.6px',
-        sssssm: '1.4px',
-        ssssssm: '1.2px',
-        sssssssm: '1px',  // ← 最も微細
+        ssm: "2px", // ← ベース
+        sssm: "1.8px", // ← 少し弱く
+        ssssm: "1.6px",
+        sssssm: "1.4px",
+        ssssssm: "1.2px",
+        sssssssm: "1px", // ← 最も微細
       },
       //////////////////////////////// 重なり
       zIndex: {
-        '100': '100',
-        '200': '200',
-        '999': '999', // これで最前面
+        100: "100",
+        200: "200",
+        999: "999", // これで最前面
       },
       //////////////////////////////// アニメーション
       animation: {
         wave: "wave 3s infinite ease-in-out",
         floating: "floating 2.5s ease-in-out infinite",
-        shake: 'shake 0.4s ease-in-out',
+        shake: "shake 0.4s ease-in-out",
       },
       keyframes: {
         wave: {
-          "0%, 100%": { transform: "scale(1.01)", opacity: "1", transformOrigin: "center" },
-          "40%": { transform: "scale(1.02)", opacity: "0.8", transformOrigin: "center" },
+          "0%, 100%": {
+            transform: "scale(1.01)",
+            opacity: "1",
+            transformOrigin: "center",
+          },
+          "40%": {
+            transform: "scale(1.02)",
+            opacity: "0.8",
+            transformOrigin: "center",
+          },
         },
         floating: {
           "0%": { transform: "translateY(0px)" },
@@ -153,61 +159,70 @@ export default {
           "100%": { transform: "translateY(0px)" },
         },
         shake: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '20%': { transform: 'translateX(-3px)' },
-          '40%': { transform: 'translateX(3px)' },
-          '60%': { transform: 'translateX(-3px)' },
-          '80%': { transform: 'translateX(3px)' },
+          "0%, 100%": { transform: "translateX(0)" },
+          "20%": { transform: "translateX(-3px)" },
+          "40%": { transform: "translateX(3px)" },
+          "60%": { transform: "translateX(-3px)" },
+          "80%": { transform: "translateX(3px)" },
         },
       },
 
       // ブレイクポイント
       screens: {
-        'xs': '400px', // 小さめスマホ
-        'xl2': '1440px', // 大画面用
+        xs: "400px", // 小さめスマホ
+        xl2: "1440px", // 大画面用
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: '#1E40AF', // 青系のメインカラー
-        secondary: '#9333EA', // 紫系のアクセント
-        danger: '#DC2626', // 赤色の警告
-        success: '#16A34A', // 緑色の成功通知
-        'metallic-blue': '#2f4550',
-        'metallic-silver': '#C0C0C0',
-        'metallic-gold': '#D4AF37',
-        'rich-gold': '#FFD700',            // ✨ 明るいリッチゴールド：視認性◎
-        'light-gold': '#FFE066',           // ✨ ライトゴールド：柔らかい黄色
-        'shine-gold': '#FFF3B0',           // ✨ シャインゴールド：白系、透過系UI向き
-        'highlight-gold': '#F5C542',       // ✨ ハイライトメタル：少し落ち着いた明るさ
-        'metallic-bronze': '#CD7F32',
-        'metallic-yellow': '#ddd12b',// ややくすみのある黄色(淡い金っぽい)
+        primary: "#1E40AF", // 青系のメインカラー
+        secondary: "#9333EA", // 紫系のアクセント
+        danger: "#DC2626", // 赤色の警告
+        success: "#16A34A", // 緑色の成功通知
+        navy: "#001f3f", // ネイビー
+        "loyal-blue": "#1E40AF", // 忠誠心のある深い青（Tailwind blue-800相当）
+        "metallic-blue": "#32527B", // 金属的な青
+        "royal-blue": "#4169E1", // ロイヤルブルー
+        "prussian-blue": "#003153", // プルシアンブルー（よりダークで重厚）
+        "midnight-blue": "#191970", // 真夜中のような濃い青
+        "electric-blue": "#7DF9FF", // ビビッドなエレクトリックブルー
+        "steel-blue": "#4682B4", // スチールブルー（クールでメタリック調）
+        "deep-sapphire": "#082567", // 宝石のような深いサファイアブルー
+        "azure-blue": "#007FFF", // 明るく爽やかなアズールブルー
+        "metallic-blue": "#2f4550",
+        "metallic-silver": "#C0C0C0",
+        "metallic-gold": "#D4AF37",
+        "rich-gold": "#FFD700", // ✨ 明るいリッチゴールド：視認性◎
+        "light-gold": "#FFE066", // ✨ ライトゴールド：柔らかい黄色
+        "shine-gold": "#FFF3B0", // ✨ シャインゴールド：白系、透過系UI向き
+        "highlight-gold": "#F5C542", // ✨ ハイライトメタル：少し落ち着いた明るさ
+        "metallic-bronze": "#CD7F32",
+        "metallic-yellow": "#ddd12b", // ややくすみのある黄色(淡い金っぽい)
 
         // Metallic Green系（ナチュラルで程よくツヤのあるグリーン）
-        'metallic-green-dark': '#3f7e5d',         // 深みと彩度UP
-        'metallic-green': '#569b75',              // バランスの取れた緑
-        'metallic-green-medium': '#6fb88e',       // 明るさ＋ツヤ感UP
-        'metallic-green-light': '#87cfa5',        // 爽やかさプラス
-        'metallic-green-soft': '#a7e1c0',         // 柔らかくナチュラル
+        "metallic-green-dark": "#3f7e5d", // 深みと彩度UP
+        "metallic-green": "#569b75", // バランスの取れた緑
+        "metallic-green-medium": "#6fb88e", // 明るさ＋ツヤ感UP
+        "metallic-green-light": "#87cfa5", // 爽やかさプラス
+        "metallic-green-soft": "#a7e1c0", // 柔らかくナチュラル
 
         // Metallic Red系（深みの中に艶を感じるレッド）
-        'metallic-red-dark': '#993d3d',
-        'metallic-red': '#b45757',
-        'metallic-red-medium': '#cd6e6e',
-        'metallic-red-light': '#e38585',
-        'metallic-red-soft': '#f0adad',
+        "metallic-red-dark": "#993d3d",
+        "metallic-red": "#b45757",
+        "metallic-red-medium": "#cd6e6e",
+        "metallic-red-light": "#e38585",
+        "metallic-red-soft": "#f0adad",
 
         // Metallic Gray系（少しブルーを含んだ洗練グレー）
-        'metallic-gray-dark': '#4a4a4a',
-        'metallic-gray': '#666666',
-        'metallic-gray-medium': '#838383',
-        'metallic-gray-light': '#a0a0a0',
-        'metallic-gray-soft': '#c9c9c9',
+        "metallic-gray-dark": "#4a4a4a",
+        "metallic-gray": "#666666",
+        "metallic-gray-medium": "#838383",
+        "metallic-gray-light": "#a0a0a0",
+        "metallic-gray-soft": "#c9c9c9",
 
-        ivory: '#fefcf3', // ← ✅ 追加済み（アイボリー）
+        ivory: "#fefcf3", // ← ✅ 追加済み（アイボリー）
 
-
-        sepia: '#704214', // セピア色
+        sepia: "#704214", // セピア色
       },
       fontFamily: {
         waterBrush: ["Water Brush", "cursive"],
@@ -215,14 +230,14 @@ export default {
       textStrokeWidth: {
         DEFAULT: "1px", // デフォルトの太さ
         sssssm: "0.05px", // 最も細い
-        ssssm: "0.1px",  // 極細
-        sssm: "0.2px",   // さらに細い
-        ssm: "0.3px",    // 超細い
-        sm: "0.5px",     // 細い
-        md: "1px",       // 標準
-        lg: "2px",       // 太め
-        xl: "3px",       // さらに太い
-        "2xl": "4px",    // 超太い
+        ssssm: "0.1px", // 極細
+        sssm: "0.2px", // さらに細い
+        ssm: "0.3px", // 超細い
+        sm: "0.5px", // 細い
+        md: "1px", // 標準
+        lg: "2px", // 太め
+        xl: "3px", // さらに太い
+        "2xl": "4px", // 超太い
       },
       textStrokeColor: {
         black: "#000",
@@ -245,7 +260,7 @@ export default {
     },
   },
   plugins: [
-    require('tailwindcss-textshadow'), // このpluginが必要です！
+    require("tailwindcss-textshadow"), // このpluginが必要です！
     function ({ addUtilities }) {
       addUtilities({
         ".text-stroke-1": {

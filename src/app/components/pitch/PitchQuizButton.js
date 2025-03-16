@@ -3,7 +3,6 @@
 import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 import { useState, useEffect } from "react";
 
-
 export function PitchQuizButton({ note, correctNote, onClick }) {
   const { convertSoundName } = useSoundName();
 
@@ -32,22 +31,109 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
                                     クイズ選択肢
             =============================================================== */}
 
-      <div
-        className="
-          w-14 h-28 bg-gradient-to-b mb-1 from-white to-gray-300 text-black
-          border border-metallic-gray-light rounded-md shadow-lg transition-transform
-          ease-in-out duration-200 transform active:translate-y-1 cursor-pointer
-          flex relative overflow-hidden items-center justify-center
-        "
-        onClick={handleClick}
-      >
-        {/*============================================================
-                                    テキストシャドウとテキストストロークが入らない
-            =============================================================== */}
+      <div>
+        <svg
+          width="80"
+          height="80"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          className="cursor-pointer transition-transform duration-200 ease-in-out active:translate-y-1 hover:brightness-110"
+          onClick={handleClick}
+        >
+          <defs>
+            {/* ツヤ感を強調したグラデーション */}
+            <radialGradient id="bgGradient" cx="50%" cy="35%" r="60%">
+              <stop offset="0%" stopColor="#66ccff" />{" "}
+              {/* 明るいハイライトブルー */}
+              <stop offset="60%" stopColor="#1e3a8a" /> {/* 深いブルー */}
+              <stop offset="100%" stopColor="#0a1a40" /> {/* 濃紺に近い外縁 */}
+            </radialGradient>
 
-        <span className="text-xl text-shadow text-center text-metallic-gray-dark text-stroke-sm text-stroke-gray mb-1 z-10">
-          {convertSoundName(note)}
-        </span>
+            {/* 内部ハイライトの反射光層 */}
+            <radialGradient id="highlight" cx="50%" cy="25%" r="30%">
+              <stop offset="0%" stopColor="white" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            </radialGradient>
+
+            {/* 外周リング用のグラデーション（上に光、下に影） */}
+            <linearGradient
+              id="borderGradient"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />{" "}
+              {/* 上部ハイライト */}
+              <stop offset="30%" stopColor="#aaaaaa" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#555555" stopOpacity="1" />{" "}
+              {/* 下部シャドウ感 */}
+            </linearGradient>
+
+            {/* シャドウ・立体感 */}
+            <filter
+              id="buttonShadow"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+            >
+              <feDropShadow
+                dx="0"
+                dy="2"
+                stdDeviation="3"
+                floodColor="rgba(0,0,0,0.4)"
+              />
+              <feDropShadow
+                dx="0"
+                dy="-2"
+                stdDeviation="4"
+                floodColor="rgba(255,255,255,0.3)"
+              />
+            </filter>
+
+            {/* テキストストローク用スタイル */}
+            <style>
+              {`
+        .textStroke {
+          font-weight: bold;
+          font-size: 20px;
+          fill: white;
+          stroke: gray;
+          stroke-width: 0.7px;
+          paint-order: stroke fill;
+        }
+      `}
+            </style>
+          </defs>
+
+          {/* ボタン本体 */}
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            fill="url(#bgGradient)"
+            stroke="#D4AF37" // 渋めグレー
+            strokeWidth="4" // 細めリング
+            filter="url(#buttonShadow)"
+          />
+          {/* 外周リング（細め＋ハイライト付き） */}
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            fill="none"
+            stroke="url(#borderGradient)"
+            strokeWidth="4"
+          />
+          {/* 光の反射ハイライト（上部） */}
+          <circle cx="50" cy="35" r="25" fill="url(#highlight)" />
+
+          {/* テキスト（中央表示） */}
+          <text x="50" y="55" textAnchor="middle" className="textStroke">
+            {convertSoundName(note)}
+          </text>
+        </svg>
       </div>
       {/*============================================================
                                     正解・不正解エフェクト
