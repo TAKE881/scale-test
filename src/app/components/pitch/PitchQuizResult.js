@@ -103,8 +103,8 @@ export default function PitchQuizResult({
   const getScoreColor = (scorePercentage) => {
     if (scorePercentage < 20) return "text-red-700";
     if (scorePercentage < 40) return "text-red-700";
-    if (scorePercentage < 60) return "text-metallic-bronze";
-    if (scorePercentage < 80) return "text-metallic-silver";
+    if (scorePercentage < 60) return "text-red-700";
+    if (scorePercentage < 80) return "text-azure-blue";
     return "text-deep-sapphire"; // 80〜100
   };
 
@@ -134,16 +134,18 @@ export default function PitchQuizResult({
           </div>
 
           <div
-            className=" text-xl text-left w-[40vw] mx-auto">
+            className=" text-xl text-left w-[65vw] mx-auto">
             <p className="mb-5">
               ▪️正解数: {score} / {totalQuestions}
             </p>
             <p className="mb-14">
               ▪️pitchレベル: {((score / totalQuestions) * 100).toFixed()}点
             </p>
-            <p className="">
-              ▪️BP: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}ポイント
-            </p>
+            {bonusPoint > 0 && (
+              <p className="">
+                ▪️BP: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}ポイント
+              </p>
+            )}
           </div>
         </>
       ),
@@ -219,13 +221,57 @@ export default function PitchQuizResult({
           <div className="transform -translate-y-50 flex flex-col sm:flex-row gap-6">
             <button
               onClick={resetQuiz}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto text-center"
+              className="
+              relative
+              px-14 py-5
+              text-xs font-semibold text-white
+              bg-gradient-to-r
+              from-royal-blue to-midnight-blue
+              rounded-full
+              shadow-lg
+              hover:shadow-xl
+              transition-all
+              duration-300
+              border border-white border-opacity-30
+              hover:border-opacity-60
+              hover:scale-105
+
+              before:absolute
+              before:inset-0
+              before:bg-white/10
+              before:rounded-full
+              before:opacity-0
+              before:transition-opacity
+              hover:before:opacity-100
+            "
             >
-              再チャレンジ
+              もう一度プレイ
             </button>
             <button
               onClick={() => router.push("/mode-select")}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg w-full sm:w-auto text-center"
+              className="
+              relative
+              px-14 py-5
+              text-xs font-semibold text-white
+              bg-gradient-to-r
+              from-gray-500 to-gray-700
+              rounded-full
+              shadow-lg
+              hover:shadow-xl
+              transition-all
+              duration-300
+              border border-white border-opacity-30
+              hover:border-opacity-60
+              hover:scale-105
+
+              before:absolute
+              before:inset-0
+              before:bg-white/10
+              before:rounded-full
+              before:opacity-0
+              before:transition-opacity
+              hover:before:opacity-100
+            "
             >
               モードセレクトに戻る
             </button>
