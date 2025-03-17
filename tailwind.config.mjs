@@ -234,6 +234,7 @@ export default {
       },
       textStrokeWidth: {
         DEFAULT: "1px", // デフォルトの太さ
+        sssssm: "0.03px", // 最細
         sssssm: "0.05px", // 最も細い
         ssssm: "0.1px", // 極細
         sssm: "0.2px", // さらに細い
@@ -280,6 +281,9 @@ export default {
         ".text-stroke": {
           "-webkit-text-stroke-width": "1px",
           "-webkit-text-stroke-color": "black",
+        },
+        ".text-stroke-ssssssm": {
+          "-webkit-text-stroke-width": "0.03px",
         },
         ".text-stroke-sssssm": {
           "-webkit-text-stroke-width": "0.05px",
