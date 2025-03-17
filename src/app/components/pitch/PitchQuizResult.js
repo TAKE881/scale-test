@@ -5,9 +5,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { waterBrush } from "@/app/layout"; // waterBrush を適切な場所から import
 
-export default function PitchQuizResult({ score, bonusPoint, totalQuestions, resetQuiz }) {
-  console.log("📊 Resultページに渡ってきたスコア:", score);
-  console.log("🎁 Resultページに渡ってきたボーナス:", bonusPoint);
+export default function PitchQuizResult({
+  score, bonusPoint, totalQuestions, resetQuiz, answerHistory
+}) {
+  console.log("📊 渡ってきたスコア:", score);
+  console.log("🎁 渡ってきたボーナス:", bonusPoint);
+  console.log("📚 渡ってきた履歴:", answerHistory);
   // const {
   //   score,
   //   bonusPoint,
@@ -95,6 +98,9 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
   const scorePercentage = ((score / totalQuestions) * 100).toFixed();
 
   const pages = [
+    /* ============================================================
+ *                          ページ１
+ * ============================================================ */
     {
       title: "結果",
       content: (
@@ -129,6 +135,9 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
         </>
       ),
     },
+    /* ============================================================
+ *                          ページ２
+ * ============================================================ */
     {
       title: "結果一覧",
       content: (
@@ -136,15 +145,29 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
           <h2 className="text-2xl font-bold mb-2">問題の答えとあなたの回答</h2>
           <div
             className=" text-xl text-left w-[60vw] mx-auto">
-            <ul className="list-disc list-inside text-left text-md">
-              <li>問題別の結果を表示したり</li>
-              <li>間違った音の確認</li>
-              <li>分析コメントなど</li>
-            </ul>
+            {answerHistory && answerHistory.length > 0 ? (
+              <ul className="list-disc list-inside text-md">
+                {answerHistory.map((item, index) => (
+                  <li key={index} className="mb-2">
+                    第 {item.questionNumber} 問：
+                    {item.isCorrect ? "⭕️" : "❌"}
+                    <div>
+                      正解 ➤ {item.correctAnswer} ／
+                      選択 ➤ {item.selectedAnswer} </div>
+
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>履歴データがありません。</p>
+            )}
           </div>
         </>
       ),
     },
+    /* ============================================================
+ *                          ページ３
+ * ============================================================ */
     {
       title: "操作メニュー",
       content: (
