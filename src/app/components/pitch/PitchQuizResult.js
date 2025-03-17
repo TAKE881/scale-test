@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { waterBrush } from "@/app/layout"; // waterBrush を適切な場所から import
 import { M_PLUS_Rounded_1c } from "next/font/google";
+import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 
 export const mplus = M_PLUS_Rounded_1c({
   weight: ["700"], // お好みで
@@ -12,7 +13,11 @@ export const mplus = M_PLUS_Rounded_1c({
 });
 
 export default function PitchQuizResult({
-  score, bonusPoint, totalQuestions, resetQuiz, answerHistory
+  score,
+  bonusPoint,
+  totalQuestions,
+  resetQuiz,
+  answerHistory,
 }) {
   console.log("渡ってきたスコア:", score);
   console.log("渡ってきたボーナス:", bonusPoint);
@@ -34,7 +39,6 @@ export default function PitchQuizResult({
   //   handleInstrumentToggle,
 
   // } = usePitchQuizLogic();
-
 
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1: 左へ, +1: 右へ
@@ -108,33 +112,32 @@ export default function PitchQuizResult({
     return "text-deep-sapphire"; // 80〜100
   };
 
+  const { convertSoundName } = useSoundName();
+
   const scorePercentage = ((score / totalQuestions) * 100).toFixed();
 
   const pages = [
     /* ============================================================
- *                          ページ１
- * ============================================================ */
+     *                          ページ１
+     * ============================================================ */
     {
       title: "結果",
       content: (
         <>
           <div className="text-xl font-bold text-left w-[70vw] mx-auto mb-3">
-            <h1 className="">
-              あなたのpitchレベルは...
-            </h1>
+            <h1 className="">あなたのpitchレベルは...</h1>
           </div>
           <div>
             <h1
-              className={`${waterBrush.className} text-9xl mb-10 ${getScoreColor(
-                scorePercentage
-              )}`}
+              className={`${
+                waterBrush.className
+              } text-9xl mb-10 ${getScoreColor(scorePercentage)}`}
             >
               {scorePercentage}
             </h1>
           </div>
 
-          <div
-            className=" text-xl text-left w-[65vw] mx-auto">
+          <div className=" text-xl text-left w-[65vw] mx-auto">
             <p className="mb-5">
               ▪️正解数: {score} / {totalQuestions}
             </p>
@@ -143,7 +146,11 @@ export default function PitchQuizResult({
             </p>
             {bonusPoint > 0 && (
               <p className="">
-                ▪️BP: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}ポイント
+                ▪️BP:{" "}
+                {totalQuestions > 0
+                  ? (((bonusPoint || 0) / totalQuestions) * 100).toFixed()
+                  : 0}
+                ポイント
               </p>
             )}
           </div>
@@ -151,15 +158,14 @@ export default function PitchQuizResult({
       ),
     },
     /* ============================================================
- *                          ページ２
- * ============================================================ */
+     *                          ページ２
+     * ============================================================ */
     {
       title: "結果一覧",
       content: (
         <>
           <h2 className="text-2xl font-bold mb-2">正解とあなたの回答</h2>
-          <div
-            className="text-left w-[70vw] mx-auto">
+          <div className="text-left w-[70vw] mx-auto">
             {answerHistory && answerHistory.length > 0 ? (
               // <ul className="list-disc list-inside text-md">
               //   {answerHistory.map((item, index) => (
@@ -175,35 +181,43 @@ export default function PitchQuizResult({
               // </ul>
               <ul className="space-y-4">
                 {answerHistory.map((item, index) => (
-                  <li key={index} className="p-1 bg-gray-100 rounded-lg shadow-sm">
+                  <li
+                    key={index}
+                    className="p-1 bg-gray-100 rounded-lg shadow-sm"
+                  >
                     <p className="font-semibold mb-2 text-md">
                       第 {item.questionNumber} 問：
                       <span
-                        className={`${item.isCorrect ? "text-deep-sapphire" : "text-red-700"} ${mplus.className} text-md`}
+                        className={`${
+                          item.isCorrect ? "text-deep-sapphire" : "text-red-700"
+                        } ${mplus.className} text-md`}
                       >
                         {item.isCorrect ? "〇" : "✕"}
                       </span>
-
                     </p>
                     <div className="flex gap-6 text-sm">
                       <p>
-                        正解　<span className="text-deep-sapphire">{item.correctAnswer}　</span>
+                        正解　
+                        <span className="text-deep-sapphire">
+                          {convertSoundName(item.correctAnswer)}　
+                        </span>
                       </p>
                       <p>
                         あなたの回答　{" "}
                         <span
-                          className={item.isCorrect ? "text-deep-sapphire" : "text-red-700"}
+                          className={
+                            item.isCorrect
+                              ? "text-deep-sapphire"
+                              : "text-red-700"
+                          }
                         >
-                          {item.selectedAnswer}
+                          {convertSoundName(item.selectedAnswer)}
                         </span>
                       </p>
                     </div>
                   </li>
                 ))}
               </ul>
-
-
-
             ) : (
               <p>履歴データがありません。</p>
             )}
@@ -212,13 +226,13 @@ export default function PitchQuizResult({
       ),
     },
     /* ============================================================
- *                          ページ３
- * ============================================================ */
+     *                          ページ３
+     * ============================================================ */
     {
       title: "操作メニュー",
       content: (
-        <div className="min-h-screen flex justify-center items-center">
-          <div className="transform -translate-y-50 flex flex-col sm:flex-row gap-6">
+        <div className="min-h-screen flex justify-center items-center z-20 relative">
+          <div className="transform -translate-y-50 flex flex-col  gap-6">
             <button
               onClick={resetQuiz}
               className="
@@ -235,7 +249,6 @@ export default function PitchQuizResult({
               border border-white border-opacity-30
               hover:border-opacity-60
               hover:scale-105
-
               before:absolute
               before:inset-0
               before:bg-white/10
@@ -295,7 +308,9 @@ export default function PitchQuizResult({
             animate="center"
             exit="exit"
             transition={{ duration: 0.3 }}
-            className="absolute top-0 left-0 w-full"
+            className={`absolute top-0 left-0 w-full z-0 ${
+              pageIndex === 2 ? "z-10" : "z-0"
+            }`}
           >
             <h2 className="text-4xl font-bold mb-4 text-deep-sapphire">
               {pages[pageIndex].title}
@@ -305,7 +320,7 @@ export default function PitchQuizResult({
         </AnimatePresence>
 
         {/* ナビゲーション矢印 */}
-        <div className="absolute left-0 right-0 top-70 flex justify-between h-20">
+        <div className="absolute left-0 right-0 top-70 flex justify-between h-20 z-50">
           <button
             onClick={handlePrev}
             disabled={pageIndex === 0}
