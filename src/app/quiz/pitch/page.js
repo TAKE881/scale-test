@@ -24,7 +24,6 @@ export default function PitchQuizPage() {
     setInstrument,
     handleInstrumentToggle,
     answerHistory,
-
   } = usePitchQuizLogic();
 
   const [clientOptions, setClientOptions] = useState([]);
@@ -131,9 +130,13 @@ export default function PitchQuizPage() {
                   </p>
                 </div>
 
-                <p className=" mb-1 text-stroke-ssssm text-stroke-gray-500">スコア: {score}</p>
+                <p className=" mb-1 text-stroke-ssssm text-stroke-gray-500">
+                  スコア: {score * 20}
+                </p>
                 {bonusPoint > 0 && (
-                  <p className="mb-1 text-metallic-gold text-stroke-ssssssm text-stroke-white pl-1">BP: {bonusPoint}</p>
+                  <p className="mb-1 text-metallic-gold text-stroke-ssssssm text-stroke-white pl-1">
+                    BP: {bonusPoint * 20}
+                  </p>
                 )}
               </div>
             </div>
@@ -157,9 +160,10 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${instrument === "Voice"
-                      ? "bg-royal-blue"
-                      : instrument !== "Voice" && instrument !== "Synth"
+                    ${
+                      instrument === "Voice"
+                        ? "bg-royal-blue"
+                        : instrument !== "Voice" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -167,9 +171,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Voice" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Voice" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -188,9 +193,10 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${instrument === "Retro"
-                      ? "bg-royal-blue"
-                      : instrument !== "Retro" && instrument !== "Synth"
+                    ${
+                      instrument === "Retro"
+                        ? "bg-royal-blue"
+                        : instrument !== "Retro" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -198,9 +204,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Retro" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Retro" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -219,9 +226,10 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${instrument === "Violin"
-                      ? "bg-royal-blue"
-                      : instrument !== "Violin" && instrument !== "Synth"
+                    ${
+                      instrument === "Violin"
+                        ? "bg-royal-blue"
+                        : instrument !== "Violin" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -229,9 +237,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Violin" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Violin" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -252,9 +261,10 @@ export default function PitchQuizPage() {
                     h-8
                     border
                     border-metallic-silver
-                    ${instrument === "Guitar"
-                      ? "bg-royal-blue"
-                      : instrument !== "Guitar" && instrument !== "Synth"
+                    ${
+                      instrument === "Guitar"
+                        ? "bg-royal-blue"
+                        : instrument !== "Guitar" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -262,9 +272,10 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${instrument !== "Guitar" && instrument !== "Synth"
-                        ? "opacity-20"
-                        : "opacity-100"
+                      ${
+                        instrument !== "Guitar" && instrument !== "Synth"
+                          ? "opacity-20"
+                          : "opacity-100"
                       }
                       transition-opacity
                       duration-500

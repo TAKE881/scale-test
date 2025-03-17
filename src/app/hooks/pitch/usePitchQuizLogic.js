@@ -16,15 +16,12 @@ export function usePitchQuizLogic(totalQuestions = 5) {
   const [bonusPoint, setBonusPoint] = useState(0);
   const [hasPlayed, setHasPlayed] = useState(false);
 
-
   const [questionNumber, setQuestionNumber] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [instrument, setInstrument] = useState("Synth");
   const [answerHistory, setAnswerHistory] = useState([]);
-
-
 
   //  シンセを保持するuseRef（Synthインスタンスを再利用）
   const synthRef = useRef(null);
@@ -41,8 +38,6 @@ export function usePitchQuizLogic(totalQuestions = 5) {
   }, [instrument]);
 
   const createSynthInstance = () => {
-
-
     if (synthRef.current?.triggerRelease) {
       synthRef.current.triggerRelease();
     }
@@ -83,13 +78,14 @@ export function usePitchQuizLogic(totalQuestions = 5) {
     }
   }, [isQuizFinished]);
 
-
   const resetQuiz = () => {
     setIsQuizFinished(false);
     setScore(0);
+    setBonusPoint(0);
     setQuestionNumber(0);
     setSelectedOption(null);
     setIsAnswered(false);
+    setAnswerHistory([]);
   };
 
   {
@@ -113,7 +109,6 @@ export function usePitchQuizLogic(totalQuestions = 5) {
 
   // 楽器の切り替えロジック
   const handleInstrumentToggle = (name) => {
-
     // 同じ楽器選択でsynthに戻る
     const newInstrument = instrument === name ? "Synth" : name;
 
@@ -123,7 +118,6 @@ export function usePitchQuizLogic(totalQuestions = 5) {
     // デバッグ用
     console.log(" 選択された楽器！！！！！！:", newInstrument);
   };
-
 
   const playNote = async () => {
     if (!pitchQuizNote || !synthRef.current) return;
@@ -217,14 +211,11 @@ export function usePitchQuizLogic(totalQuestions = 5) {
           return updated;
         });
         console.log("score（リアルタイム）:", score);
-
       }
-
     } else {
       console.log("❌ 不正解");
       playIncorrectSound();
     }
-
 
     setTimeout(() => {
       if (questionNumber + 1 < totalQuestions) {
