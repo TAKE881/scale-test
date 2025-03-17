@@ -16,7 +16,7 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
 
     //  親に通知（必要なら）
     if (onClick) {
-      onClick(note, isCorrect);
+      onClick(note);
     }
 
     //  一定時間後にエフェクト消去

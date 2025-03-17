@@ -13,11 +13,16 @@ export function usePitchQuizLogic(totalQuestions = 1) {
   const [pitchQuizNote, setPitchQuizNote] = useState(null);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
+  const [bonusPoint, setBonusPoint] = useState(0);
+  const [hasPlayed, setHasPlayed] = useState(false);
+
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [instrument, setInstrument] = useState("Synth");
+
 
   //  シンセを保持するuseRef（Synthインスタンスを再利用）
   const synthRef = useRef(null);
@@ -64,11 +69,18 @@ export function usePitchQuizLogic(totalQuestions = 1) {
             =============================================================== */
   }
 
+  // useEffect(() => {
+  //   if (!isQuizFinished) {
+  //     generatePitchTrainingQuestion();
+  //   }
+  // }, [isQuizFinished]);
+  // 出題処理：SSR対策のためクライアント限定に変更
   useEffect(() => {
-    if (!isQuizFinished) {
+    if (!isQuizFinished && typeof window !== "undefined") {
       generatePitchTrainingQuestion();
     }
   }, [isQuizFinished]);
+
 
   const resetQuiz = () => {
     setIsQuizFinished(false);
@@ -88,6 +100,14 @@ export function usePitchQuizLogic(totalQuestions = 1) {
   useEffect(() => {
     console.log("🎵 pitchQuizNote が更新！！！！！！！:", pitchQuizNote);
   }, [pitchQuizNote]);
+
+  useEffect(() => {
+    console.log("📈 score state updated →", score);
+  }, [score]);
+
+  useEffect(() => {
+    console.log("🎁 bonusPoint state updated →", bonusPoint);
+  }, [bonusPoint]);
 
   // 楽器の切り替えロジック
   const handleInstrumentToggle = (name) => {
@@ -112,6 +132,7 @@ export function usePitchQuizLogic(totalQuestions = 1) {
     synthRef.current.triggerRelease?.();
 
     synthRef.current.triggerAttackRelease(pitchQuizNote, "4n");
+    setHasPlayed(true);
   };
 
   const generatePitchTrainingQuestion = () => {
@@ -141,6 +162,7 @@ export function usePitchQuizLogic(totalQuestions = 1) {
   };
   // 選択肢をクリックしたときの起こるイベント
   const handleAnswer = (answer, index) => {
+    console.log("💥 handleAnswer called!", answer); // ←ここです！
     // 連打防止
     if (isAnswered) return;
     // もう選びました
@@ -148,45 +170,105 @@ export function usePitchQuizLogic(totalQuestions = 1) {
     // どのボタンを選択したか
     setSelectedOption(answer);
 
-    {
-      /*============================================================
-                                    画面効果と制御
-            =============================================================== */
-    }
+    console.log("選択されたnote！！！！！！！！！:", answer);
+    console.log("正解note！！！！！！！！！:", pitchQuizNote);
+    console.log("isCorrect！！！！！！！！！:", answer === pitchQuizNote);
+    console.log("hasPlayed！！！！！！！！！:", hasPlayed);
 
-    // コレクトサウンドとインコレクトサウンドの設定
-    if (answer === pitchQuizNote) {
+    const isCorrect = answer === pitchQuizNote;
+
+    // if (isCorrect) {
+    //   playCorrectSound();
+    //   setScore((prev) => prev + 1); // 正解したら必ず score 加算
+
+    //   if (!hasPlayed) {
+    //     setBonusPoint((prev) => prev + 1); // 未再生で正解 → bonus も加算
+    //   }
+    // } else {
+    //   playIncorrectSound();
+    // }
+    if (isCorrect) {
+      console.log("✅ 正解！hasPlayed =", hasPlayed);
+
       playCorrectSound();
-      setScore((prev) => prev + 1);
+
+      setScore((prev) => {
+        const updated = prev + 1;
+        console.log("🎯 スコア加算:", updated);
+        return updated;
+      });
+
+      if (!hasPlayed) {
+        setBonusPoint((prev) => {
+          const updated = prev + 1;
+          console.log("🎁 ボーナス加算:", updated);
+          return updated;
+        });
+        console.log("score（リアルタイム）:", score);
+
+      }
+
     } else {
+      console.log("❌ 不正解");
       playIncorrectSound();
     }
-    {
-      /*============================================================
-                                    次の問題
-            =============================================================== */
-    }
-    // 実行を遅らせる関数
+
+
     setTimeout(() => {
-      // 次の問題に進むか、クイズ終了か？
       if (questionNumber + 1 < totalQuestions) {
         setQuestionNumber((prev) => prev + 1);
         generatePitchTrainingQuestion();
       } else {
-        setIsQuizFinished(true);
+        setTimeout(() => {
+          setIsQuizFinished(true); // ← ボーナス加算完了後に実行
+        }, 100); // 少し遅らせる（50〜100msでOK）
       }
-      // 選択履歴削除
       setSelectedOption(null);
-      // 1問ごとにユーザーが1回選んだら true次の問題が出たらfalse に戻す
       setIsAnswered(false);
+      setHasPlayed(false); // 次の問題に備えてリセット（必要に応じて）
     }, 500);
   };
+
+  {
+    /*============================================================
+                                  画面効果と制御
+          =============================================================== */
+  }
+
+  // コレクトサウンドとインコレクトサウンドの設定
+  // if (answer === pitchQuizNote) {
+  //   playCorrectSound();
+  //   setScore((prev) => prev + 1);
+  // } else {
+  //   playIncorrectSound();
+  // }
+  {
+    /*============================================================
+                                  次の問題
+          =============================================================== */
+  }
+  //   // 実行を遅らせる関数
+  //   setTimeout(() => {
+  //     // 次の問題に進むか、クイズ終了か？
+  //     if (questionNumber + 1 < totalQuestions) {
+  //       setQuestionNumber((prev) => prev + 1);
+  //       generatePitchTrainingQuestion();
+  //     } else {
+  //       setIsQuizFinished(true);
+  //     }
+  //     // 選択履歴削除
+  //     setSelectedOption(null);
+  //     // 1問ごとにユーザーが1回選んだら true次の問題が出たらfalse に戻す
+  //     setIsAnswered(false);
+  //   }, 500);
+  // };
 
   return {
     pitchQuizNote,
     correctAnswer: pitchQuizNote,
     options,
     score,
+    bonusPoint,
     questionNumber,
     totalQuestions,
     isQuizFinished,
@@ -197,5 +279,7 @@ export function usePitchQuizLogic(totalQuestions = 1) {
     playNote,
     handleAnswer,
     resetQuiz,
+    hasPlayed,
+    setHasPlayed,
   };
 }
