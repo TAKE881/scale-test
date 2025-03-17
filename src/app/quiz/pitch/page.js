@@ -10,6 +10,7 @@ import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 export default function PitchQuizPage() {
   const {
     score,
+    bonusPoint,
     questionNumber,
     totalQuestions,
     isQuizFinished,
@@ -22,11 +23,11 @@ export default function PitchQuizPage() {
     instrument,
     setInstrument,
     handleInstrumentToggle,
+
   } = usePitchQuizLogic();
 
   const [clientOptions, setClientOptions] = useState([]);
   const [isShaking, setIsShaking] = useState(false);
-
   const isOnlyCorrect = false;
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function PitchQuizPage() {
         >
           <PitchQuizResult
             score={score}
+            bonusPoint={bonusPoint}
             totalQuestions={totalQuestions}
             resetQuiz={resetQuiz}
           />
@@ -124,6 +126,7 @@ export default function PitchQuizPage() {
             >
               <div>
                 <p className=" mb-1">スコア: {score}</p>
+                <p className=" mb-1">スコア: {bonusPoint}</p>
                 <p className="mb-10">
                   問題: {questionNumber + 1} / {totalQuestions}
                 </p>
@@ -149,10 +152,9 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Voice"
-                        ? "bg-royal-blue"
-                        : instrument !== "Voice" && instrument !== "Synth"
+                    ${instrument === "Voice"
+                      ? "bg-royal-blue"
+                      : instrument !== "Voice" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -160,10 +162,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Voice" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Voice" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -182,10 +183,9 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Retro"
-                        ? "bg-royal-blue"
-                        : instrument !== "Retro" && instrument !== "Synth"
+                    ${instrument === "Retro"
+                      ? "bg-royal-blue"
+                      : instrument !== "Retro" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -193,10 +193,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Retro" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Retro" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -215,10 +214,9 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Violin"
-                        ? "bg-royal-blue"
-                        : instrument !== "Violin" && instrument !== "Synth"
+                    ${instrument === "Violin"
+                      ? "bg-royal-blue"
+                      : instrument !== "Violin" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -226,10 +224,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Violin" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Violin" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -250,10 +247,9 @@ export default function PitchQuizPage() {
                     h-8
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Guitar"
-                        ? "bg-royal-blue"
-                        : instrument !== "Guitar" && instrument !== "Synth"
+                    ${instrument === "Guitar"
+                      ? "bg-royal-blue"
+                      : instrument !== "Guitar" && instrument !== "Synth"
                         ? "bg-gray-400"
                         : "bg-metallic-silver"
                     }
@@ -261,10 +257,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Guitar" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Guitar" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -298,7 +293,7 @@ export default function PitchQuizPage() {
                 "
               >
                 {/*============================================================
-                                    SVG
+                                  PlayerSVG
                 =============================================================== */}
                 <svg
                   width="400"

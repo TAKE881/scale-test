@@ -5,7 +5,28 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { waterBrush } from "@/app/layout"; // waterBrush を適切な場所から import
 
-export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
+export default function PitchQuizResult({ score, bonusPoint, totalQuestions, resetQuiz }) {
+  console.log("📊 Resultページに渡ってきたスコア:", score);
+  console.log("🎁 Resultページに渡ってきたボーナス:", bonusPoint);
+  // const {
+  //   score,
+  //   bonusPoint,
+  //   questionNumber,
+  //   totalQuestions,
+  //   // isQuizFinished,
+  //   // selectedOption,
+  //   correctAnswer,
+  //   options,
+  //   playNote,
+  //   handleAnswer,
+  //   resetQuiz,
+  //   instrument,
+  //   setInstrument,
+  //   handleInstrumentToggle,
+
+  // } = usePitchQuizLogic();
+
+
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1: 左へ, +1: 右へ
   const router = useRouter();
@@ -80,6 +101,10 @@ export default function PitchQuizResult({ score, totalQuestions, resetQuiz }) {
               <p className="mb-8">
                 pitch レベル: {((score / totalQuestions) * 100).toFixed()}
               </p>
+              <p className="mb-8">
+                ボーナスレベル: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}
+              </p>
+
             </div>
           </div>
         </>
