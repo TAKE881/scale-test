@@ -119,19 +119,22 @@ export default function PitchQuizPage() {
                 items-center
                 justify-center
                 text-royal-blue
-                text-stroke-ssssm
-                text-stroke-gray-500
                 text-xl
                 font-bold
                 text-center
               "
             >
-              <div>
-                <p className=" mb-1">スコア: {score}</p>
-                <p className=" mb-1">スコア: {bonusPoint}</p>
-                <p className="mb-10">
-                  問題: {questionNumber + 1} / {totalQuestions}
-                </p>
+              <div className="text-left w-[60vw] mx-auto pl-26">
+                <div>
+                  <p className="mb-3 text-stroke-ssssm text-stroke-gray-500">
+                    問題: {questionNumber + 1} / {totalQuestions}
+                  </p>
+                </div>
+
+                <p className=" mb-1 text-stroke-ssssm text-stroke-gray-500">スコア: {score}</p>
+                {bonusPoint > 0 && (
+                  <p className="mb-1 text-metallic-gold text-stroke-ssssssm text-stroke-white pl-1">BP: {bonusPoint}</p>
+                )}
               </div>
             </div>
             {/*============================================================

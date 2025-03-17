@@ -8,9 +8,9 @@ import { waterBrush } from "@/app/layout"; // waterBrush を適切な場所か�
 export default function PitchQuizResult({
   score, bonusPoint, totalQuestions, resetQuiz, answerHistory
 }) {
-  console.log("📊 渡ってきたスコア:", score);
-  console.log("🎁 渡ってきたボーナス:", bonusPoint);
-  console.log("📚 渡ってきた履歴:", answerHistory);
+  console.log("渡ってきたスコア:", score);
+  console.log("渡ってきたボーナス:", bonusPoint);
+  console.log("渡ってきた履歴:", answerHistory);
   // const {
   //   score,
   //   bonusPoint,
@@ -87,12 +87,19 @@ export default function PitchQuizResult({
   };
 
   // 色を決める関数を追加
+  // const getScoreColor = (scorePercentage) => {
+  //   if (scorePercentage < 20) return "text-red-500";
+  //   if (scorePercentage < 40) return "text-red-500";
+  //   if (scorePercentage < 60) return "text-metallic-bronze";
+  //   if (scorePercentage < 80) return "text-metallic-silver";
+  //   return "text-metallic-gold"; // 80〜100
+  // };
   const getScoreColor = (scorePercentage) => {
-    if (scorePercentage < 20) return "text-red-500";
-    if (scorePercentage < 40) return "text-red-500";
+    if (scorePercentage < 20) return "text-red-700";
+    if (scorePercentage < 40) return "text-red-700";
     if (scorePercentage < 60) return "text-metallic-bronze";
     if (scorePercentage < 80) return "text-metallic-silver";
-    return "text-metallic-gold"; // 80〜100
+    return "text-deep-sapphire"; // 80〜100
   };
 
   const scorePercentage = ((score / totalQuestions) * 100).toFixed();
@@ -142,22 +149,47 @@ export default function PitchQuizResult({
       title: "結果一覧",
       content: (
         <>
-          <h2 className="text-2xl font-bold mb-2">問題の答えとあなたの回答</h2>
+          <h2 className="text-2xl font-bold mb-2">正解とあなたの回答</h2>
           <div
-            className=" text-xl text-left w-[60vw] mx-auto">
+            className="text-left w-[60vw] mx-auto">
             {answerHistory && answerHistory.length > 0 ? (
-              <ul className="list-disc list-inside text-md">
-                {answerHistory.map((item, index) => (
-                  <li key={index} className="mb-2">
-                    第 {item.questionNumber} 問：
-                    {item.isCorrect ? "⭕️" : "❌"}
-                    <div>
-                      正解 ➤ {item.correctAnswer} ／
-                      選択 ➤ {item.selectedAnswer} </div>
+              // <ul className="list-disc list-inside text-md">
+              //   {answerHistory.map((item, index) => (
+              //     <li key={index} className="mb-2">
+              //       第 {item.questionNumber} 問：
+              //       {item.isCorrect ? "⭕️" : "❌"}
+              //       <div className="">
+              //         正解 ➤ {item.correctAnswer} ／
+              //         選択 ➤ {item.selectedAnswer} </div>
 
+              //     </li>
+              //   ))}
+              // </ul>
+              <ul className="space-y-4">
+                {answerHistory.map((item, index) => (
+                  <li key={index} className="p-1 bg-gray-100 rounded-lg shadow-sm">
+                    <p className="font-semibold mb-2 text-md">
+                      第 {item.questionNumber} 問：{item.isCorrect ? "⭕️" : "❌"}
+                    </p>
+                    <div className="flex gap-6">
+                      <p>
+                        正解　<span className="text-deep-sapphire">{item.correctAnswer}　</span>
+                      </p>
+                      <p>
+                        あなたの回答　{" "}
+                        <span
+                          className={item.isCorrect ? "text-deep-sapphire" : "text-red-700"}
+                        >
+                          {item.selectedAnswer}
+                        </span>
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ul>
+
+
+
             ) : (
               <p>履歴データがありません。</p>
             )}
