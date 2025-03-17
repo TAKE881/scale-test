@@ -23,6 +23,7 @@ export default function PitchQuizPage() {
     instrument,
     setInstrument,
     handleInstrumentToggle,
+    answerHistory,
 
   } = usePitchQuizLogic();
 
@@ -86,6 +87,7 @@ export default function PitchQuizPage() {
             bonusPoint={bonusPoint}
             totalQuestions={totalQuestions}
             resetQuiz={resetQuiz}
+            answerHistory={answerHistory}
           />
         </motion.div>
       ) : (

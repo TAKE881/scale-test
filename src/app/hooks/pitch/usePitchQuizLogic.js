@@ -22,6 +22,8 @@ export function usePitchQuizLogic(totalQuestions = 1) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [instrument, setInstrument] = useState("Synth");
+  const [answerHistory, setAnswerHistory] = useState([]);
+
 
 
   //  シンセを保持するuseRef（Synthインスタンスを再利用）
@@ -177,6 +179,16 @@ export function usePitchQuizLogic(totalQuestions = 1) {
 
     const isCorrect = answer === pitchQuizNote;
 
+    setAnswerHistory((prev) => [
+      ...prev,
+      {
+        questionNumber: questionNumber + 1,
+        correctAnswer: pitchQuizNote,
+        selectedAnswer: answer,
+        isCorrect: isCorrect,
+        bonusEarned: isCorrect && !hasPlayed,
+      },
+    ]);
     // if (isCorrect) {
     //   playCorrectSound();
     //   setScore((prev) => prev + 1); // 正解したら必ず score 加算
@@ -281,5 +293,6 @@ export function usePitchQuizLogic(totalQuestions = 1) {
     resetQuiz,
     hasPlayed,
     setHasPlayed,
+    answerHistory,
   };
 }
