@@ -119,12 +119,12 @@ export default function PitchQuizPage() {
                 items-center
                 justify-center
                 text-royal-blue
-                text-xl
+                text-lg
                 font-bold
                 text-center
               "
             >
-              <div className="text-left w-[60vw] mx-auto pl-26">
+              <div className="text-center">
                 <div>
                   <p className="mb-3 text-stroke-ssssm text-stroke-gray-500">
                     問題: {questionNumber + 1} / {totalQuestions}

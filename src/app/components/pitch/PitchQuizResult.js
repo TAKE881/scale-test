@@ -4,6 +4,12 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { waterBrush } from "@/app/layout"; // waterBrush を適切な場所から import
+import { M_PLUS_Rounded_1c } from "next/font/google";
+
+export const mplus = M_PLUS_Rounded_1c({
+  weight: ["700"], // お好みで
+  subsets: ["latin"],
+});
 
 export default function PitchQuizResult({
   score, bonusPoint, totalQuestions, resetQuiz, answerHistory
@@ -133,10 +139,10 @@ export default function PitchQuizResult({
               ▪️正解数: {score} / {totalQuestions}
             </p>
             <p className="mb-14">
-              ▪️pitchレベル: {((score / totalQuestions) * 100).toFixed()}
+              ▪️pitchレベル: {((score / totalQuestions) * 100).toFixed()}点
             </p>
             <p className="">
-              ▪️BP: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}
+              ▪️BP: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}ポイント
             </p>
           </div>
         </>
@@ -151,7 +157,7 @@ export default function PitchQuizResult({
         <>
           <h2 className="text-2xl font-bold mb-2">正解とあなたの回答</h2>
           <div
-            className="text-left w-[60vw] mx-auto">
+            className="text-left w-[70vw] mx-auto">
             {answerHistory && answerHistory.length > 0 ? (
               // <ul className="list-disc list-inside text-md">
               //   {answerHistory.map((item, index) => (
@@ -169,9 +175,15 @@ export default function PitchQuizResult({
                 {answerHistory.map((item, index) => (
                   <li key={index} className="p-1 bg-gray-100 rounded-lg shadow-sm">
                     <p className="font-semibold mb-2 text-md">
-                      第 {item.questionNumber} 問：{item.isCorrect ? "⭕️" : "❌"}
+                      第 {item.questionNumber} 問：
+                      <span
+                        className={`${item.isCorrect ? "text-deep-sapphire" : "text-red-700"} ${mplus.className} text-md`}
+                      >
+                        {item.isCorrect ? "〇" : "✕"}
+                      </span>
+
                     </p>
-                    <div className="flex gap-6">
+                    <div className="flex gap-6 text-sm">
                       <p>
                         正解　<span className="text-deep-sapphire">{item.correctAnswer}　</span>
                       </p>
