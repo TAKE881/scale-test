@@ -45,19 +45,42 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
     }
   };
 
+  // const variants = {
+  //   enter: (dir) => ({
+  //     x: dir > 0 ? 300 : -300,
+  //     opacity: 0,
+  //   }),
+  //   center: {
+  //     x: 0,
+  //     opacity: 1,
+  //   },
+  //   exit: (dir) => ({
+  //     x: dir > 0 ? -300 : 300,
+  //     opacity: 0,
+  //   }),
+  // };
+
   const variants = {
-    enter: (dir) => ({
-      x: dir > 0 ? 300 : -300,
+    hidden: {
       opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
+      y: 0, // ← 下からふわっと登場させたいならここ
     },
-    exit: (dir) => ({
-      x: dir > 0 ? -300 : 300,
+    center: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+    exit: {
       opacity: 0,
-    }),
+      y: 0, // ← 上にフェードアウトしたいならここ
+      transition: {
+        duration: 0.4,
+        ease: "easeIn",
+      },
+    },
   };
 
   // 色を決める関数を追加
@@ -76,36 +99,32 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
       title: "結果",
       content: (
         <>
+          <div className="text-xl font-bold text-left w-[70vw] mx-auto mb-3">
+            <h1 className="">
+              あなたのpitchレベルは...
+            </h1>
+          </div>
           <div>
             <h1
-              className={`${waterBrush.className} text-9xl ${getScoreColor(
+              className={`${waterBrush.className} text-9xl mb-10 ${getScoreColor(
                 scorePercentage
               )}`}
             >
               {scorePercentage}
             </h1>
           </div>
-          <div>
-            <h1 className="text-2xl font-bold mb-9 text-center">
-              あなたのpitchレベル
-            </h1>
-          </div>
-          <div
-            className=" text-xl text-left w-[60vw] mx-auto
-"
-          >
-            <div className="">
-              <p className="mb-1">
-                正解数: {score} / {totalQuestions}
-              </p>
-              <p className="mb-8">
-                pitch レベル: {((score / totalQuestions) * 100).toFixed()}
-              </p>
-              <p className="mb-8">
-                ボーナスレベル: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}
-              </p>
 
-            </div>
+          <div
+            className=" text-xl text-left w-[40vw] mx-auto">
+            <p className="mb-5">
+              ▪️正解数: {score} / {totalQuestions}
+            </p>
+            <p className="mb-14">
+              ▪️pitchレベル: {((score / totalQuestions) * 100).toFixed()}
+            </p>
+            <p className="">
+              ▪️BP: {totalQuestions > 0 ? ((bonusPoint || 0) / totalQuestions * 100).toFixed() : 0}
+            </p>
           </div>
         </>
       ),
@@ -115,11 +134,14 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
       content: (
         <>
           <h2 className="text-2xl font-bold mb-2">問題の答えとあなたの回答</h2>
-          <ul className="list-disc list-inside text-left text-md">
-            <li>問題別の結果を表示したり</li>
-            <li>間違った音の確認</li>
-            <li>分析コメントなど</li>
-          </ul>
+          <div
+            className=" text-xl text-left w-[60vw] mx-auto">
+            <ul className="list-disc list-inside text-left text-md">
+              <li>問題別の結果を表示したり</li>
+              <li>間違った音の確認</li>
+              <li>分析コメントなど</li>
+            </ul>
+          </div>
         </>
       ),
     },
@@ -156,7 +178,7 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
             key={pageIndex}
             custom={direction}
             variants={variants}
-            initial="enter"
+            initial="hidden"
             animate="center"
             exit="exit"
             transition={{ duration: 0.3 }}
@@ -170,20 +192,20 @@ export default function PitchQuizResult({ score, bonusPoint, totalQuestions, res
         </AnimatePresence>
 
         {/* ナビゲーション矢印 */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4">
+        <div className="absolute left-0 right-0 top-70 flex justify-between h-20">
           <button
             onClick={handlePrev}
             disabled={pageIndex === 0}
-            className="text-7xl text-gray-600 hover:text-black disabled:opacity-30"
+            className="text-5xl text-metallic-blue disabled:opacity-20"
           >
-            ←
+            ◀︎
           </button>
           <button
             onClick={handleNext}
             disabled={pageIndex === pages.length - 1}
-            className="text-7xl text-gray-600 hover:text-black disabled:opacity-30"
+            className="text-5xl text-metallic-blue disabled:opacity-20"
           >
-            →
+            ▶︎
           </button>
         </div>
       </div>
