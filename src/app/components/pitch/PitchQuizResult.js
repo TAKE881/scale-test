@@ -115,6 +115,12 @@ export default function PitchQuizResult({
   const { convertSoundName } = useSoundName();
 
   const scorePercentage = ((score / totalQuestions) * 100).toFixed();
+  const handleModeSelect = () => {
+    // 一時的にボタンを無効にして多重クリック防止しても良い
+    setTimeout(() => {
+      router.push("/mode-select");
+    }, 400); // exitアニメーションと同じくらい
+  };
 
   const pages = [
     /* ============================================================
@@ -231,7 +237,7 @@ export default function PitchQuizResult({
     {
       title: "操作メニュー",
       content: (
-        <div className="min-h-screen flex justify-center items-center z-20 relative">
+        <div className="min-h-screen flex justify-center items-center z-50 relative">
           <div className="transform -translate-y-50 flex flex-col  gap-6">
             <button
               onClick={resetQuiz}
@@ -261,7 +267,7 @@ export default function PitchQuizResult({
               もう一度プレイ
             </button>
             <button
-              onClick={() => router.push("/mode-select")}
+              onClick={handleModeSelect}
               className="
               relative
               px-14 py-5
@@ -295,10 +301,15 @@ export default function PitchQuizResult({
   ];
 
   return (
-    // <div className="bg[url('/image-bg-Result/bggakki.webp')] bg-cover-center bg-no-repeat">
-    //   <div className="relative inset-0  bg-cover bg-center bg-no-repeat  opacity-30 z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
-    <div className="bg[url('/image-bg-Result/bggakki.webp')] bg-cover-center bg-no-repeat">
-      <div className="relative inset-0  bg-cover bg-center bg-no-repeat z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
+    <div className="relative min-h-screen overflow-hidden">
+      {/* ✅ 背景画像部分 - opacity 20% */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-50 z-0 pointer-events-none"
+        style={{ backgroundImage: `url('/image-bg-Result/bggakki.webp')` }}
+      ></div>
+
+      {/* ✅ メインボックス - あなたの元の構造そのまま */}
+      <div className="relative z-10 w-full max-w-md mx-auto p-6 text-center bg-white/70 backdrop-blur-sm shadow-lg rounded-lg min-h-[80vh]">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
             key={pageIndex}
@@ -308,9 +319,7 @@ export default function PitchQuizResult({
             animate="center"
             exit="exit"
             transition={{ duration: 0.3 }}
-            className={`absolute top-0 left-0 w-full z-0 ${
-              pageIndex === 2 ? "z-10" : "z-0"
-            }`}
+            className="w-full"
           >
             <h2 className="text-4xl font-bold mb-4 text-deep-sapphire">
               {pages[pageIndex].title}
