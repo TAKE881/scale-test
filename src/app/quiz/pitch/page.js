@@ -58,7 +58,7 @@ export default function PitchQuizPage() {
       {/*============================================================
                                     タイトル
         =============================================================== */}
-      <div className="h-[5%] mb-7 flex items-center justify-center">
+      <div className="h-[5%] mb-4 flex items-center justify-center">
         <h1
           className="
             text-royal-blue
@@ -114,7 +114,7 @@ export default function PitchQuizPage() {
             <div
               className="
                 h-[5%]
-                mb-12
+                mb-16
                 flex
                 items-center
                 justify-center
@@ -295,6 +295,7 @@ export default function PitchQuizPage() {
                   transition-all
                   duration-150
                   active:scale-95
+                  mb-7
                 "
               >
                 {/*============================================================
@@ -521,7 +522,7 @@ export default function PitchQuizPage() {
             <div
               className="
                 h-[42.5%]
-                mb-30
+                mb-24
                 flex
                 items-center
                 justify-center
