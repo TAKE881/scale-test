@@ -6,6 +6,7 @@ import { usePitchQuizLogic } from "@/app/hooks/pitch/usePitchQuizLogic";
 import Link from "next/link";
 import PitchQuizResult from "@/app/components/pitch/PitchQuizResult";
 import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
+import Image from "next/image";
 
 export default function PitchQuizPage() {
   const {
@@ -52,8 +53,16 @@ export default function PitchQuizPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.0 }}
-      className="h-screen flex flex-col bg-cover bg-center bg-no-repeat"
+      // className="h-screen flex flex-col bg-[url('/image-button/bgsilver.webp')]  bg-cover bg-center bg-no-repeat bg-cover bg-center bg-no-repeat"
+      className="h-screen flex flex-col  bg-cover bg-center bg-no-repeat bg-cover bg-center bg-no-repeat"
+
     >
+      {/* <Image
+        src="/image-button/bgsilver.webp"
+        alt="background"
+        fill
+        className="object-cover opacity-0 pointer-events-none -z-10"
+      /> */}
       {/*============================================================
                                     タイトル
         =============================================================== */}
@@ -117,7 +126,7 @@ export default function PitchQuizPage() {
                 flex
                 items-center
                 justify-center
-                text-royal-blue
+                text-loyal-blue
                 text-lg
                 font-bold
                 text-center
@@ -125,12 +134,12 @@ export default function PitchQuizPage() {
             >
               <div className="text-center">
                 <div>
-                  <p className="mb-3 text-stroke-ssssm text-stroke-gray-500">
+                  <p className="mb-3 text-stroke-ssssssm text-stroke-gray-400">
                     問題: {questionNumber + 1} / {totalQuestions}
                   </p>
                 </div>
 
-                <p className=" mb-1 text-stroke-ssssm text-stroke-gray-500">
+                <p className=" mb-1 text-stroke-ssssssm text-stroke-gray-400">
                   スコア: {score * 20}
                 </p>
                 {bonusPoint > 0 && (
@@ -160,21 +169,19 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Voice"
-                        ? "bg-royal-blue"
-                        : instrument !== "Voice" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
+                    ${instrument === "Voice"
+                      ? "bg-royal-blue"
+                      : instrument !== "Voice" && instrument !== "Synth"
+                        ? "bg-gray-500"
+                        : "bg-gray-500"
                     }
                   `}
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Voice" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Voice" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -193,21 +200,19 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Retro"
-                        ? "bg-royal-blue"
-                        : instrument !== "Retro" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
+                    ${instrument === "Retro"
+                      ? "bg-royal-blue"
+                      : instrument !== "Retro" && instrument !== "Synth"
+                        ? "bg-gray-500"
+                        : "bg-gray-500"
                     }
                   `}
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Retro" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Retro" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -226,21 +231,19 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Violin"
-                        ? "bg-royal-blue"
-                        : instrument !== "Violin" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
+                    ${instrument === "Violin"
+                      ? "bg-royal-blue"
+                      : instrument !== "Violin" && instrument !== "Synth"
+                        ? "bg-gray-500"
+                        : "bg-gray-500"
                     }
                   `}
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Violin" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Violin" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -261,21 +264,19 @@ export default function PitchQuizPage() {
                     h-8
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Guitar"
-                        ? "bg-royal-blue"
-                        : instrument !== "Guitar" && instrument !== "Synth"
-                        ? "bg-gray-400"
-                        : "bg-metallic-silver"
+                    ${instrument === "Guitar"
+                      ? "bg-royal-blue"
+                      : instrument !== "Guitar" && instrument !== "Synth"
+                        ? "bg-gray-500"
+                        : "bg-gray-500"
                     }
                   `}
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Guitar" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Guitar" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -603,6 +604,7 @@ export default function PitchQuizPage() {
           </motion.main>
         </AnimatePresence>
       )}
+
     </motion.div>
   );
 }

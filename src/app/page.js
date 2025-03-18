@@ -9,12 +9,16 @@ export default function Home() {
 
         {/* 背景画像レイヤー */}
         {/* <div className="absolute inset-0 bg-[url('/image-bg-piano/imagepiano.webp')] bg-cover bg-center bg-no-repeat animate-wave z-0"></div> */}
-        <div
+        {/* <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-wave z-0"
           style={{ backgroundImage: "url('/image-button/bgsilver.webp')" }}
+        ></div> */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-wave z-0"
+          style={{ backgroundImage: "url('/image-bg-Result/silver6.webp')" }}
         ></div>
         {/* ぼかし・透過レイヤー（背景だけをぼかす） */}
-        <div className="absolute inset-0 backdrop-blur-ssm bg-black/10 z-10"></div>
+        <div className="absolute inset-0 backdrop-blur-sssssm bg-black/20 z-10"></div>
 
         {/* メインコンテンツ（前面・文字はぼけない） */}
         <main className="relative z-20 flex flex-col items-center justify-center h-screen text-center">

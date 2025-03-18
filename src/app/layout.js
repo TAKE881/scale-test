@@ -30,6 +30,7 @@ export const waterBrush = Water_Brush({
 }
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="ja">
       {/*============================================================
@@ -74,14 +75,24 @@ export default function RootLayout({ children }) {
           className="
           relative w-screen min-h-screen"
         >
-          <div
+          {/* <div
             className="
           absolute inset-0 bg-[url('/image-button/bgsilver.webp')] bg-cover bg-center bg-no-repeat backdrop-blur z-0"
-          ></div>
+          ></div> */}
           <div
             className="
-          absolute inset-0 backdrop-blur-sm bg-black/10 border border-white/40 rounded-xl shadow-lg z-10"
+          absolute inset-0 bg-[url('/image-bg-Result/silver6.webp')] bg-cover  bg-center bg-no-repeat z-0
+opacity-20
+          "
           ></div>
+          {/* <div
+            className="
+          absolute inset-0 backdrop-blur-sm bg-brack/30 border border-white/40 rounded-xl shadow-lg z-10"
+          ></div> */}
+          <div className="absolute inset-0 bg-black/30 z-5 pointer-events-none" />
+
+
+
           <div
             className="
           relative z-10"
