@@ -22,23 +22,7 @@ export default function PitchQuizResult({
   console.log("渡ってきたスコア:", score);
   console.log("渡ってきたボーナス:", bonusPoint);
   console.log("渡ってきた履歴:", answerHistory);
-  // const {
-  //   score,
-  //   bonusPoint,
-  //   questionNumber,
-  //   totalQuestions,
-  //   // isQuizFinished,
-  //   // selectedOption,
-  //   correctAnswer,
-  //   options,
-  //   playNote,
-  //   handleAnswer,
-  //   resetQuiz,
-  //   instrument,
-  //   setInstrument,
-  //   handleInstrumentToggle,
 
-  // } = usePitchQuizLogic();
 
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1: 左へ, +1: 右へ
@@ -58,20 +42,6 @@ export default function PitchQuizResult({
     }
   };
 
-  // const variants = {
-  //   enter: (dir) => ({
-  //     x: dir > 0 ? 300 : -300,
-  //     opacity: 0,
-  //   }),
-  //   center: {
-  //     x: 0,
-  //     opacity: 1,
-  //   },
-  //   exit: (dir) => ({
-  //     x: dir > 0 ? -300 : 300,
-  //     opacity: 0,
-  //   }),
-  // };
 
   const variants = {
     hidden: {
@@ -96,14 +66,6 @@ export default function PitchQuizResult({
     },
   };
 
-  // 色を決める関数を追加
-  // const getScoreColor = (scorePercentage) => {
-  //   if (scorePercentage < 20) return "text-red-500";
-  //   if (scorePercentage < 40) return "text-red-500";
-  //   if (scorePercentage < 60) return "text-metallic-bronze";
-  //   if (scorePercentage < 80) return "text-metallic-silver";
-  //   return "text-metallic-gold"; // 80〜100
-  // };
   const getScoreColor = (scorePercentage) => {
     if (scorePercentage < 20) return "text-red-700";
     if (scorePercentage < 40) return "text-red-700";
@@ -115,6 +77,12 @@ export default function PitchQuizResult({
   const { convertSoundName } = useSoundName();
 
   const scorePercentage = ((score / totalQuestions) * 100).toFixed();
+  const handleModeSelect = () => {
+    // 一時的にボタンを無効にして多重クリック防止しても良い
+    setTimeout(() => {
+      router.push("/mode-select");
+    }, 400); // exitアニメーションと同じくらい
+  };
 
   const pages = [
     /* ============================================================
@@ -129,9 +97,8 @@ export default function PitchQuizResult({
           </div>
           <div>
             <h1
-              className={`${
-                waterBrush.className
-              } text-9xl mb-10 ${getScoreColor(scorePercentage)}`}
+              className={`${waterBrush.className
+                } text-9xl mb-10 ${getScoreColor(scorePercentage)}`}
             >
               {scorePercentage}
             </h1>
@@ -165,20 +132,9 @@ export default function PitchQuizResult({
       content: (
         <>
           <h2 className="text-2xl font-bold mb-2">正解とあなたの回答</h2>
-          <div className="text-left w-[70vw] mx-auto">
+          <div className="text-left w-[80%] mx-auto">
             {answerHistory && answerHistory.length > 0 ? (
-              // <ul className="list-disc list-inside text-md">
-              //   {answerHistory.map((item, index) => (
-              //     <li key={index} className="mb-2">
-              //       第 {item.questionNumber} 問：
-              //       {item.isCorrect ? "⭕️" : "❌"}
-              //       <div className="">
-              //         正解 ➤ {item.correctAnswer} ／
-              //         選択 ➤ {item.selectedAnswer} </div>
 
-              //     </li>
-              //   ))}
-              // </ul>
               <ul className="space-y-4">
                 {answerHistory.map((item, index) => (
                   <li
@@ -188,18 +144,17 @@ export default function PitchQuizResult({
                     <p className="font-semibold mb-2 text-md">
                       第 {item.questionNumber} 問：
                       <span
-                        className={`${
-                          item.isCorrect ? "text-deep-sapphire" : "text-red-700"
-                        } ${mplus.className} text-md`}
+                        className={`${item.isCorrect ? "text-deep-sapphire" : "text-red-700"
+                          } ${mplus.className} text-md`}
                       >
                         {item.isCorrect ? "〇" : "✕"}
                       </span>
                     </p>
                     <div className="flex gap-6 text-sm">
                       <p>
-                        正解　
+                        正解
                         <span className="text-deep-sapphire">
-                          {convertSoundName(item.correctAnswer)}　
+                          {convertSoundName(item.correctAnswer)}
                         </span>
                       </p>
                       <p>
@@ -231,59 +186,32 @@ export default function PitchQuizResult({
     {
       title: "操作メニュー",
       content: (
-        <div className="min-h-screen flex justify-center items-center z-20 relative">
+        <div className="min-h-screen flex justify-center items-center z-50 relative">
           <div className="transform -translate-y-50 flex flex-col  gap-6">
             <button
               onClick={resetQuiz}
               className="
-              relative
-              px-14 py-5
-              text-xs font-semibold text-white
-              bg-gradient-to-r
-              from-royal-blue to-midnight-blue
-              rounded-full
-              shadow-lg
-              hover:shadow-xl
-              transition-all
-              duration-300
-              border border-white border-opacity-30
-              hover:border-opacity-60
-              hover:scale-105
-              before:absolute
-              before:inset-0
-              before:bg-white/10
-              before:rounded-full
-              before:opacity-0
-              before:transition-opacity
-              hover:before:opacity-100
+                  relative px-14 py-5 text-xs font-semibold text-white
+                  bg-gradient-to-r from-royal-blue to-midnight-blue
+                  rounded-full shadow-lg hover:shadow-xl
+                  transition-all duration-300
+                  border border-white border-opacity-30 hover:border-opacity-60 hover:scale-105
+                  before:absolute before:inset-0 before:bg-white/10 before:rounded-full
+                  before:opacity-0 before:transition-opacity hover:before:opacity-100
             "
             >
               もう一度プレイ
             </button>
             <button
-              onClick={() => router.push("/mode-select")}
+              onClick={handleModeSelect}
               className="
-              relative
-              px-14 py-5
-              text-xs font-semibold text-white
-              bg-gradient-to-r
-              from-gray-500 to-gray-700
-              rounded-full
-              shadow-lg
-              hover:shadow-xl
-              transition-all
-              duration-300
-              border border-white border-opacity-30
-              hover:border-opacity-60
-              hover:scale-105
-
-              before:absolute
-              before:inset-0
-              before:bg-white/10
-              before:rounded-full
-              before:opacity-0
-              before:transition-opacity
-              hover:before:opacity-100
+                  relative px-14 py-5 text-xs font-semibold text-white
+                  bg-gradient-to-r from-gray-500 to-gray-700
+                  rounded-full shadow-lg hover:shadow-xl
+                  transition-all duration-300
+                  border border-white border-opacity-30 hover:border-opacity-60 hover:scale-105
+                  before:absolute before:inset-0 before:bg-white/10 before:rounded-full
+                  before:opacity-0 before:transition-opacity hover:before:opacity-100
             "
             >
               モードセレクトに戻る
@@ -295,10 +223,15 @@ export default function PitchQuizResult({
   ];
 
   return (
-    // <div className="bg[url('/image-bg-Result/bggakki.webp')] bg-cover-center bg-no-repeat">
-    //   <div className="relative inset-0  bg-cover bg-center bg-no-repeat  opacity-30 z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
-    <div className="bg[url('/image-bg-Result/bggakki.webp')] bg-cover-center bg-no-repeat">
-      <div className="relative inset-0  bg-cover bg-center bg-no-repeat z-0 w-full max-w-md mx-auto p-6 text-center bg-white shadow-lg rounded-lg min-h-[80vh]">
+    <div className="relative min-h-screen overflow-hidden">
+      {/* ✅ 背景画像部分 - opacity 20% */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-50 z-0 pointer-events-none"
+        style={{ backgroundImage: `url('/image-bg-Result/bggakki.webp')` }}
+      ></div>
+
+      {/* ✅ メインボックス - あなたの元の構造そのまま */}
+      <div className="relative z-10 w-full max-w-md mx-auto p-6 text-center bg-white/70 backdrop-blur-sm shadow-lg rounded-lg min-h-[80vh]">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
             key={pageIndex}
@@ -308,9 +241,7 @@ export default function PitchQuizResult({
             animate="center"
             exit="exit"
             transition={{ duration: 0.3 }}
-            className={`absolute top-0 left-0 w-full z-0 ${
-              pageIndex === 2 ? "z-10" : "z-0"
-            }`}
+            className="w-full"
           >
             <h2 className="text-4xl font-bold mb-4 text-deep-sapphire">
               {pages[pageIndex].title}
@@ -320,7 +251,7 @@ export default function PitchQuizResult({
         </AnimatePresence>
 
         {/* ナビゲーション矢印 */}
-        <div className="absolute left-0 right-0 top-70 flex justify-between h-20 z-50">
+        <div className="absolute left-0 right-0 top-80 flex justify-between h-20 z-50">
           <button
             onClick={handlePrev}
             disabled={pageIndex === 0}
