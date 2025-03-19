@@ -98,7 +98,7 @@ export default function PitchQuizResult({
           <div>
             <h1
               className={`${waterBrush.className
-                } text-9xl mb-10 ${getScoreColor(scorePercentage)}`}
+                } text-9xl mb-4 ${getScoreColor(scorePercentage)}`}
             >
               {scorePercentage}
             </h1>
@@ -108,17 +108,59 @@ export default function PitchQuizResult({
             <p className="mb-5">
               ▪️正解数: {score} / {totalQuestions}
             </p>
-            <p className="mb-14">
+            <p className="mb-2">
               ▪️pitchレベル: {((score / totalQuestions) * 100).toFixed()}点
             </p>
+            <p className="text-sm font-bold mb-4">
+              【一口辛口コメント】
+            </p>
+            <p className="mb-8 text-gray-800 text-sm">
+              {
+                scorePercentage >= 100
+                  ? "完璧すぎて逆に怖い。あなたはもうチートですか？ ー 大谷の親レベル。"
+                  : scorePercentage >= 80
+                    ? "なかなかやるじゃないですか。でも満点取ってからドヤってください。 ー サイ・ヤング賞レベル"
+                    : scorePercentage >= 60
+                      ? "中途半端にできる人って、一番伸び悩むタイプですよね。 ー 奪三振王レベル"
+                      : scorePercentage >= 40
+                        ? "うーん…こういう点数が一番コメントに困るんだよなあ。 ー 新人王レベル"
+                        : scorePercentage >= 20
+                          ? "音感？なにそれ美味しいの？ ー マイナーリーグレベル"
+                          : "これは逆にすごい。全問外す才能、ある意味レア。 ー 近所の公園でボール遊びレベル。"
+
+
+              }
+            </p>
             {bonusPoint > 0 && (
-              <p className="">
-                ▪️BP:{" "}
+              <>
+                <p className="">
+                  ▪️BP:{" "}
+                  {totalQuestions > 0
+                    ? (((bonusPoint || 0) / totalQuestions) * 100).toFixed()
+                    : 0}
+                  ポイント
+                </p>
                 {totalQuestions > 0
-                  ? (((bonusPoint || 0) / totalQuestions) * 100).toFixed()
+                  ? <p className="text-sm font-bold mb-4">
+                    【一口甘口コメント】
+                  </p>
                   : 0}
-                ポイント
-              </p>
+                <p className="text-gray-800 text-sm">
+                  {
+                    (((bonusPoint || 0) / totalQuestions) * 100) >= 100
+                      ? "あなたは超人的な直感の持ち主です！是非このアプリの続きを作っていただきたい！null2025@gmial.com"
+                      : (((bonusPoint || 0) / totalQuestions) * 100) >= 80
+                        ? "驚異的な感覚です！直感だけでここまで当てるなんて、天性の才能ですね！"
+                        : (((bonusPoint || 0) / totalQuestions) * 100) >= 60
+                          ? "直感の冴えが光ってます！あなたには音を超えたセンスがあります✨"
+                          : (((bonusPoint || 0) / totalQuestions) * 100) >= 40
+                            ? "直感力、着実に育ってきています！潜在能力が開花し始めてます！"
+                            : (((bonusPoint || 0) / totalQuestions) * 100) >= 20
+                              ? "少しの直感でも未来の大きな力になります！このまま磨きましょう！"
+                              : ""
+                  }
+                </p>
+              </>
             )}
           </div>
         </>
@@ -152,8 +194,7 @@ export default function PitchQuizResult({
                     </p>
                     <div className="flex gap-6 text-sm">
                       <p>
-                        正解
-                        <span className="text-deep-sapphire">
+                        正解　<span className="text-deep-sapphire">
                           {convertSoundName(item.correctAnswer)}
                         </span>
                       </p>
