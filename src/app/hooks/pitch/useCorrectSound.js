@@ -20,7 +20,7 @@ export const useCorrectSound = () => {
         sustain: 0.6,
         release: 0.2,
       },
-      volume: -8, // 🔻 音量を8dB下げ
+      volume: -8,
     }).toDestination();
 
     const now = Tone.now();
