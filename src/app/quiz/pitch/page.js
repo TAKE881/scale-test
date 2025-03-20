@@ -53,7 +53,6 @@ export default function PitchQuizPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.0 }}
-      // className="h-screen flex flex-col bg-[url('/image-button/bgsilver.webp')]  bg-cover bg-center bg-no-repeat bg-cover bg-center bg-no-repeat"
       className="h-screen flex flex-col  bg-cover bg-center bg-no-repeat bg-cover bg-center bg-no-repeat"
     >
       <div className="h-[5%] mb-4 flex items-center justify-center">
@@ -509,8 +508,8 @@ export default function PitchQuizPage() {
                   <PitchQuizButton
                     key={option}
                     note={option}
-                    correctNote={correctAnswer} //  noteと比較する基準
-                    onClick={() => handleAnswer(option)} //  正誤判定不要、PitchQuizButtonが自分で判断する
+                    correctNote={correctAnswer}
+                    onClick={() => handleAnswer(option)}
                   />
                 ))}
               </div>

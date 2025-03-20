@@ -1,11 +1,9 @@
-// src/tone/synths/ViolinSynth.js
 import * as Tone from "tone";
 
 export class ViolinSynth {
   constructor() {
-    // 本体：MonoSynth（Violin風）
     this.synth = new Tone.MonoSynth({
-      oscillator: { type: "sawtooth" }, // 鋸波 → 弦っぽい音
+      oscillator: { type: "sawtooth" },
       envelope: {
         attack: 0.4,
         decay: 0.8,
@@ -18,7 +16,6 @@ export class ViolinSynth {
       },
     });
 
-    // エフェクト（任意で追加してもOK、今回は直接出力）
     this.synth.toDestination();
   }
 

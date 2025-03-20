@@ -1,11 +1,8 @@
 import { Reggae_One } from "next/font/google";
-import { Water_Brush } from "next/font/google"; //Water_Brushフォント//
+import { Water_Brush } from "next/font/google";
 import "./globals.css";
 
 {
-  /*============================================================
-                              RaggaeOneフォント使用
-        =============================================================== */
 }
 
 const ReggaeOne = Reggae_One({
@@ -13,9 +10,6 @@ const ReggaeOne = Reggae_One({
   subsets: ["latin"],
 });
 {
-  /*============================================================
-                              waterBrushフォント使用
-        =============================================================== */
 }
 
 export const waterBrush = Water_Brush({
@@ -24,9 +18,6 @@ export const waterBrush = Water_Brush({
 });
 
 {
-  /*============================================================
-                              全ページの背景設定
-        =============================================================== */
 }
 
 export default function RootLayout({ children }) {

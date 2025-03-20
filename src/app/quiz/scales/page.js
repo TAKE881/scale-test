@@ -1,4 +1,3 @@
-// app/quiz/scales/page.js
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -11,12 +10,12 @@ export default function ScalesQuizPage() {
       await Tone.start();
       toneStarted = true;
     }
-    // localStorageから音量を取得し、反映
+
     const vol = localStorage.getItem("quizVolume");
     if (vol !== null) {
       Tone.getDestination().volume.value = Number(vol);
     }
-    // あとはSynth再生
+
     const synth = new Tone.Synth().toDestination();
     synth.triggerAttackRelease("C4", "8n");
   }

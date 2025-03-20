@@ -1,11 +1,9 @@
-// src/tone/synths/GuitarSynth.js
 import * as Tone from "tone";
 
 export class GuitarSynth {
   constructor() {
-    // 本体：MonoSynth
     this.synth = new Tone.MonoSynth({
-      oscillator: { type: "fatsawtooth" }, // ギター風に派手な音に
+      oscillator: { type: "fatsawtooth" },
       envelope: {
         attack: 0.01,
         decay: 0.3,
@@ -27,13 +25,11 @@ export class GuitarSynth {
       },
     });
 
-    // Distortion
     this.distortion = new Tone.Distortion({
       distortion: 0.7,
       oversample: "4x",
     });
 
-    // Chorus
     this.chorus = new Tone.Chorus({
       frequency: 4,
       delayTime: 2.5,
@@ -41,38 +37,34 @@ export class GuitarSynth {
       spread: 180,
     });
 
-    // EQ
     this.eq = new Tone.EQ3({
       low: -8,
       mid: 1,
       high: 5,
     });
 
-    // Reverb
     this.reverb = new Tone.Reverb({
       decay: 2.5,
       wet: 0.4,
     });
 
-    // 接続（出力は Reverb → Destination）
     this.synth.connect(this.distortion);
     this.distortion.connect(this.chorus);
     this.chorus.connect(this.eq);
     this.eq.connect(this.reverb);
     this.reverb.toDestination();
 
-    // ★ Chorus は明示的に start が必要！
     this.chorus.start();
   }
 
   async triggerAttackRelease(note, duration) {
-    await Tone.loaded(); // リバーブなどが読み込み完了してから
+    await Tone.loaded();
     this.synth.triggerAttackRelease(note, duration);
   }
   dispose() {
     this.synth.dispose();
     this.distortion.dispose();
-    this.chorus.dispose(); // ★ start したものは dispose も必要
+    this.chorus.dispose();
     this.eq.dispose();
     this.reverb.dispose();
   }

@@ -1,16 +1,3 @@
-// /** @type {import('tailwindcss').Config} */
-// import theme from "./src/config/tailwind/theme";  // カスタムテーマを読み込む
-// import plugins from "./src/config/tailwind/plugins";  // プラグインを読み込む
-
-// export default {
-//   content: [
-//     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-//     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-//   ],
-//   theme,
-//   plugins,
-// };
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -21,10 +8,6 @@ export default {
 
   theme: {
     extend: {
-      /*============================================================
-                              カスタム設定
-      =============================================================== */
-
       backgroundImage: {
         "music-paper":
           "linear-gradient(to bottom, #fefcf3, #f5f1e8), url('/images/noise.png')",
@@ -32,7 +15,7 @@ export default {
       backgroundBlendMode: {
         overlay: "overlay",
       },
-      /////////////////////////////////// 高さ
+
       textShadow: {
         sm: "1px 1px 2px rgba(0, 0, 0, 0.5)",
         DEFAULT: "2px 2px 4px rgba(0, 0, 0, 0.5)",
@@ -66,7 +49,7 @@ export default {
         36: "144px",
         38: "152px",
       },
-      //////////////////////////////// フォントサイズ
+
       fontSize: {
         xxs: "10px",
         xxxs: "8px",
@@ -78,14 +61,14 @@ export default {
         "6xl": "60px",
         "7xl": "72px",
       },
-      //////////////////////////////// 角丸
+
       borderRadius: {
         xl: "16px",
         "2xl": "24px",
         "3xl": "32px",
         "4xl": "40px",
       },
-      //////////////////////////////// スペース
+
       spacing: {
         12: "48px",
         14: "56px",
@@ -126,20 +109,20 @@ export default {
         75: "250px",
       },
       blur: {
-        ssm: "2px", // ← ベース
-        sssm: "1.8px", // ← 少し弱く
+        ssm: "2px",
+        sssm: "1.8px",
         ssssm: "1.6px",
         sssssm: "1.4px",
         ssssssm: "1.2px",
-        sssssssm: "1px", // ← 最も微細
+        sssssssm: "1px",
       },
-      //////////////////////////////// 重なり
+
       zIndex: {
         100: "100",
         200: "200",
-        999: "999", // これで最前面
+        999: "999",
       },
-      //////////////////////////////// アニメーション
+
       animation: {
         wave: "wave 3s infinite ease-in-out",
         floating: "floating 2.5s ease-in-out infinite",
@@ -172,78 +155,74 @@ export default {
         },
       },
 
-      // ブレイクポイント
       screens: {
-        xs: "400px", // 小さめスマホ
-        xl2: "1440px", // 大画面用
+        xs: "400px",
+        xl2: "1440px",
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#1E40AF", // 青系のメインカラー
-        secondary: "#9333EA", // 紫系のアクセント
-        danger: "#DC2626", // 赤色の警告
-        success: "#16A34A", // 緑色の成功通知
-        navy: "#001f3f", // ネイビー
-        "loyal-blue": "#1E40AF", // 忠誠心のある深い青（Tailwind blue-800相当）
-        "metallic-blue": "#32527B", // 金属的な青
-        "royal-blue": "#4169E1", // ロイヤルブルー
-        "prussian-blue": "#003153", // プルシアンブルー（よりダークで重厚）
-        "midnight-blue": "#191970", // 真夜中のような濃い青
-        "electric-blue": "#7DF9FF", // ビビッドなエレクトリックブルー
-        "steel-blue": "#4682B4", // スチールブルー（クールでメタリック調）
-        "deep-sapphire": "#082567", // 宝石のような深いサファイアブルー
-        "azure-blue": "#007FFF", // 明るく爽やかなアズールブルー
+        primary: "#1E40AF",
+        secondary: "#9333EA",
+        danger: "#DC2626",
+        success: "#16A34A",
+        navy: "#001f3f",
+        "loyal-blue": "#1E40AF",
+        "metallic-blue": "#32527B",
+        "royal-blue": "#4169E1",
+        "prussian-blue": "#003153",
+        "midnight-blue": "#191970",
+        "electric-blue": "#7DF9FF",
+        "steel-blue": "#4682B4",
+        "deep-sapphire": "#082567",
+        "azure-blue": "#007FFF",
         "metallic-blue": "#2f4550",
         "metallic-silver": "#C0C0C0",
         "metallic-gold": "#D4AF37",
-        "rich-gold": "#FFD700", // ✨ 明るいリッチゴールド：視認性◎
-        "light-gold": "#FFE066", // ✨ ライトゴールド：柔らかい黄色
-        "shine-gold": "#FFF3B0", // ✨ シャインゴールド：白系、透過系UI向き
-        "highlight-gold": "#F5C542", // ✨ ハイライトメタル：少し落ち着いた明るさ
+        "rich-gold": "#FFD700",
+        "light-gold": "#FFE066",
+        "shine-gold": "#FFF3B0",
+        "highlight-gold": "#F5C542",
         "metallic-bronze": "#CD7F32",
-        "metallic-yellow": "#ddd12b", // ややくすみのある黄色(淡い金っぽい)
+        "metallic-yellow": "#ddd12b",
 
-        // Metallic Green系（ナチュラルで程よくツヤのあるグリーン）
-        "metallic-green-dark": "#3f7e5d", // 深みと彩度UP
-        "metallic-green": "#569b75", // バランスの取れた緑
-        "metallic-green-medium": "#6fb88e", // 明るさ＋ツヤ感UP
-        "metallic-green-light": "#87cfa5", // 爽やかさプラス
-        "metallic-green-soft": "#a7e1c0", // 柔らかくナチュラル
+        "metallic-green-dark": "#3f7e5d",
+        "metallic-green": "#569b75",
+        "metallic-green-medium": "#6fb88e",
+        "metallic-green-light": "#87cfa5",
+        "metallic-green-soft": "#a7e1c0",
 
-        // Metallic Red系（深みの中に艶を感じるレッド）
         "metallic-red-dark": "#993d3d",
         "metallic-red": "#b45757",
         "metallic-red-medium": "#cd6e6e",
         "metallic-red-light": "#e38585",
         "metallic-red-soft": "#f0adad",
 
-        // Metallic Gray系（少しブルーを含んだ洗練グレー）
         "metallic-gray-dark": "#4a4a4a",
         "metallic-gray": "#666666",
         "metallic-gray-medium": "#838383",
         "metallic-gray-light": "#a0a0a0",
         "metallic-gray-soft": "#c9c9c9",
 
-        ivory: "#fefcf3", // ← ✅ 追加済み（アイボリー）
+        ivory: "#fefcf3",
 
-        sepia: "#704214", // セピア色
+        sepia: "#704214",
       },
       fontFamily: {
         waterBrush: ["Water Brush", "cursive"],
       },
       textStrokeWidth: {
-        DEFAULT: "1px", // デフォルトの太さ
-        sssssm: "0.03px", // 最細
-        sssssm: "0.05px", // 最も細い
-        ssssm: "0.1px", // 極細
-        sssm: "0.2px", // さらに細い
-        ssm: "0.3px", // 超細い
-        sm: "0.5px", // 細い
-        md: "1px", // 標準
-        lg: "2px", // 太め
-        xl: "3px", // さらに太い
-        "2xl": "4px", // 超太い
+        DEFAULT: "1px",
+        sssssm: "0.03px",
+        sssssm: "0.05px",
+        ssssm: "0.1px",
+        sssm: "0.2px",
+        ssm: "0.3px",
+        sm: "0.5px",
+        md: "1px",
+        lg: "2px",
+        xl: "3px",
+        "2xl": "4px",
       },
       textStrokeColor: {
         black: "#000",
@@ -260,13 +239,10 @@ export default {
         gray800: "#1f2937",
         gray900: "#111827",
       },
-      /*============================================================
-              ///////////////////////////////////////////////////////////
-      =============================================================== */
     },
   },
   plugins: [
-    require("tailwindcss-textshadow"), // このpluginが必要です！
+    require("tailwindcss-textshadow"),
     function ({ addUtilities }) {
       addUtilities({
         ".text-stroke-1": {

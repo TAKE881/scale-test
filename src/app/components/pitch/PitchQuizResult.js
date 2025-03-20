@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { waterBrush } from "@/app/layout"; // waterBrush を適切な場所から import
+import { waterBrush } from "@/app/layout";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import { useSoundName } from "@/app/hooks/pitch/useSoundName";
 
 export const mplus = M_PLUS_Rounded_1c({
-  weight: ["700"], // お好みで
+  weight: ["700"],
   subsets: ["latin"],
 });
 
@@ -24,7 +24,7 @@ export default function PitchQuizResult({
   console.log("渡ってきた履歴:", answerHistory);
 
   const [pageIndex, setPageIndex] = useState(0);
-  const [direction, setDirection] = useState(0); // -1: 左へ, +1: 右へ
+  const [direction, setDirection] = useState(0);
   const router = useRouter();
 
   const handleNext = () => {
@@ -44,7 +44,7 @@ export default function PitchQuizResult({
   const variants = {
     hidden: {
       opacity: 0,
-      y: 0, // ← 下からふわっと登場させたいならここ
+      y: 0,
     },
     center: {
       opacity: 1,
@@ -56,7 +56,7 @@ export default function PitchQuizResult({
     },
     exit: {
       opacity: 0,
-      y: 0, // ← 上にフェードアウトしたいならここ
+      y: 0,
       transition: {
         duration: 0.4,
         ease: "easeIn",
@@ -69,17 +69,16 @@ export default function PitchQuizResult({
     if (scorePercentage < 40) return "text-red-700";
     if (scorePercentage < 60) return "text-red-700";
     if (scorePercentage < 80) return "text-azure-blue";
-    return "text-deep-sapphire"; // 80〜100
+    return "text-deep-sapphire";
   };
 
   const { convertSoundName } = useSoundName();
 
   const scorePercentage = ((score / totalQuestions) * 100).toFixed();
   const handleModeSelect = () => {
-    // 一時的にボタンを無効にして多重クリック防止しても良い
     setTimeout(() => {
       router.push("/mode-select");
-    }, 400); // exitアニメーションと同じくらい
+    }, 400);
   };
 
   const pages = [

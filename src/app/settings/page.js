@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function SettingsPage() {
-  // 音量スライダーの変更 (例: -1 ~ +3)
   function handleVolumeChange(e) {
     const val = Number(e.target.value);
     setVolumeLevel(val);

@@ -6,20 +6,17 @@ import { useState, useEffect } from "react";
 export function PitchQuizButton({ note, correctNote, onClick }) {
   const { convertSoundName } = useSoundName();
 
-  const [effectType, setEffectType] = useState(null); // "correct" or "wrong" or null
+  const [effectType, setEffectType] = useState(null);
 
   const handleClick = () => {
     const isCorrect = note === correctNote;
 
-    //  即時エフェクト表示
     setEffectType(isCorrect ? "correct" : "wrong");
 
-    //  親に通知（必要なら）
     if (onClick) {
       onClick(note);
     }
 
-    //  一定時間後にエフェクト消去
     setTimeout(() => {
       setEffectType(null);
     }, 1000);
@@ -100,8 +97,8 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
             cy="50"
             r="40"
             fill="url(#bgGradient)"
-            stroke="#D4AF37" // 渋めグレー
-            strokeWidth="4" // 細めリング
+            stroke="#D4AF37"
+            strokeWidth="4"
             filter="url(#buttonShadow)"
           />
           <circle
@@ -187,9 +184,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
             />
           </line>
         </svg>
-        // ============================================================
-
-        // ===============================================================
       )}
     </>
   );
