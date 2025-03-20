@@ -23,7 +23,6 @@ export default function PitchQuizResult({
   console.log("渡ってきたボーナス:", bonusPoint);
   console.log("渡ってきた履歴:", answerHistory);
 
-
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1: 左へ, +1: 右へ
   const router = useRouter();
@@ -41,7 +40,6 @@ export default function PitchQuizResult({
       setPageIndex((prev) => prev - 1);
     }
   };
-
 
   const variants = {
     hidden: {
@@ -97,8 +95,9 @@ export default function PitchQuizResult({
           </div>
           <div>
             <h1
-              className={`${waterBrush.className
-                } text-9xl mb-4 ${getScoreColor(scorePercentage)}`}
+              className={`${waterBrush.className} text-9xl mb-4 ${getScoreColor(
+                scorePercentage
+              )}`}
             >
               {scorePercentage}
             </h1>
@@ -111,25 +110,19 @@ export default function PitchQuizResult({
             <p className="mb-2">
               ▪️pitchレベル: {((score / totalQuestions) * 100).toFixed()}点
             </p>
-            <p className="text-sm font-bold mb-4">
-              【一口辛口コメント】
-            </p>
+            <p className="text-sm font-bold mb-4">【一口辛口コメント】</p>
             <p className="mb-8 text-gray-800 text-sm">
-              {
-                scorePercentage >= 100
-                  ? "完璧すぎて逆に怖い。あなたはもうチートですか？ ー 大谷の親レベル。"
-                  : scorePercentage >= 80
-                    ? "なかなかやるじゃないですか。でも満点取ってからドヤってください。 ー サイ・ヤング賞レベル"
-                    : scorePercentage >= 60
-                      ? "中途半端にできる人って、一番伸び悩むタイプですよね。 ー 奪三振王レベル"
-                      : scorePercentage >= 40
-                        ? "うーん…こういう点数が一番コメントに困るんだよなあ。 ー 新人王レベル"
-                        : scorePercentage >= 20
-                          ? "音感？なにそれ美味しいの？ ー マイナーリーグレベル"
-                          : "これは逆にすごい。全問外す才能、ある意味レア。 ー 近所の公園でボール遊びレベル。"
-
-
-              }
+              {scorePercentage >= 100
+                ? "完璧すぎて逆に怖い。あなたはもうチートですか？ ー 大谷の親レベル。"
+                : scorePercentage >= 80
+                ? "なかなかやるじゃないですか。でも満点取ってからドヤってください。 ー サイ・ヤング賞レベル"
+                : scorePercentage >= 60
+                ? "中途半端にできる人って、一番伸び悩むタイプですよね。 ー 奪三振王レベル"
+                : scorePercentage >= 40
+                ? "うーん…こういう点数が一番コメントに困るんだよなあ。 ー 新人王レベル"
+                : scorePercentage >= 20
+                ? "音感？なにそれ美味しいの？ ー マイナーリーグレベル"
+                : "これは逆にすごい。全問外す才能、ある意味レア。 ー 近所の公園でボール遊びレベル。"}
             </p>
             {bonusPoint > 0 && (
               <>
@@ -140,25 +133,23 @@ export default function PitchQuizResult({
                     : 0}
                   ポイント
                 </p>
-                {totalQuestions > 0
-                  ? <p className="text-sm font-bold mb-4">
-                    【一口甘口コメント】
-                  </p>
-                  : 0}
+                {totalQuestions > 0 ? (
+                  <p className="text-sm font-bold mb-4">【一口甘口コメント】</p>
+                ) : (
+                  0
+                )}
                 <p className="text-gray-800 text-sm">
-                  {
-                    (((bonusPoint || 0) / totalQuestions) * 100) >= 100
-                      ? "あなたは超人的な直感の持ち主です！是非このアプリの続きを作っていただきたい！null2025@gmial.com"
-                      : (((bonusPoint || 0) / totalQuestions) * 100) >= 80
-                        ? "驚異的な感覚です！直感だけでここまで当てるなんて、天性の才能ですね！"
-                        : (((bonusPoint || 0) / totalQuestions) * 100) >= 60
-                          ? "直感の冴えが光ってます！あなたには音を超えたセンスがあります✨"
-                          : (((bonusPoint || 0) / totalQuestions) * 100) >= 40
-                            ? "直感力、着実に育ってきています！潜在能力が開花し始めてます！"
-                            : (((bonusPoint || 0) / totalQuestions) * 100) >= 20
-                              ? "少しの直感でも未来の大きな力になります！このまま磨きましょう！"
-                              : ""
-                  }
+                  {((bonusPoint || 0) / totalQuestions) * 100 >= 100
+                    ? "あなたは超人的な直感の持ち主です！是非このアプリの続きを作っていただきたい！null2025@gmial.com"
+                    : ((bonusPoint || 0) / totalQuestions) * 100 >= 80
+                    ? "驚異的な感覚です！直感だけでここまで当てるなんて、天性の才能ですね！"
+                    : ((bonusPoint || 0) / totalQuestions) * 100 >= 60
+                    ? "直感の冴えが光ってます！あなたには音を超えたセンスがあります✨"
+                    : ((bonusPoint || 0) / totalQuestions) * 100 >= 40
+                    ? "直感力、着実に育ってきています！潜在能力が開花し始めてます！"
+                    : ((bonusPoint || 0) / totalQuestions) * 100 >= 20
+                    ? "少しの直感でも未来の大きな力になります！このまま磨きましょう！"
+                    : ""}
                 </p>
               </>
             )}
@@ -176,7 +167,6 @@ export default function PitchQuizResult({
           <h2 className="text-2xl font-bold mb-2">正解とあなたの回答</h2>
           <div className="text-left w-[80%] mx-auto">
             {answerHistory && answerHistory.length > 0 ? (
-
               <ul className="space-y-4">
                 {answerHistory.map((item, index) => (
                   <li
@@ -186,15 +176,17 @@ export default function PitchQuizResult({
                     <p className="font-semibold mb-2 text-md">
                       第 {item.questionNumber} 問：
                       <span
-                        className={`${item.isCorrect ? "text-deep-sapphire" : "text-red-700"
-                          } ${mplus.className} text-md`}
+                        className={`${
+                          item.isCorrect ? "text-deep-sapphire" : "text-red-700"
+                        } ${mplus.className} text-md`}
                       >
                         {item.isCorrect ? "〇" : "✕"}
                       </span>
                     </p>
                     <div className="flex gap-6 text-sm">
                       <p>
-                        正解　<span className="text-deep-sapphire">
+                        正解　
+                        <span className="text-deep-sapphire">
                           {convertSoundName(item.correctAnswer)}
                         </span>
                       </p>
@@ -265,13 +257,11 @@ export default function PitchQuizResult({
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* ✅ 背景画像部分 - opacity 20% */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-50 z-0 pointer-events-none"
         style={{ backgroundImage: `url('/image-bg-Result/bggakki.webp')` }}
       ></div>
 
-      {/* ✅ メインボックス - あなたの元の構造そのまま */}
       <div className="relative z-10 w-full max-w-md mx-auto p-6 text-center bg-white/70 backdrop-blur-sm shadow-lg rounded-lg min-h-[80vh]">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
@@ -291,7 +281,6 @@ export default function PitchQuizResult({
           </motion.div>
         </AnimatePresence>
 
-        {/* ナビゲーション矢印 */}
         <div className="absolute left-0 right-0 top-80 flex justify-between h-20 z-50">
           <button
             onClick={handlePrev}

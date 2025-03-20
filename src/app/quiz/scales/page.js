@@ -93,7 +93,6 @@ export default function ScalesQuizPage() {
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
 
-            {/* スケールを再生ボタン */}
             <button
               onClick={playScaleNotes}
               className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
@@ -102,14 +101,14 @@ export default function ScalesQuizPage() {
               再生
             </button>
 
-            {/* 選択肢を並べる */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4">
               {options.map((option, index) => (
                 <motion.button
                   key={index}
                   onClick={() => handleAnswer(option.name, index)}
-                  className={`bg-white border border-gray-300 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 transition-all duration-300 ${selectedOption === index ? "selected" : ""
-                    }`}
+                  className={`bg-white border border-gray-300 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 transition-all duration-300 ${
+                    selectedOption === index ? "selected" : ""
+                  }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >

@@ -116,8 +116,7 @@
 //                     </motion.div>
 //                 </AnimatePresence>
 
-//                 {/* ナビゲーション矢印 */}
-//                 <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4">
+//                 //                 <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4">
 //                     <button
 //                         onClick={handlePrev}
 //                         disabled={pageIndex === 0}

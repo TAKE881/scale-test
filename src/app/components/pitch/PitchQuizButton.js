@@ -27,10 +27,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
 
   return (
     <>
-      {/*============================================================
-                                    クイズ選択肢
-            =============================================================== */}
-
       <div>
         <svg
           width="80"
@@ -41,21 +37,17 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
           onClick={handleClick}
         >
           <defs>
-            {/* ツヤ感を強調したグラデーション */}
             <radialGradient id="bgGradient" cx="50%" cy="35%" r="60%">
               <stop offset="0%" stopColor="#66ccff" />{" "}
-              {/* 明るいハイライトブルー */}
-              <stop offset="60%" stopColor="#1e3a8a" /> {/* 深いブルー */}
-              <stop offset="100%" stopColor="#0a1a40" /> {/* 濃紺に近い外縁 */}
+              <stop offset="60%" stopColor="#1e3a8a" />{" "}
+              <stop offset="100%" stopColor="#0a1a40" />{" "}
             </radialGradient>
 
-            {/* 内部ハイライトの反射光層 */}
             <radialGradient id="highlight" cx="50%" cy="25%" r="30%">
               <stop offset="0%" stopColor="white" stopOpacity="0.5" />
               <stop offset="100%" stopColor="white" stopOpacity="0" />
             </radialGradient>
 
-            {/* 外周リング用のグラデーション（上に光、下に影） */}
             <linearGradient
               id="borderGradient"
               x1="0%"
@@ -64,13 +56,10 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
               y2="100%"
             >
               <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />{" "}
-              {/* 上部ハイライト */}
               <stop offset="30%" stopColor="#aaaaaa" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#555555" stopOpacity="1" />{" "}
-              {/* 下部シャドウ感 */}
             </linearGradient>
 
-            {/* シャドウ・立体感 */}
             <filter
               id="buttonShadow"
               x="-20%"
@@ -92,7 +81,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
               />
             </filter>
 
-            {/* テキストストローク用スタイル */}
             <style>
               {`
         .textStroke {
@@ -107,7 +95,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
             </style>
           </defs>
 
-          {/* ボタン本体 */}
           <circle
             cx="50"
             cy="50"
@@ -117,7 +104,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
             strokeWidth="4" // 細めリング
             filter="url(#buttonShadow)"
           />
-          {/* 外周リング（細め＋ハイライト付き） */}
           <circle
             cx="50"
             cy="50"
@@ -126,19 +112,13 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
             stroke="url(#borderGradient)"
             strokeWidth="4"
           />
-          {/* 光の反射ハイライト（上部） */}
           <circle cx="50" cy="35" r="25" fill="url(#highlight)" />
 
-          {/* テキスト（中央表示） */}
           <text x="50" y="55" textAnchor="middle" className="textStroke">
             {convertSoundName(note)}
           </text>
         </svg>
       </div>
-      {/*============================================================
-                                    正解・不正解エフェクト
-            =============================================================== */}
-      {/*  正解エフェクト（赤丸） */}
       {effectType === "correct" && (
         <svg
           className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-1/2 z-50"
@@ -166,7 +146,6 @@ export function PitchQuizButton({ note, correctNote, onClick }) {
         </svg>
       )}
 
-      {/*  不正解エフェクト（青） */}
       {effectType === "wrong" && (
         <svg
           className="fixed top-1/2 left-1/2 w-48 h-48 transform -translate-x-1/2 -translate-y-[65%] z-50"

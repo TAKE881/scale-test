@@ -30,14 +30,9 @@ export const waterBrush = Water_Brush({
 }
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="ja">
-      {/*============================================================
-                                    アイコン
-        =============================================================== */}
       <head>
-        {/*  ① favicon明示 */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link
@@ -46,52 +41,33 @@ export default function RootLayout({ children }) {
           sizes="180x180"
         />
 
-        {/*  ③ PWA対応 */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
 
-        {/*  ② SNS / OGP対応 */}
         <meta property="og:title" content="Perfect Pitch App" />
         <meta property="og:description" content="音感を鍛えるクイズアプリ！" />
         <meta property="og:image" content="/og-image.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://your-project.vercel.app/" />
 
-        {/* Twitterカード */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Perfect Pitch App" />
         <meta name="twitter:description" content="音感を鍛えるクイズアプリ！" />
         <meta name="twitter:image" content="/og-image.png" />
       </head>
 
-      {/*============================================================
-                                    フォント
-        =============================================================== */}
       <body className={ReggaeOne.className}>
-        {/*============================================================
-                                    背景
-        =============================================================== */}
         <div
           className="
           relative w-screen min-h-screen"
         >
-          {/* <div
-            className="
-          absolute inset-0 bg-[url('/image-button/bgsilver.webp')] bg-cover bg-center bg-no-repeat backdrop-blur z-0"
-          ></div> */}
           <div
             className="
           absolute inset-0 bg-[url('/image-bg-Result/silver6.webp')] bg-cover  bg-center bg-no-repeat z-0
 opacity-20
           "
           ></div>
-          {/* <div
-            className="
-          absolute inset-0 backdrop-blur-sm bg-brack/30 border border-white/40 rounded-xl shadow-lg z-10"
-          ></div> */}
           <div className="absolute inset-0 bg-black/30 z-5 pointer-events-none" />
-
-
 
           <div
             className="
