@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
+//  スケール一覧
 const scales = [
     {
         name: "メジャースケール",
@@ -44,6 +45,7 @@ const scales = [
 ];
 
 export function useScaleQuizLogic(totalQuestions = 4) {
+
     const [currentScale, setCurrentScale] = useState(null);
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);
@@ -53,37 +55,43 @@ export function useScaleQuizLogic(totalQuestions = 4) {
     const [usedScales, setUsedScales] = useState([]);
     const [isAnswered, setIsAnswered] = useState(false);
 
+    // クイズ開始時・リセット時に新しい問題出す
     useEffect(() => {
         if (!isQuizFinished) {
             generateScaleQuestion();
         }
     }, [isQuizFinished]);
 
+    // 新しいスケール問題を出題（かぶり防止あり）
     const generateScaleQuestion = () => {
         const availableScales = scales.filter((s) => !usedScales.includes(s.name));
         if (availableScales.length === 0) {
+            // もう出せるスケールなかったら終わり
             setIsQuizFinished(true);
             return;
         }
 
+        // ランダムで1つ選んで出題スケールに
         const randomScale =
             availableScales[Math.floor(Math.random() * availableScales.length)];
         setCurrentScale(randomScale);
         setUsedScales((prev) => [...prev, randomScale.name]);
 
+        // 選択肢を4つに絞ってランダム配置
         const shuffled = [...scales].sort(() => 0.5 - Math.random()).slice(0, 4);
         if (!shuffled.includes(randomScale)) {
-            shuffled[0] = randomScale;
+            shuffled[0] = randomScale; // 確実に正解を含める（保険）
         }
         setOptions(shuffled.sort(() => 0.5 - Math.random()));
     };
 
+    //  スケールを順に再生
     const playScaleNotes = async () => {
         if (!currentScale) return;
         await Tone.start();
         const synth = new Tone.Synth().toDestination();
 
-        const speedFactor = 1.5;
+        const speedFactor = 1.5; // ← ここでテンポ調整してる（好みでいじれる）
         const noteDuration = 0.5 / speedFactor;
 
         currentScale.notes.forEach((note, index) => {
@@ -91,31 +99,37 @@ export function useScaleQuizLogic(totalQuestions = 4) {
         });
     };
 
+    // ユーザーが選択したときの処理
     const handleAnswer = (answer, index) => {
         if (isAnswered) return;
         setIsAnswered(true);
         setSelectedOption(index);
+
         setTimeout(() => {
             if (answer === currentScale.name) {
-                setScore((prev) => prev + 1);
+                setScore((prev) => prev + 1); // 正解ならスコア加算
             }
+
             if (questionNumber + 1 < totalQuestions) {
                 setQuestionNumber((prev) => prev + 1);
                 generateScaleQuestion();
             } else {
-                setIsQuizFinished(true);
+                setIsQuizFinished(true); // ラスト問題だったら終了
             }
+
             setSelectedOption(null);
             setIsAnswered(false);
         }, 500);
     };
 
+    //  クイズ初期化（再プレイ用）
     const resetQuiz = () => {
         setIsQuizFinished(false);
         setScore(0);
         setQuestionNumber(0);
         setUsedScales([]);
     };
+
 
     return {
         currentScale,

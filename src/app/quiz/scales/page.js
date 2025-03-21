@@ -4,7 +4,9 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useScaleQuizLogic } from "@/app/hooks/scales/useScaleQuizLogic";
 
+//  スケールクイズのページコンポーネント
 export default function ScalesQuizPage() {
+  //  （保留）
   async function playNote() {
     if (!toneStarted) {
       await Tone.start();
@@ -21,6 +23,8 @@ export default function ScalesQuizPage() {
   }
 
   const router = useRouter();
+
+  //  スケールクイズのロジック取得
   const {
     score,
     questionNumber,
@@ -35,16 +39,19 @@ export default function ScalesQuizPage() {
 
   return (
     <motion.div
+      //  ページフェードイン
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.0 }}
       className="min-h-screen bg-cover bg-center bg-no-repeat"
     >
+      {/*  タイトル */}
       <h1 className="text-white text-2xl font-bold text-center mb-4">
         スケールクイズ
       </h1>
 
+      {/*  終了画面 */}
       {isQuizFinished ? (
         <motion.main
           initial={{ y: 300, opacity: 0 }}
@@ -60,6 +67,7 @@ export default function ScalesQuizPage() {
             正答率: {((score / totalQuestions) * 100).toFixed(2)}%
           </p>
 
+          {/*  再挑戦orトップへ */}
           <div className="flex flex-col sm:flex-row gap-4 w-full">
             <button
               onClick={resetQuiz}
@@ -76,6 +84,7 @@ export default function ScalesQuizPage() {
           </div>
         </motion.main>
       ) : (
+        //  出題中の画面
         <AnimatePresence mode="wait">
           <motion.main
             key={questionNumber}
@@ -85,6 +94,7 @@ export default function ScalesQuizPage() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center justify-center min-h-screen p-4"
           >
+            {/*  スコア&問題数 */}
             <p className="text-white mb-4 text-lg text-center">
               スコア: {score}
             </p>
@@ -92,6 +102,7 @@ export default function ScalesQuizPage() {
               問題: {questionNumber + 1} / {totalQuestions}
             </p>
 
+            {/* ▶️ 再生ボタン（実際はスケール再生） */}
             <button
               onClick={playScaleNotes}
               className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-md transition-colors duration-200"
@@ -100,14 +111,14 @@ export default function ScalesQuizPage() {
               再生
             </button>
 
+            {/*  選択肢ボタン（scale名） */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mt-4">
               {options.map((option, index) => (
                 <motion.button
                   key={index}
                   onClick={() => handleAnswer(option.name, index)}
-                  className={`bg-white border border-gray-300 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 transition-all duration-300 ${
-                    selectedOption === index ? "selected" : ""
-                  }`}
+                  className={`bg-white border border-gray-300 shadow-md rounded-lg p-4 text-center hover:bg-gray-200 transition-all duration-300 ${selectedOption === index ? "selected" : ""
+                    }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >

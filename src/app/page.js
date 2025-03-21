@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <>
@@ -11,6 +12,7 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-wave z-0"
           style={{ backgroundImage: "url('/image-bg-Result/silver6.webp')" }}
         ></div>
+
         <div className="absolute inset-0 backdrop-blur-sssssm bg-black/20 z-10"></div>
 
         <main className="relative z-20 flex flex-col items-center justify-center h-screen text-center">

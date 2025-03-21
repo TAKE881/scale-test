@@ -4,6 +4,7 @@ import SettingToneSlider from "@/app/components/setting/SettingToneSlider";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+//  設定ページ（スケール表示切替とかボリュームとか）
 export default function SettingsPage() {
   function handleVolumeChange(e) {
     const val = Number(e.target.value);
@@ -16,9 +17,12 @@ export default function SettingsPage() {
       className="text-gray-600 flex flex-col items-center
     justify-center h-screen text-center text-stroke-sm text-stroke-white"
     >
+      {/*  ページタイトル */}
       <h1 className="text-2xl mb-10">設定</h1>
 
       <div></div>
+
+      {/*  表示ラベル（音名）の選択 */}
       <div className="mb-8">
         <h2 className="mb-2 text-stroke-sm text-stroke-gray-300">スケール</h2>
         <div className="mb-1">
@@ -34,6 +38,8 @@ export default function SettingsPage() {
           </label>
         </div>
       </div>
+
+      {/*  戻るボタン（モードセレクトへ） */}
       <div className="">
         <Link href="/mode-select">
           <button
@@ -51,6 +57,8 @@ export default function SettingsPage() {
           </button>
         </Link>
       </div>
+
+      {/*  タイトル画面に戻るボタン */}
       <div className="">
         <Link href="/">
           <button

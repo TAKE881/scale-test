@@ -4,16 +4,21 @@ import Image from "next/image";
 export default function ModeSelect() {
   return (
     <div
+      //  背景グラデーション（フル画面）
       className={
         "w-screen h-screen bg-[url('/gradation-612x612.jpg')] bg-cover bg-center bg-no-repeat"
       }
     >
       <main className="flex flex-col items-center justify-center h-screen text-center">
+        {/* タイトル見出し */}
         <p className="mb-7 text-2xl text-metallic-gold font-bold text-stroke-sssm text-stroke-white">
           モードセレクト
         </p>
 
+        {/* ▼ モード選択ボタンたち */}
         <div className="flex flex-col gap-4">
+
+          {/* --- 初心者モードボタン --- */}
           <Link href="/quiz/pitch">
             <button
               className="
@@ -27,6 +32,7 @@ export default function ModeSelect() {
               "
             >
               初心者
+              {/* ▼ SVGアイコン：初心者マーク風（レーダーチャート型のエフェクト） */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -37,6 +43,7 @@ export default function ModeSelect() {
             </button>
           </Link>
 
+          {/* --- 上級者モードボタン --- */}
           <Link href="/quiz/pitch">
             <button
               className="
@@ -50,6 +57,7 @@ export default function ModeSelect() {
               "
             >
               上級者
+              {/* ▼ SVGアイコン：上級者っぽい強さ・パワー系エフェクト */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

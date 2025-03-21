@@ -9,6 +9,7 @@ import { PitchQuizButton } from "@/app/components/pitch/PitchQuizButton";
 import Image from "next/image";
 
 export default function PitchQuizPage() {
+  //  クイズのロジック周り
   const {
     score,
     bonusPoint,
@@ -27,25 +28,35 @@ export default function PitchQuizPage() {
     answerHistory,
   } = usePitchQuizLogic();
 
+  //  表示用の選択肢。最初は空で、あとからuseEffectでセットする流れ
   const [clientOptions, setClientOptions] = useState([]);
+
+  //  音を鳴らす時にちょっとだけ揺らす（アニメーション用の状態）
   const [isShaking, setIsShaking] = useState(false);
+
+  // 未使用
   const isOnlyCorrect = false;
 
+  //  選択肢（options）が更新された時にclientOptionsも更新する
   useEffect(() => {
     if (options) {
+      //  もし正解だけ表示モードなら、1個だけ表示
       if (isOnlyCorrect) {
         setClientOptions([correctAnswer]);
       } else {
+        // 全optionsをそのまま出す
         setClientOptions(options);
       }
     }
   }, [options, correctAnswer]);
 
+  //  音を再生する処理。ついでにshake演出も入れてる
   const handlePlayClick = () => {
-    setIsShaking(true);
-    setTimeout(() => setIsShaking(false), 400);
-    playNote();
+    setIsShaking(true); // シェイク
+    setTimeout(() => setIsShaking(false), 400); // 一瞬だけ揺らして戻す
+    playNote(); // 音鳴らす
   };
+
 
   return (
     <motion.div
@@ -54,7 +65,11 @@ export default function PitchQuizPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 1.0 }}
       className="h-screen flex flex-col  bg-cover bg-center bg-no-repeat bg-cover bg-center bg-no-repeat"
+
     >
+      {/*============================================================
+                                    タイトル
+        =============================================================== */}
       <div className="h-[5%] mb-4 flex items-center justify-center">
         <h1
           className="
@@ -66,8 +81,13 @@ export default function PitchQuizPage() {
             font-bold
             text-center
           "
-        ></h1>
+        >
+          {/* Perfect Pitch！ */}
+        </h1>
       </div>
+      {/*============================================================
+                                    リザルト
+        =============================================================== */}
       {isQuizFinished ? (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -100,6 +120,9 @@ export default function PitchQuizPage() {
               p-4
             "
           >
+            {/*============================================================
+                                    スコア、問題数
+            =============================================================== */}
             <div
               className="
                 h-[5%]
@@ -130,6 +153,9 @@ export default function PitchQuizPage() {
                 )}
               </div>
             </div>
+            {/*============================================================
+                                    楽器変更ボタン
+            =============================================================== */}
             <div
               className="
                 h-[42.5%]
@@ -139,6 +165,7 @@ export default function PitchQuizPage() {
               "
             >
               <div className="flex gap-4">
+                {/* ***************** Voice ***************** */}
                 <button
                   onClick={() => handleInstrumentToggle("Voice")}
                   className={`
@@ -146,10 +173,9 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Voice"
-                        ? "bg-royal-blue"
-                        : instrument !== "Voice" && instrument !== "Synth"
+                    ${instrument === "Voice"
+                      ? "bg-royal-blue"
+                      : instrument !== "Voice" && instrument !== "Synth"
                         ? "bg-gray-500"
                         : "bg-gray-500"
                     }
@@ -157,10 +183,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Voice" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Voice" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -171,6 +196,7 @@ export default function PitchQuizPage() {
                   </span>
                 </button>
 
+                {/* *****************Retro ***************** */}
                 <button
                   onClick={() => handleInstrumentToggle("Retro")}
                   className={`
@@ -178,10 +204,9 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Retro"
-                        ? "bg-royal-blue"
-                        : instrument !== "Retro" && instrument !== "Synth"
+                    ${instrument === "Retro"
+                      ? "bg-royal-blue"
+                      : instrument !== "Retro" && instrument !== "Synth"
                         ? "bg-gray-500"
                         : "bg-gray-500"
                     }
@@ -189,10 +214,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Retro" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Retro" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -203,6 +227,7 @@ export default function PitchQuizPage() {
                   </span>
                 </button>
 
+                {/* ***************** Violin ***************** */}
                 <button
                   onClick={() => handleInstrumentToggle("Violin")}
                   className={`
@@ -210,10 +235,9 @@ export default function PitchQuizPage() {
                     rounded-full
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Violin"
-                        ? "bg-royal-blue"
-                        : instrument !== "Violin" && instrument !== "Synth"
+                    ${instrument === "Violin"
+                      ? "bg-royal-blue"
+                      : instrument !== "Violin" && instrument !== "Synth"
                         ? "bg-gray-500"
                         : "bg-gray-500"
                     }
@@ -221,10 +245,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Violin" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Violin" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -234,6 +257,7 @@ export default function PitchQuizPage() {
                     🎻
                   </span>
                 </button>
+                {/* ***************** Guitar ***************** */}
                 <button
                   onClick={() => handleInstrumentToggle("Guitar")}
                   className={`
@@ -244,10 +268,9 @@ export default function PitchQuizPage() {
                     h-8
                     border
                     border-metallic-silver
-                    ${
-                      instrument === "Guitar"
-                        ? "bg-royal-blue"
-                        : instrument !== "Guitar" && instrument !== "Synth"
+                    ${instrument === "Guitar"
+                      ? "bg-royal-blue"
+                      : instrument !== "Guitar" && instrument !== "Synth"
                         ? "bg-gray-500"
                         : "bg-gray-500"
                     }
@@ -255,10 +278,9 @@ export default function PitchQuizPage() {
                 >
                   <span
                     className={`
-                      ${
-                        instrument !== "Guitar" && instrument !== "Synth"
-                          ? "opacity-20"
-                          : "opacity-100"
+                      ${instrument !== "Guitar" && instrument !== "Synth"
+                        ? "opacity-20"
+                        : "opacity-100"
                       }
                       transition-opacity
                       duration-500
@@ -269,6 +291,9 @@ export default function PitchQuizPage() {
                   </span>
                 </button>
               </div>
+              {/*============================================================
+                                    再生ボタン
+                =============================================================== */}
 
               <button
                 onClick={playNote}
@@ -289,13 +314,18 @@ export default function PitchQuizPage() {
                   mb-7
                 "
               >
+                {/*============================================================
+                                  PlayerSVG
+                =============================================================== */}
                 <svg
                   width="400"
                   height="400"
                   viewBox="0 0 400 400"
                   xmlns="http://www.w3.org/2000/svg"
                 >
+                  {/* グラデーション定義 */}
                   <defs>
+                    {/* 外円のグラデーション */}
                     <radialGradient
                       id="outerGradient"
                       cx="50%"
@@ -317,6 +347,7 @@ export default function PitchQuizPage() {
                       <stop offset="100%" stopColor="transparent" />
                     </radialGradient>
 
+                    {/* 中央シルバーグラデーション */}
                     <radialGradient id="silverGloss" cx="50%" cy="40%" r="50%">
                       <stop offset="0%" stopColor="#ffffff" />
                       <stop offset="30%" stopColor="#e5e7eb" />
@@ -325,6 +356,7 @@ export default function PitchQuizPage() {
                       <stop offset="100%" stopColor="#4b5563" />
                     </radialGradient>
 
+                    {/* シルバー縁のグラデーション */}
                     <linearGradient
                       id="silverEdge"
                       x1="0%"
@@ -333,18 +365,21 @@ export default function PitchQuizPage() {
                       y2="100%"
                     >
                       <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />{" "}
+                      {/* 上部ハイライト */}
                       <stop
                         offset="30%"
                         stopColor="#aaaaaa"
                         stopOpacity="0.8"
                       />
                       <stop offset="100%" stopColor="#555555" stopOpacity="1" />{" "}
+                      {/* 下部シャドウ感 */}
                     </linearGradient>
 
                     <radialGradient id="glowLight" cx="50%" cy="50%" r="100%">
                       <stop offset="0%" stopColor="#cceeff" />
                       <stop offset="100%" stopColor="transparent" />
                     </radialGradient>
+                    {/* シャドウ・立体感 */}
                     <filter
                       id="buttonShadow"
                       x="-20%"
@@ -392,6 +427,7 @@ export default function PitchQuizPage() {
                     </filter>
                   </defs>
 
+                  {/* 外円（背景） */}
                   <circle
                     cx="200"
                     cy="200"
@@ -400,6 +436,7 @@ export default function PitchQuizPage() {
                     stroke="url(#borderGradient)"
                     strokeWidth="8"
                   />
+                  {/* 下部の光の演出（オプション） */}
                   <ellipse
                     cx="200"
                     cy="310"
@@ -409,6 +446,7 @@ export default function PitchQuizPage() {
                     opacity="0.3"
                   />
 
+                  {/* クロスヘア線 */}
                   <line
                     x1="200"
                     y1="20"
@@ -434,6 +472,7 @@ export default function PitchQuizPage() {
                     strokeWidth="1"
                   />
 
+                  {/* 中央の縁（光沢リング） */}
                   <circle
                     cx="200"
                     cy="200"
@@ -443,6 +482,7 @@ export default function PitchQuizPage() {
                     strokeWidth="9"
                   />
 
+                  {/* 中央 */}
                   <circle
                     cx="200"
                     cy="200"
@@ -451,6 +491,7 @@ export default function PitchQuizPage() {
                     stroke="none"
                   />
 
+                  {/* 音符アイコン（少し小さめ・中央） */}
                   <g transform="translate(200, 200) scale(0.008, -0.008) translate(-4800, -6400)">
                     <path
                       d="M6060 11646 l-3125 -632 -3 -4047 c-1 -2226 -4 -4047 -7 -4047 -3 0
@@ -466,6 +507,10 @@ export default function PitchQuizPage() {
                     />
                   </g>
                 </svg>
+
+                {/*============================================================
+                                    SVG(END)
+                =============================================================== */}
               </button>
               <button
                 onClick={handlePlayClick}
@@ -486,6 +531,10 @@ export default function PitchQuizPage() {
                 tap
               </button>
             </div>
+            {/*============================================================
+                                    選択肢ボタン
+            =============================================================== */}
+            {/* 選択肢ボタン */}
             <div
               className="
                 h-[42.5%]
@@ -508,13 +557,16 @@ export default function PitchQuizPage() {
                   <PitchQuizButton
                     key={option}
                     note={option}
-                    correctNote={correctAnswer}
-                    onClick={() => handleAnswer(option)}
+                    correctNote={correctAnswer} //  noteと比較する基準
+                    onClick={() => handleAnswer(option)} //  正誤判定不要、PitchQuizButtonが自分で判断する
                   />
                 ))}
               </div>
             </div>
 
+            {/*============================================================
+                                    モードセレクトに戻る
+            =============================================================== */}
             <div
               className="
                 h-[5%]
@@ -556,6 +608,7 @@ export default function PitchQuizPage() {
           </motion.main>
         </AnimatePresence>
       )}
+
     </motion.div>
   );
 }
